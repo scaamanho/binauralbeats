@@ -60,8 +60,14 @@
     backdrop-filter:blur(20px);
   }
   .player.hidden{display:none}
-  .close-player{position:absolute;top:14px;right:14px;z-index:1;padding:4px 8px;border:1px solid rgba(255,255,255,0.18);border-radius:8px;background:rgba(255,255,255,0.08);color:#fff;font-size:16px;line-height:1;cursor:pointer}
-  .player-title{padding-right:42px;font-size:13px;opacity:0.7;margin-bottom:10px;text-transform:uppercase;letter-spacing:1.5px}
+  .close-player{position:absolute;top:12px;right:12px;z-index:1;display:inline-flex;align-items:center;gap:6px;min-width:44px;min-height:44px;padding:9px 13px;border:1px solid rgba(255,255,255,0.22);border-radius:12px;background:rgba(255,255,255,0.1);color:#fff;font-size:13px;font-weight:700;line-height:1;cursor:pointer;transition:background .2s,transform .2s}
+  .close-player:hover,.close-player:focus-visible{background:rgba(0,212,255,0.25);outline:2px solid #00d4ff;outline-offset:2px}
+  .close-player:active{transform:scale(0.96)}
+  .player-title{padding-right:130px;font-size:13px;opacity:0.7;margin-bottom:10px;text-transform:uppercase;letter-spacing:1.5px}
+  @media (max-width:480px){
+    .close-player{position:relative;top:auto;right:auto;display:flex;width:max-content;align-self:flex-end;margin:0 0 10px auto}
+    .player-title{padding-right:0}
+  }
   .player-mode{font-size:20px;font-weight:700;margin-bottom:14px}
   .slider-group{margin-bottom:14px}
   .slider-label{display:flex;justify-content:space-between;font-size:12px;opacity:0.75;margin-bottom:6px}
@@ -134,7 +140,7 @@
     <div class="presets" id="presetGrid"></div>
 
     <div class="player hidden" id="playerPanel">
-      <button class="close-player" id="closePlayerBtn" aria-label="Cerrar reproductor">×</button>
+      <button class="close-player" id="closePlayerBtn" aria-label="Volver a las presintonías"><span aria-hidden="true">←</span><span data-i18n="closePlayer">Volver</span></button>
       <div class="player-title" data-i18n="player">Reproductor</div>
       <div class="player-mode" id="currentMode" data-i18n="selectPreset">Selecciona un preset</div>
 
@@ -265,12 +271,17 @@ Object.assign(TRANSLATIONS.es,{
 Object.assign(TRANSLATIONS.en,{
   brainwavesTab:'Brainwaves',brainwavesIntroTitle:'What are brainwaves?',brainwavesIntro:'They are patterns of electrical activity in the brain described by their frequency, measured in hertz (Hz). The associations below are general guidance and are not medical advice.',deltaTitle:'Delta · 0.5–4 Hz',deltaInfo:'Commonly associated with deep sleep and rest.',thetaTitle:'Theta · 4–8 Hz',thetaInfo:'Related to deep relaxation, imagination and meditation.',alphaTitle:'Alpha · 8–13 Hz',alphaInfo:'Often present during relaxed, awake states and calm.',betaTitle:'Beta · 13–30 Hz',betaInfo:'Usually linked with attention, concentration and mental activity.',gammaTitle:'Gamma · 30–100 Hz',gammaInfo:'Studied in relation to information processing and intense attention.',binauralTitle:'How does this application work?',binauralInfo:'The application plays two similar tones, one in each ear. The difference between their frequencies creates the perception of a binaural beat. For example, 200 Hz in one ear and 210 Hz in the other create a 10 Hz difference. Headphones and a comfortable volume are recommended.'
 });
+TRANSLATIONS.es.closePlayer='Volver';
+TRANSLATIONS.es.closePlayerAria='Volver a las presintonías';
+TRANSLATIONS.en.closePlayer='Back';
+TRANSLATIONS.en.closePlayerAria='Back to presets';
 let language=localStorage.getItem('bb_language')||((navigator.language||'es').toLowerCase().startsWith('en')?'en':'es');
 const t=key=>TRANSLATIONS[language][key]||key;
 function translateStatic(){
   document.documentElement.lang=language;
   document.querySelectorAll('[data-i18n]').forEach(el=>{el.innerHTML=t(el.dataset.i18n);});
   document.getElementById('languageSelect').value=language;
+  document.getElementById('closePlayerBtn').setAttribute('aria-label',t('closePlayerAria'));
 }
 const PRESETS = [
   {id:'memoria',name:'Memoria',sub:'Aprendizaje',icon:'🧠',beat:14,base:200,wave:'Beta',grad:'linear-gradient(135deg,#00d4ff,#0066ff)',c1:'#00d4ff',glow:'rgba(0,212,255,0.4)',desc:'Beta 14Hz - Concentración y memoria'},
