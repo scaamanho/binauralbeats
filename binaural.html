@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a1f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Binaural Beats Pro</title>
+<link rel="manifest" href='data:application/manifest+json,{"name":"Binaural Beats Pro","short_name":"BinauralBeats","start_url":".","display":"standalone","background_color":"%230a0a1f","theme_color":"%230a0a1f","orientation":"portrait","icons":[{"src":"data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 192 192%22><rect width=%22192%22 height=%22192%22 rx=%2240%22 fill=%22%230a0a1f%22/><text x=%2296%22 y=%22120%22 font-size=%2290%22 text-anchor=%22middle%22 fill=%22%2300d4ff%22>♪</text></svg>","sizes":"192x192","type":"image/svg+xml"}]}'>
+<link rel="icon" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="80" font-size="80">🎧</text></svg>'>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
+  html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#fff;background:#0a0a1f}
+  body{
+    background:radial-gradient(ellipse at top,#1a1a3e 0%,#0a0a1f 50%,#000 100%);
+    display:flex;flex-direction:column;
+    padding-top:env(safe-area-inset-top);
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  header{
+    padding:18px 20px 10px;text-align:center;
+    background:linear-gradient(180deg,rgba(0,212,255,0.08),transparent);
+  }
+  header h1{font-size:22px;font-weight:700;letter-spacing:1px;
+    background:linear-gradient(90deg,#00d4ff,#a855f7,#ec4899);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  header p{font-size:11px;opacity:0.6;margin-top:3px;letter-spacing:2px;text-transform:uppercase}
+  main{flex:1;overflow-y:auto;padding:10px 16px 20px;-webkit-overflow-scrolling:touch}
+  .tabs{display:flex;gap:6px;margin-bottom:14px;background:rgba(255,255,255,0.04);padding:4px;border-radius:14px;border:1px solid rgba(255,255,255,0.06)}
+  .tab{flex:1;padding:10px;text-align:center;font-size:13px;font-weight:600;border-radius:10px;cursor:pointer;transition:all .25s;opacity:0.6}
+  .tab.active{background:linear-gradient(135deg,#00d4ff,#a855f7);opacity:1;box-shadow:0 4px 16px rgba(0,212,255,0.35)}
+  .view{display:none;animation:fadeIn .3s}
+  .view.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .presets{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .preset{
+    position:relative;padding:18px 14px;border-radius:18px;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
+    backdrop-filter:blur(10px);
+    cursor:pointer;transition:all .25s;overflow:hidden;
+  }
+  .preset::before{
+    content:"";position:absolute;inset:0;opacity:0;transition:opacity .25s;
+    background:var(--grad);
+  }
+  .preset:active{transform:scale(0.97)}
+  .preset.active::before{opacity:0.18}
+  .preset.active{border-color:var(--c1);box-shadow:0 0 24px var(--glow)}
+  .preset .icon{font-size:28px;margin-bottom:6px;position:relative}
+  .preset .name{font-size:14px;font-weight:700;position:relative}
+  .preset .hz{font-size:11px;opacity:0.65;margin-top:3px;position:relative}
+  .player{
+    margin-top:16px;padding:18px;border-radius:22px;
+    background:linear-gradient(135deg,rgba(0,212,255,0.1),rgba(168,85,247,0.1));
+    border:1px solid rgba(255,255,255,0.08);
+    backdrop-filter:blur(20px);
+  }
+  .player-title{font-size:13px;opacity:0.7;margin-bottom:10px;text-transform:uppercase;letter-spacing:1.5px}
+  .player-mode{font-size:20px;font-weight:700;margin-bottom:14px}
+  .slider-group{margin-bottom:14px}
+  .slider-label{display:flex;justify-content:space-between;font-size:12px;opacity:0.75;margin-bottom:6px}
+  .slider-label b{color:#00d4ff;font-weight:600}
+  input[type=range]{width:100%;-webkit-appearance:none;height:6px;border-radius:3px;background:rgba(255,255,255,0.1);outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#00d4ff,#a855f7);cursor:pointer;box-shadow:0 2px 10px rgba(0,212,255,0.5)}
+  input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#00d4ff,#a855f7);cursor:pointer;border:none}
+  .play-btn{
+    width:100%;padding:16px;margin-top:8px;border:none;border-radius:16px;
+    background:linear-gradient(135deg,#00d4ff,#a855f7);
+    color:#fff;font-size:16px;font-weight:700;letter-spacing:1px;
+    cursor:pointer;transition:all .2s;
+    box-shadow:0 6px 20px rgba(0,212,255,0.35);
+  }
+  .play-btn:active{transform:scale(0.98)}
+  .play-btn.playing{background:linear-gradient(135deg,#ec4899,#a855f7)}
+  .visualizer{height:60px;margin-top:14px;border-radius:12px;background:rgba(0,0,0,0.3);overflow:hidden}
+  /* Editor */
+  .editor-tools{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+  .tool-btn{flex:1;min-width:80px;padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:#fff;font-size:12px;font-weight:600;cursor:pointer}
+  .tool-btn:active{background:rgba(0,212,255,0.2)}
+  .tool-btn.primary{background:linear-gradient(135deg,#00d4ff,#a855f7);border:none}
+  .canvas-wrap{position:relative;border-radius:16px;overflow:hidden;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.08);margin-bottom:12px}
+  canvas#editor{display:block;width:100%;height:260px;touch-action:none}
+  .canvas-labels{position:absolute;inset:0;pointer-events:none;font-size:10px;opacity:0.5}
+  .canvas-labels span{position:absolute}
+  .yl{left:4px;top:4px}.ym{left:4px;top:50%;transform:translateY(-50%)}.yb{left:4px;bottom:4px}
+  .xl{bottom:4px;left:50%;transform:translateX(-50%)}
+  .info-box{padding:12px;border-radius:12px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);font-size:12px;line-height:1.5;margin-bottom:12px}
+  .info-box b{color:#00d4ff}
+  .saved-list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+  .saved-item{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)}
+  .saved-item .name{font-size:13px;font-weight:600}
+  .saved-item .meta{font-size:10px;opacity:0.6;margin-top:2px}
+  .saved-item button{padding:6px 10px;border-radius:8px;border:none;background:rgba(255,255,255,0.1);color:#fff;font-size:11px;cursor:pointer;margin-left:4px}
+  .saved-item button.del{background:rgba(239,68,68,0.2);color:#fca5a5}
+  .empty{text-align:center;padding:30px 20px;opacity:0.5;font-size:13px}
+  .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:rgba(0,0,0,0.9);color:#fff;padding:12px 20px;border-radius:24px;font-size:13px;border:1px solid rgba(0,212,255,0.3);transition:transform .3s;z-index:1000;backdrop-filter:blur(10px)}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  .install-banner{position:fixed;bottom:20px;left:16px;right:16px;padding:14px;border-radius:16px;background:linear-gradient(135deg,rgba(0,212,255,0.2),rgba(168,85,247,0.2));border:1px solid rgba(0,212,255,0.3);backdrop-filter:blur(20px);display:none;z-index:50;font-size:13px}
+  .install-banner button{margin-left:8px;padding:6px 12px;border-radius:8px;border:none;background:#fff;color:#0a0a1f;font-weight:700;font-size:12px;cursor:pointer}
+  .wave-badge{display:inline-block;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:700;margin-left:6px;background:rgba(0,212,255,0.2);color:#00d4ff}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎧 BINAURAL BEATS PRO</h1>
+  <p>Generador de ondas cerebrales</p>
+</header>
+
+<main>
+  <div class="tabs">
+    <div class="tab active" data-view="presets">Presets</div>
+    <div class="tab" data-view="editor">Editor</div>
+    <div class="tab" data-view="saved">Guardados</div>
+  </div>
+
+  <!-- VISTA PRESETS -->
+  <div class="view active" id="view-presets">
+    <div class="presets" id="presetGrid"></div>
+
+    <div class="player">
+      <div class="player-title">Reproductor</div>
+      <div class="player-mode" id="currentMode">Selecciona un preset</div>
+
+      <div class="slider-group">
+        <div class="slider-label"><span>Frecuencia base</span><b><span id="baseVal">200</span> Hz</b></div>
+        <input type="range" id="baseFreq" min="100" max="500" value="200" step="1">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label"><span>Volumen</span><b><span id="volVal">50</span>%</b></div>
+        <input type="range" id="volume" min="0" max="100" value="50">
+      </div>
+
+      <button class="play-btn" id="playBtn">▶  INICIAR</button>
+
+      <canvas class="visualizer" id="visualizer"></canvas>
+    </div>
+  </div>
+
+  <!-- VISTA EDITOR -->
+  <div class="view" id="view-editor">
+    <div class="info-box">
+      <b>¿Cómo usar?</b> Toca el gráfico para añadir puntos. Arrástralos para definir la frecuencia del batido binaural a lo largo del tiempo. La línea muestra la diferencia entre oídos (Hz).
+    </div>
+
+    <div class="canvas-wrap">
+      <canvas id="editor"></canvas>
+      <div class="canvas-labels">
+        <span class="yl">40 Hz</span>
+        <span class="ym">20 Hz</span>
+        <span class="yb">0 Hz</span>
+        <span class="xl">Tiempo →</span>
+      </div>
+    </div>
+
+    <div class="editor-tools">
+      <button class="tool-btn" id="clearBtn">🗑 Limpiar</button>
+      <button class="tool-btn" id="saveBtn">💾 Guardar</button>
+      <button class="tool-btn primary" id="playCustomBtn">▶ Reproducir</button>
+    </div>
+
+    <div class="slider-group">
+      <div class="slider-label"><span>Duración total</span><b><span id="durVal">60</span>s</b></div>
+      <input type="range" id="duration" min="10" max="600" value="60" step="5">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>Frecuencia base</span><b><span id="baseVal2">200</span> Hz</b></div>
+      <input type="range" id="baseFreq2" min="100" max="500" value="200" step="1">
+    </div>
+  </div>
+
+  <!-- VISTA GUARDADOS -->
+  <div class="view" id="view-saved">
+    <div class="info-box">Tus programas personalizados se guardan localmente en este dispositivo.</div>
+    <div class="saved-list" id="savedList"></div>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+<div class="install-banner" id="installBanner">
+  📲 Instalar como app
+  <button id="installBtn">Instalar</button>
+</div>
+
+<script>
+/* ============ PWA ============ */
+if('serviceWorker' in navigator){
+  const swCode = `self.addEventListener('install',e=>self.skipWaiting());
+self.addEventListener('activate',e=>self.clients.claim());
+self.addEventListener('fetch',e=>{
+  e.respondWith(fetch(e.request).catch(()=>caches.match(e.request)));
+});`;
+  const swBlob = new Blob([swCode],{type:'application/javascript'});
+  const swUrl = URL.createObjectURL(swBlob);
+  navigator.serviceWorker.register(swUrl).catch(()=>{});
+}
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt',e=>{
+  deferredPrompt=e;
+  document.getElementById('installBanner').style.display='block';
+});
+document.getElementById('installBtn').onclick=async()=>{
+  if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;document.getElementById('installBanner').style.display='none';}
+};
+
+/* ============ PRESETS ============ */
+const PRESETS = [
+  {id:'memoria',name:'Memoria',sub:'Aprendizaje',icon:'🧠',beat:14,base:200,wave:'Beta',grad:'linear-gradient(135deg,#00d4ff,#0066ff)',c1:'#00d4ff',glow:'rgba(0,212,255,0.4)',desc:'Beta 14Hz - Concentración y memoria'},
+  {id:'relax',name:'Relajarse',sub:'Calma',icon:'🌿',beat:10,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#10b981,#059669)',c1:'#10b981',glow:'rgba(16,185,129,0.4)',desc:'Alpha 10Hz - Relajación profunda'},
+  {id:'dormir',name:'Dormir',sub:'Sueño profundo',icon:'🌙',beat:2,base:180,wave:'Delta',grad:'linear-gradient(135deg,#6366f1,#312e81)',c1:'#6366f1',glow:'rgba(99,102,241,0.4)',desc:'Delta 2Hz - Sueño profundo'},
+  {id:'meditar',name:'Meditación',sub:'Mindfulness',icon:'🧘',beat:6,base:200,wave:'Theta',grad:'linear-gradient(135deg,#a855f7,#7e22ce)',c1:'#a855f7',glow:'rgba(168,85,247,0.4)',desc:'Theta 6Hz - Meditación'},
+  {id:'deseo',name:'Excitación',sub:'Deseo',icon:'💋',beat:5,base:210,wave:'Theta',grad:'linear-gradient(135deg,#ec4899,#be185d)',c1:'#ec4899',glow:'rgba(236,72,153,0.4)',desc:'Theta 5Hz - Sensualidad'},
+  {id:'energia',name:'Energía',sub:'Motivación',icon:'⚡',beat:20,base:220,wave:'Beta',grad:'linear-gradient(135deg,#f59e0b,#dc2626)',c1:'#f59e0b',glow:'rgba(245,158,11,0.4)',desc:'Beta 20Hz - Energía'}
+];
+
+/* ============ AUDIO ENGINE ============ */
+let audioCtx=null, leftOsc=null, rightOsc=null, merger=null, gainNode=null, analyser=null;
+let isPlaying=false, currentPreset=null, animId=null;
+let customPlayData=null, customStartTime=0;
+
+function initAudio(){
+  if(audioCtx) return;
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  gainNode=audioCtx.createGain();
+  gainNode.gain.value=0.5;
+  analyser=audioCtx.createAnalyser();
+  analyser.fftSize=256;
+  merger=audioCtx.createChannelMerger(2);
+  gainNode.connect(analyser);
+  analyser.connect(audioCtx.destination);
+}
+
+function startTone(baseFreq, beatFreq, volume){
+  initAudio();
+  stopTone();
+  leftOsc=audioCtx.createOscillator();
+  rightOsc=audioCtx.createOscillator();
+  leftOsc.type='sine';
+  rightOsc.type='sine';
+  leftOsc.frequency.value=baseFreq;
+  rightOsc.frequency.value=baseFreq+beatFreq;
+  const gL=audioCtx.createGain();
+  const gR=audioCtx.createGain();
+  gL.gain.value=volume;
+  gR.gain.value=volume;
+  leftOsc.connect(gL).connect(merger,0,0);
+  rightOsc.connect(gR).connect(merger,0,1);
+  merger.connect(gainNode);
+  leftOsc.start();
+  rightOsc.start();
+  isPlaying=true;
+  startVisualizer();
+}
+
+function stopTone(){
+  if(leftOsc){try{leftOsc.stop();}catch(e){}leftOsc.disconnect();leftOsc=null;}
+  if(rightOsc){try{rightOsc.stop();}catch(e){}rightOsc.disconnect();rightOsc=null;}
+  isPlaying=false;
+  if(animId){cancelAnimationFrame(animId);animId=null;}
+  customPlayData=null;
+}
+
+function updateBeat(beatFreq){
+  if(rightOsc && currentPreset){
+    rightOsc.frequency.setValueAtTime(currentPreset.base+beatFreq, audioCtx.currentTime);
+  }
+}
+
+/* ============ VISUALIZER ============ */
+const vizCanvas=document.getElementById('visualizer');
+const vizCtx=vizCanvas.getContext('2d');
+function resizeViz(){vizCanvas.width=vizCanvas.offsetWidth*2;vizCanvas.height=vizCanvas.offsetHeight*2;}
+resizeViz();
+window.addEventListener('resize',resizeViz);
+
+function startVisualizer(){
+  if(!analyser) return;
+  const data=new Uint8Array(analyser.frequencyBinCount);
+  function draw(){
+    if(!isPlaying){vizCtx.clearRect(0,0,vizCanvas.width,vizCanvas.height);return;}
+    analyser.getByteFrequencyData(data);
+    vizCtx.fillStyle='rgba(0,0,0,0.2)';
+    vizCtx.fillRect(0,0,vizCanvas.width,vizCanvas.height);
+    const barW=vizCanvas.width/data.length*2.5;
+    let x=0;
+    for(let i=0;i<data.length;i++){
+      const h=(data[i]/255)*vizCanvas.height;
+      const grad=vizCtx.createLinearGradient(0,vizCanvas.height-h,0,vizCanvas.height);
+      grad.addColorStop(0,'#00d4ff');
+      grad.addColorStop(1,'#a855f7');
+      vizCtx.fillStyle=grad;
+      vizCtx.fillRect(x,vizCanvas.height-h,barW-2,h);
+      x+=barW;
+      if(x>vizCanvas.width) break;
+    }
+    animId=requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+/* ============ UI PRESETS ============ */
+const presetGrid=document.getElementById('presetGrid');
+PRESETS.forEach(p=>{
+  const el=document.createElement('div');
+  el.className='preset';
+  el.style.setProperty('--grad',p.grad);
+  el.style.setProperty('--c1',p.c1);
+  el.style.setProperty('--glow',p.glow);
+  el.innerHTML=`<div class="icon">${p.icon}</div>
+    <div class="name">${p.name}<span class="wave-badge">${p.wave}</span></div>
+    <div class="hz">${p.beat}Hz · ${p.sub}</div>`;
+  el.onclick=()=>selectPreset(p);
+  presetGrid.appendChild(el);
+});
+
+function selectPreset(p){
+  currentPreset=p;
+  document.querySelectorAll('.preset').forEach(e=>e.classList.remove('active'));
+  document.querySelector(`.preset[onclick*="${p.id}"]`)?.classList.add('active');
+  // buscar por contenido
+  [...document.querySelectorAll('.preset')].forEach(e=>{
+    if(e.querySelector('.name').textContent.startsWith(p.name)) e.classList.add('active');
+  });
+  document.getElementById('currentMode').innerHTML=`${p.icon} ${p.name} <span class="wave-badge">${p.desc}</span>`;
+  document.getElementById('baseFreq').value=p.base;
+  document.getElementById('baseVal').textContent=p.base;
+  if(isPlaying){
+    leftOsc.frequency.setValueAtTime(p.base, audioCtx.currentTime);
+    rightOsc.frequency.setValueAtTime(p.base+p.beat, audioCtx.currentTime);
+  }
+}
+
+/* ============ CONTROLES ============ */
+const playBtn=document.getElementById('playBtn');
+playBtn.onclick=()=>{
+  if(isPlaying){
+    stopTone();
+    playBtn.textContent='▶  INICIAR';
+    playBtn.classList.remove('playing');
+  } else {
+    if(!currentPreset){toast('Selecciona un preset primero');return;}
+    const base=+document.getElementById('baseFreq').value;
+    const vol=+document.getElementById('volume').value/100;
+    initAudio();                      // ✅ Inicializar primero
+    gainNode.gain.value=vol;          // ✅ Ahora gainNode ya existe
+    startTone(base, currentPreset.beat, vol);
+    playBtn.textContent='■  DETENER';
+    playBtn.classList.add('playing');
+  }
+};
+
+document.getElementById('baseFreq').oninput=e=>{
+  document.getElementById('baseVal').textContent=e.target.value;
+  if(isPlaying && currentPreset){
+    leftOsc.frequency.setValueAtTime(+e.target.value, audioCtx.currentTime);
+    rightOsc.frequency.setValueAtTime(+e.target.value+currentPreset.beat, audioCtx.currentTime);
+  }
+};
+document.getElementById('volume').oninput=e=>{
+  document.getElementById('volVal').textContent=e.target.value;
+  if(gainNode) gainNode.gain.value=e.target.value/100;
+};
+
+/* ============ TABS ============ */
+document.querySelectorAll('.tab').forEach(t=>{
+  t.onclick=()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('view-'+t.dataset.view).classList.add('active');
+    if(t.dataset.view==='editor') resizeEditor();
+    if(t.dataset.view==='saved') renderSaved();
+  };
+});
+
+/* ============ EDITOR ============ */
+const editorCanvas=document.getElementById('editor');
+const ectx=editorCanvas.getContext('2d');
+let points=[]; // {x:0..1, y:0..1} y=0 es 0Hz, y=1 es 40Hz
+let dragging=null;
+const MAX_BEAT=40;
+
+function resizeEditor(){
+  editorCanvas.width=editorCanvas.offsetWidth*2;
+  editorCanvas.height=editorCanvas.offsetHeight*2;
+  drawEditor();
+}
+window.addEventListener('resize',resizeEditor);
+
+function drawEditor(){
+  const W=editorCanvas.width, H=editorCanvas.height;
+  ectx.clearRect(0,0,W,H);
+  // grid
+  ectx.strokeStyle='rgba(255,255,255,0.06)';
+  ectx.lineWidth=1;
+  for(let i=1;i<8;i++){
+    const y=H*i/8;
+    ectx.beginPath();ectx.moveTo(0,y);ectx.lineTo(W,y);ectx.stroke();
+  }
+  for(let i=1;i<10;i++){
+    const x=W*i/10;
+    ectx.beginPath();ectx.moveTo(x,0);ectx.lineTo(x,H);ectx.stroke();
+  }
+  // curva
+  if(points.length>0){
+    const sorted=[...points].sort((a,b)=>a.x-b.x);
+    const grad=ectx.createLinearGradient(0,0,W,0);
+    grad.addColorStop(0,'#00d4ff');
+    grad.addColorStop(0.5,'#a855f7');
+    grad.addColorStop(1,'#ec4899');
+    ectx.strokeStyle=grad;
+    ectx.lineWidth=4;
+    ectx.beginPath();
+    sorted.forEach((p,i)=>{
+      const x=p.x*W, y=H-p.y*H;
+      if(i===0) ectx.moveTo(x,y); else ectx.lineTo(x,y);
+    });
+    ectx.stroke();
+    // relleno
+    ectx.lineTo(sorted[sorted.length-1].x*W, H);
+    ectx.lineTo(sorted[0].x*W, H);
+    ectx.closePath();
+    const fillGrad=ectx.createLinearGradient(0,0,0,H);
+    fillGrad.addColorStop(0,'rgba(168,85,247,0.3)');
+    fillGrad.addColorStop(1,'rgba(0,212,255,0)');
+    ectx.fillStyle=fillGrad;
+    ectx.fill();
+    // puntos
+    sorted.forEach(p=>{
+      const x=p.x*W, y=H-p.y*H;
+      ectx.fillStyle='#fff';
+      ectx.beginPath();ectx.arc(x,y,10,0,Math.PI*2);ectx.fill();
+      ectx.fillStyle='#00d4ff';
+      ectx.beginPath();ectx.arc(x,y,6,0,Math.PI*2);ectx.fill();
+    });
+  } else {
+    ectx.fillStyle='rgba(255,255,255,0.3)';
+    ectx.font='24px sans-serif';
+    ectx.textAlign='center';
+    ectx.fillText('Toca para añadir puntos',W/2,H/2);
+  }
+}
+
+function getPos(e){
+  const r=editorCanvas.getBoundingClientRect();
+  const t=e.touches?e.touches[0]:e;
+  return {
+    x:Math.max(0,Math.min(1,(t.clientX-r.left)/r.width)),
+    y:Math.max(0,Math.min(1,1-(t.clientY-r.top)/r.height))
+  };
+}
+
+editorCanvas.addEventListener('touchstart',e=>{e.preventDefault();handleDown(e);},{passive:false});
+editorCanvas.addEventListener('touchmove',e=>{e.preventDefault();handleMove(e);},{passive:false});
+editorCanvas.addEventListener('touchend',e=>{e.preventDefault();dragging=null;},{passive:false});
+editorCanvas.addEventListener('mousedown',handleDown);
+editorCanvas.addEventListener('mousemove',handleMove);
+editorCanvas.addEventListener('mouseup',()=>dragging=null);
+editorCanvas.addEventListener('mouseleave',()=>dragging=null);
+
+function handleDown(e){
+  const p=getPos(e);
+  // buscar punto cercano
+  let closest=-1, minD=0.05;
+  points.forEach((pt,i)=>{
+    const d=Math.hypot(pt.x-p.x,pt.y-p.y);
+    if(d<minD){minD=d;closest=i;}
+  });
+  if(closest>=0){
+    dragging=closest;
+  } else {
+    points.push(p);
+    dragging=points.length-1;
+    drawEditor();
+  }
+}
+function handleMove(e){
+  if(dragging===null) return;
+  const p=getPos(e);
+  points[dragging]=p;
+  drawEditor();
+}
+
+document.getElementById('clearBtn').onclick=()=>{points=[];drawEditor();};
+
+document.getElementById('duration').oninput=e=>{
+  document.getElementById('durVal').textContent=e.target.value;
+};
+document.getElementById('baseFreq2').oninput=e=>{
+  document.getElementById('baseVal2').textContent=e.target.value;
+};
+
+/* ============ REPRODUCIR CUSTOM ============ */
+const playCustomBtn=document.getElementById('playCustomBtn');
+playCustomBtn.onclick=()=>{
+  if(isPlaying){
+    stopTone();
+    playCustomBtn.textContent='▶ Reproducir';
+    playCustomBtn.classList.remove('playing');
+    playCustomBtn.classList.add('primary');
+    return;
+  }
+  if(points.length<2){toast('Añade al menos 2 puntos al gráfico');return;}
+  initAudio();
+  const base=+document.getElementById('baseFreq2').value;
+  const vol=+document.getElementById('volume').value/100;
+  const duration=+document.getElementById('duration').value;
+  gainNode.gain.value=vol;
+
+  leftOsc=audioCtx.createOscillator();
+  rightOsc=audioCtx.createOscillator();
+  leftOsc.type='sine';rightOsc.type='sine';
+  leftOsc.frequency.value=base;
+  rightOsc.frequency.value=base;
+  const gL=audioCtx.createGain();const gR=audioCtx.createGain();
+  gL.gain.value=vol;gR.gain.value=vol;
+  leftOsc.connect(gL).connect(merger,0,0);
+  rightOsc.connect(gR).connect(merger,0,1);
+  merger.connect(gainNode);
+
+  // Programar curva
+  const now=audioCtx.currentTime;
+  const sorted=[...points].sort((a,b)=>a.x-b.x);
+  sorted.forEach(p=>{
+    const t=now+p.x*duration;
+    const freq=base+p.y*MAX_BEAT;
+    rightOsc.frequency.setValueAtTime(freq,t);
+  });
+  // Auto-stop
+  setTimeout(()=>{
+    if(isPlaying && customPlayData){
+      stopTone();
+      playCustomBtn.textContent='▶ Reproducir';
+      playCustomBtn.classList.remove('playing');
+      playCustomBtn.classList.add('primary');
+      toast('Programa finalizado');
+    }
+  },duration*1000);
+
+  leftOsc.start();rightOsc.start();
+  isPlaying=true;
+  customPlayData={base,duration,sorted};
+  customStartTime=now;
+  playCustomBtn.textContent='■ Detener';
+  playCustomBtn.classList.add('playing');
+  playCustomBtn.classList.remove('primary');
+  startVisualizer();
+};
+
+/* ============ GUARDAR / CARGAR ============ */
+document.getElementById('saveBtn').onclick=()=>{
+  if(points.length<2){toast('Añade al menos 2 puntos');return;}
+  const name=prompt('Nombre del programa:','Mi programa');
+  if(!name) return;
+  const saved=JSON.parse(localStorage.getItem('bb_saved')||'[]');
+  saved.push({
+    id:Date.now(),
+    name,
+    points:[...points],
+    duration:+document.getElementById('duration').value,
+    base:+document.getElementById('baseFreq2').value,
+    created:Date.now()
+  });
+  localStorage.setItem('bb_saved',JSON.stringify(saved));
+  toast('✓ Programa guardado');
+  renderSaved();
+};
+
+function renderSaved(){
+  const list=document.getElementById('savedList');
+  const saved=JSON.parse(localStorage.getItem('bb_saved')||'[]');
+  if(saved.length===0){
+    list.innerHTML='<div class="empty">No hay programas guardados aún.<br>Crea uno en el Editor.</div>';
+    return;
+  }
+  list.innerHTML='';
+  saved.forEach(s=>{
+    const el=document.createElement('div');
+    el.className='saved-item';
+    el.innerHTML=`
+      <div>
+        <div class="name">🎵 ${s.name}</div>
+        <div class="meta">${s.points.length} puntos · ${s.duration}s · Base ${s.base}Hz</div>
+      </div>
+      <div>
+        <button data-act="load" data-id="${s.id}">Cargar</button>
+        <button data-act="play" data-id="${s.id}">▶</button>
+        <button class="del" data-act="del" data-id="${s.id}">✕</button>
+      </div>`;
+    list.appendChild(el);
+  });
+  list.querySelectorAll('button').forEach(b=>{
+    b.onclick=()=>{
+      const id=+b.dataset.id;
+      const s=saved.find(x=>x.id===id);
+      if(!s) return;
+      if(b.dataset.act==='del'){
+        if(confirm('¿Eliminar este programa?')){
+          const nw=saved.filter(x=>x.id!==id);
+          localStorage.setItem('bb_saved',JSON.stringify(nw));
+          renderSaved();
+          toast('Eliminado');
+        }
+      } else if(b.dataset.act==='load'){
+        points=[...s.points];
+        document.getElementById('duration').value=s.duration;
+        document.getElementById('durVal').textContent=s.duration;
+        document.getElementById('baseFreq2').value=s.base;
+        document.getElementById('baseVal2').textContent=s.base;
+        document.querySelector('[data-view="editor"]').click();
+        toast('Cargado en el editor');
+      } else if(b.dataset.act==='play'){
+        playSaved(s);
+      }
+    };
+  });
+}
+
+function playSaved(s){
+  if(isPlaying) stopTone();
+  initAudio();
+  gainNode.gain.value=+document.getElementById('volume').value/100;
+  leftOsc=audioCtx.createOscillator();
+  rightOsc=audioCtx.createOscillator();
+  leftOsc.type='sine';rightOsc.type='sine';
+  leftOsc.frequency.value=s.base;
+  rightOsc.frequency.value=s.base;
+  const gL=audioCtx.createGain();const gR=audioCtx.createGain();
+  const v=+document.getElementById('volume').value/100;
+  gL.gain.value=v;gR.gain.value=v;
+  leftOsc.connect(gL).connect(merger,0,0);
+  rightOsc.connect(gR).connect(merger,0,1);
+  merger.connect(gainNode);
+  const now=audioCtx.currentTime;
+  [...s.points].sort((a,b)=>a.x-b.x).forEach(p=>{
+    rightOsc.frequency.setValueAtTime(s.base+p.y*MAX_BEAT, now+p.x*s.duration);
+  });
+  setTimeout(()=>{
+    if(isPlaying){
+      stopTone();
+      toast('Programa finalizado');
+    }
+  },s.duration*1000);
+  leftOsc.start();rightOsc.start();
+  isPlaying=true;
+  startVisualizer();
+  toast('▶ Reproduciendo '+s.name);
+}
+
+/* ============ TOAST ============ */
+let toastTimer;
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+/* ============ INIT ============ */
+resizeEditor();
+selectPreset(PRESETS[0]);
+</script>
+</body>
+</html>
