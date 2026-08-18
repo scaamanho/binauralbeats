@@ -92,6 +92,10 @@
   .xl{bottom:4px;left:50%;transform:translateX(-50%)}
   .info-box{padding:12px;border-radius:12px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);font-size:12px;line-height:1.5;margin-bottom:12px}
   .info-box b{color:#00d4ff}
+  .brainwave-list{display:grid;gap:8px}
+  .brainwave-card{padding:14px;border-radius:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)}
+  .brainwave-card h3{font-size:14px;margin-bottom:4px}
+  .brainwave-card p{font-size:12px;line-height:1.45;opacity:0.75}
   .saved-list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
   .saved-item{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)}
   .saved-item .name{font-size:13px;font-weight:600}
@@ -122,6 +126,7 @@
     <div class="tab active" data-view="presets" data-i18n="presetsTab">Presintonías</div>
     <div class="tab" data-view="editor" data-i18n="editorTab">Editor</div>
     <div class="tab" data-view="saved" data-i18n="savedTab">Guardados</div>
+    <div class="tab" data-view="brainwaves" data-i18n="brainwavesTab">Ondas</div>
   </div>
 
   <!-- VISTA PRESETS -->
@@ -185,6 +190,25 @@
     <div class="info-box" data-i18n="savedInfo">Tus programas personalizados se guardan localmente en este dispositivo.</div>
     <div class="saved-list" id="savedList"></div>
   </div>
+
+  <!-- VISTA ONDAS CEREBRALES -->
+  <div class="view" id="view-brainwaves">
+    <div class="info-box">
+      <b data-i18n="brainwavesIntroTitle">¿Qué son las ondas cerebrales?</b>
+      <span data-i18n="brainwavesIntro">Son patrones de actividad eléctrica del cerebro que se describen por su frecuencia, medida en hercios (Hz). Las asociaciones siguientes son orientativas y no sustituyen consejo médico.</span>
+    </div>
+    <div class="brainwave-list">
+      <article class="brainwave-card"><h3 data-i18n="deltaTitle">Delta · 0,5–4 Hz</h3><p data-i18n="deltaInfo">Se asocia habitualmente con el sueño profundo y el descanso.</p></article>
+      <article class="brainwave-card"><h3 data-i18n="thetaTitle">Theta · 4–8 Hz</h3><p data-i18n="thetaInfo">Se relaciona con relajación profunda, imaginación y meditación.</p></article>
+      <article class="brainwave-card"><h3 data-i18n="alphaTitle">Alpha · 8–13 Hz</h3><p data-i18n="alphaInfo">Suele aparecer en estados de calma despierta y relajación.</p></article>
+      <article class="brainwave-card"><h3 data-i18n="betaTitle">Beta · 13–30 Hz</h3><p data-i18n="betaInfo">Se vincula normalmente con atención, concentración y actividad mental.</p></article>
+      <article class="brainwave-card"><h3 data-i18n="gammaTitle">Gamma · 30–100 Hz</h3><p data-i18n="gammaInfo">Se estudia en relación con procesamiento de información y atención intensa.</p></article>
+    </div>
+    <div class="info-box">
+      <b data-i18n="binauralTitle">¿Cómo funciona esta aplicación?</b>
+      <span data-i18n="binauralInfo">La aplicación reproduce dos tonos parecidos: uno en cada oído. La diferencia entre sus frecuencias crea la sensación de un ritmo binaural. Por ejemplo, 200 Hz en un oído y 210 Hz en el otro producen una diferencia de 10 Hz. Se recomienda usar auriculares y mantener un volumen cómodo.</span>
+    </div>
+  </div>
 </main>
 
 <div class="toast" id="toast"></div>
@@ -219,6 +243,28 @@ const TRANSLATIONS={
   es:{tagline:'Generador de ondas cerebrales',presetsTab:'Presintonías',editorTab:'Editor',savedTab:'Guardados',player:'Reproductor',selectPreset:'Selecciona una presintonía',baseFrequency:'Frecuencia base',volume:'Volumen',start:'▶  INICIAR',stop:'■  DETENER',howToUse:'¿Cómo usar?',editorHelp:'Toca el gráfico para añadir puntos. Arrástralos para definir la frecuencia del batido binaural a lo largo del tiempo. La línea muestra la diferencia entre oídos (Hz).',time:'Tiempo →',clear:'Limpiar',save:'Guardar',play:'Reproducir',totalDuration:'Duración total',savedInfo:'Tus programas personalizados se guardan localmente en este dispositivo.',installAsApp:'Instalar como app',install:'Instalar',addPoints:'Toca para añadir puntos',selectFirst:'Selecciona una presintonía primero',needTwo:'Añade al menos 2 puntos al gráfico',needTwoShort:'Añade al menos 2 puntos',finished:'Programa finalizado',programName:'Nombre del programa:',myProgram:'Mi programa',saved:'✓ Programa guardado',empty:'No hay programas guardados aún.<br>Crea uno en el Editor.',load:'Cargar',delete:'Eliminar',deleted:'Eliminado',loaded:'Cargado en el editor',playing:'▶ Reproduciendo',confirmDelete:'¿Eliminar este programa?',points:'puntos',base:'Base',presets:{memoria:['Memoria','Aprendizaje','Beta 14Hz - Concentración y memoria'],relax:['Relajarse','Calma','Alpha 10Hz - Relajación profunda'],dormir:['Dormir','Sueño profundo','Delta 2Hz - Sueño profundo'],meditar:['Meditación','Atención plena','Theta 6Hz - Meditación'],deseo:['Excitación','Deseo','Theta 5Hz - Sensualidad'],energia:['Energía','Motivación','Beta 20Hz - Energía']}},
   en:{tagline:'Brainwave generator',presetsTab:'Presets',editorTab:'Editor',savedTab:'Saved',player:'Player',selectPreset:'Select a preset',baseFrequency:'Base frequency',volume:'Volume',start:'▶  START',stop:'■  STOP',howToUse:'How to use',editorHelp:'Tap the graph to add points. Drag them to define the binaural beat frequency over time. The line shows the difference between ears (Hz).',time:'Time →',clear:'Clear',save:'Save',play:'Play',totalDuration:'Total duration',savedInfo:'Your custom programs are stored locally on this device.',installAsApp:'Install as app',install:'Install',addPoints:'Tap to add points',selectFirst:'Select a preset first',needTwo:'Add at least 2 points to the graph',needTwoShort:'Add at least 2 points',finished:'Program finished',programName:'Program name:',myProgram:'My program',saved:'✓ Program saved',empty:'No saved programs yet.<br>Create one in the Editor.',load:'Load',delete:'Delete',deleted:'Deleted',loaded:'Loaded in editor',playing:'▶ Playing',confirmDelete:'Delete this program?',points:'points',base:'Base',presets:{memoria:['Memory','Learning','Beta 14Hz - Focus and memory'],relax:['Relax','Calm','Alpha 10Hz - Deep relaxation'],dormir:['Sleep','Deep sleep','Delta 2Hz - Deep sleep'],meditar:['Meditation','Mindfulness','Theta 6Hz - Meditation'],deseo:['Excitement','Desire','Theta 5Hz - Sensuality'],energia:['Energy','Motivation','Beta 20Hz - Energy']}}
 };
+Object.assign(TRANSLATIONS.es.presets,{
+  creatividad:['Creatividad','Inspiración','Theta 8Hz - Flujo creativo'],
+  enfoque:['Enfoque profundo','Productividad','Beta 18Hz - Atención sostenida'],
+  claridad:['Claridad','Equilibrio','Alpha 12Hz - Claridad mental'],
+  siesta:['Siesta','Descanso breve','Delta 3Hz - Descanso reparador'],
+  respiracion:['Respiración','Serenidad','Theta 4Hz - Respiración consciente'],
+  alerta:['Alerta','Activación','Gamma 30Hz - Estado de alerta']
+});
+Object.assign(TRANSLATIONS.en.presets,{
+  creatividad:['Creativity','Inspiration','Theta 8Hz - Creative flow'],
+  enfoque:['Deep focus','Productivity','Beta 18Hz - Sustained attention'],
+  claridad:['Clarity','Balance','Alpha 12Hz - Mental clarity'],
+  siesta:['Power nap','Short rest','Delta 3Hz - Restorative rest'],
+  respiracion:['Breathing','Serenity','Theta 4Hz - Mindful breathing'],
+  alerta:['Alertness','Activation','Gamma 30Hz - Alert state']
+});
+Object.assign(TRANSLATIONS.es,{
+  brainwavesTab:'Ondas',brainwavesIntroTitle:'¿Qué son las ondas cerebrales?',brainwavesIntro:'Son patrones de actividad eléctrica del cerebro que se describen por su frecuencia, medida en hercios (Hz). Las asociaciones siguientes son orientativas y no sustituyen consejo médico.',deltaTitle:'Delta · 0,5–4 Hz',deltaInfo:'Se asocia habitualmente con el sueño profundo y el descanso.',thetaTitle:'Theta · 4–8 Hz',thetaInfo:'Se relaciona con relajación profunda, imaginación y meditación.',alphaTitle:'Alpha · 8–13 Hz',alphaInfo:'Suele aparecer en estados de calma despierta y relajación.',betaTitle:'Beta · 13–30 Hz',betaInfo:'Se vincula normalmente con atención, concentración y actividad mental.',gammaTitle:'Gamma · 30–100 Hz',gammaInfo:'Se estudia en relación con procesamiento de información y atención intensa.',binauralTitle:'¿Cómo funciona esta aplicación?',binauralInfo:'La aplicación reproduce dos tonos parecidos: uno en cada oído. La diferencia entre sus frecuencias crea la sensación de un ritmo binaural. Por ejemplo, 200 Hz en un oído y 210 Hz en el otro producen una diferencia de 10 Hz. Se recomienda usar auriculares y mantener un volumen cómodo.'
+});
+Object.assign(TRANSLATIONS.en,{
+  brainwavesTab:'Brainwaves',brainwavesIntroTitle:'What are brainwaves?',brainwavesIntro:'They are patterns of electrical activity in the brain described by their frequency, measured in hertz (Hz). The associations below are general guidance and are not medical advice.',deltaTitle:'Delta · 0.5–4 Hz',deltaInfo:'Commonly associated with deep sleep and rest.',thetaTitle:'Theta · 4–8 Hz',thetaInfo:'Related to deep relaxation, imagination and meditation.',alphaTitle:'Alpha · 8–13 Hz',alphaInfo:'Often present during relaxed, awake states and calm.',betaTitle:'Beta · 13–30 Hz',betaInfo:'Usually linked with attention, concentration and mental activity.',gammaTitle:'Gamma · 30–100 Hz',gammaInfo:'Studied in relation to information processing and intense attention.',binauralTitle:'How does this application work?',binauralInfo:'The application plays two similar tones, one in each ear. The difference between their frequencies creates the perception of a binaural beat. For example, 200 Hz in one ear and 210 Hz in the other create a 10 Hz difference. Headphones and a comfortable volume are recommended.'
+});
 let language=localStorage.getItem('bb_language')||((navigator.language||'es').toLowerCase().startsWith('en')?'en':'es');
 const t=key=>TRANSLATIONS[language][key]||key;
 function translateStatic(){
@@ -232,7 +278,13 @@ const PRESETS = [
   {id:'dormir',name:'Dormir',sub:'Sueño profundo',icon:'🌙',beat:2,base:180,wave:'Delta',grad:'linear-gradient(135deg,#6366f1,#312e81)',c1:'#6366f1',glow:'rgba(99,102,241,0.4)',desc:'Delta 2Hz - Sueño profundo'},
   {id:'meditar',name:'Meditación',sub:'Atención plena',icon:'🧘',beat:6,base:200,wave:'Theta',grad:'linear-gradient(135deg,#a855f7,#7e22ce)',c1:'#a855f7',glow:'rgba(168,85,247,0.4)',desc:'Theta 6Hz - Meditación'},
   {id:'deseo',name:'Excitación',sub:'Deseo',icon:'💋',beat:5,base:210,wave:'Theta',grad:'linear-gradient(135deg,#ec4899,#be185d)',c1:'#ec4899',glow:'rgba(236,72,153,0.4)',desc:'Theta 5Hz - Sensualidad'},
-  {id:'energia',name:'Energía',sub:'Motivación',icon:'⚡',beat:20,base:220,wave:'Beta',grad:'linear-gradient(135deg,#f59e0b,#dc2626)',c1:'#f59e0b',glow:'rgba(245,158,11,0.4)',desc:'Beta 20Hz - Energía'}
+  {id:'energia',name:'Energía',sub:'Motivación',icon:'⚡',beat:20,base:220,wave:'Beta',grad:'linear-gradient(135deg,#f59e0b,#dc2626)',c1:'#f59e0b',glow:'rgba(245,158,11,0.4)',desc:'Beta 20Hz - Energía'},
+  {id:'creatividad',name:'Creatividad',sub:'Inspiración',icon:'💡',beat:8,base:210,wave:'Theta',grad:'linear-gradient(135deg,#f97316,#ea580c)',c1:'#f97316',glow:'rgba(249,115,22,0.4)',desc:'Theta 8Hz - Flujo creativo'},
+  {id:'enfoque',name:'Enfoque profundo',sub:'Productividad',icon:'🎯',beat:18,base:220,wave:'Beta',grad:'linear-gradient(135deg,#14b8a6,#0f766e)',c1:'#14b8a6',glow:'rgba(20,184,166,0.4)',desc:'Beta 18Hz - Atención sostenida'},
+  {id:'claridad',name:'Claridad',sub:'Equilibrio',icon:'🔎',beat:12,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#38bdf8,#0284c7)',c1:'#38bdf8',glow:'rgba(56,189,248,0.4)',desc:'Alpha 12Hz - Claridad mental'},
+  {id:'siesta',name:'Siesta',sub:'Descanso breve',icon:'🛌',beat:3,base:180,wave:'Delta',grad:'linear-gradient(135deg,#818cf8,#4f46e5)',c1:'#818cf8',glow:'rgba(129,140,248,0.4)',desc:'Delta 3Hz - Descanso reparador'},
+  {id:'respiracion',name:'Respiración',sub:'Serenidad',icon:'🌬️',beat:4,base:190,wave:'Theta',grad:'linear-gradient(135deg,#2dd4bf,#0d9488)',c1:'#2dd4bf',glow:'rgba(45,212,191,0.4)',desc:'Theta 4Hz - Respiración consciente'},
+  {id:'alerta',name:'Alerta',sub:'Activación',icon:'🚀',beat:30,base:240,wave:'Gamma',grad:'linear-gradient(135deg,#facc15,#eab308)',c1:'#facc15',glow:'rgba(250,204,21,0.4)',desc:'Gamma 30Hz - Estado de alerta'}
 ];
 
 /* ============ AUDIO ENGINE ============ */
