@@ -63,6 +63,13 @@
     .player-title{padding-right:0}
   }
   .player-mode{font-size:20px;font-weight:700;margin-bottom:14px}
+  .preset-details{margin:22px 0 0;padding:13px 14px;border-left:3px solid var(--theme-accent);border-radius:0 12px 12px 0;background:rgba(255,255,255,0.06)}
+  .preset-details p{margin:0}
+  .preset-details-description{font-size:12px;line-height:1.5;opacity:.86}
+  .preset-details-effects{display:flex;gap:6px;margin-top:8px !important;font-size:12px;line-height:1.45}
+  .preset-details-effects b{color:var(--theme-accent);white-space:nowrap}
+  .preset-details-effects span{opacity:.76}
+  .preset-details-note{margin-top:8px !important;font-size:10px;line-height:1.45;opacity:.6}
   .slider-group{margin-bottom:14px}
   .slider-label{display:flex;justify-content:space-between;font-size:12px;opacity:0.75;margin-bottom:6px}
   .slider-label b{color:#00d4ff;font-weight:600}
@@ -88,7 +95,9 @@
   canvas#editor{display:block;width:100%;height:260px;touch-action:none}
   .canvas-labels{position:absolute;inset:0;pointer-events:none;font-size:10px;opacity:0.5}
   .canvas-labels span{position:absolute}
-  .yl{left:4px;top:4px}.ym{left:4px;top:50%;transform:translateY(-50%)}.yb{left:4px;bottom:4px}
+  .y-axis-label{left:5px;top:var(--y);transform:translateY(-50%)}
+  .y-axis-label[style*="--y:0%"]{transform:none}
+  .y-axis-label[style*="--y:100%"]{transform:translateY(-100%)}
   .xl{bottom:4px;left:50%;transform:translateX(-50%)}
   .info-box{padding:12px;border-radius:12px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);font-size:12px;line-height:1.5;margin-bottom:12px}
   .info-box b{color:#00d4ff}
@@ -97,6 +106,9 @@
   .brainwave-card h3{font-size:14px;margin-bottom:4px}
   .brainwave-card p{font-size:12px;line-height:1.45;opacity:0.75}
   .settings-section{padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.1)}
+  .settings-close{display:inline-flex;align-items:center;gap:7px;min-height:44px;margin:0 0 8px;padding:9px 13px;border:1px solid rgba(255,255,255,0.22);border-radius:12px;background:rgba(255,255,255,0.1);color:#fff;font-size:13px;font-weight:700;line-height:1;cursor:pointer;transition:background .2s,transform .2s}
+  .settings-close:hover,.settings-close:focus-visible{background:rgba(0,212,255,0.25);outline:2px solid #00d4ff;outline-offset:2px}
+  .settings-close:active{transform:scale(.96)}
   .settings-section:last-child{border-bottom:0}
   .settings-section h2{font-size:16px;margin-bottom:10px}
   .settings-section p{font-size:12px;line-height:1.45;opacity:0.7;margin-bottom:10px}

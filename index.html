@@ -30,6 +30,7 @@
   <nav class="main-nav" aria-label="Navegación principal" data-i18n-aria-label="mainNavigation">
     <a href="#funciona" data-i18n="howItWorks">Cómo funciona</a>
     <a href="#beneficios" data-i18n="benefits">Beneficios</a>
+    <a href="#guia" data-i18n="guide">Guía</a>
     <a href="#consejos" data-i18n="advice">Consejos</a>
     <a href="#instalar" data-i18n="install">Instalar</a>
   </nav>
@@ -164,6 +165,101 @@
         <p data-i18n="programsText">Editor visual para diseñar curvas de frecuencia y guardarlas en el dispositivo.</p>
       </article>
     </div>
+  </section>
+
+  <section class="section tutorial-section" id="guia">
+    <div class="section-intro reveal">
+      <span class="section-kicker" data-i18n="guideKicker">Guía de escucha</span>
+      <h2 data-i18n="guideHeading">Qué son los ritmos binaurales y cómo interpretar sus frecuencias.</h2>
+      <p class="section-lead" data-i18n="guideLead">Los ritmos binaurales se perciben al escuchar dos tonos cercanos, uno por cada oído. La diferencia entre ambos tonos es la frecuencia de batido; por eso se recomiendan auriculares estéreo.</p>
+    </div>
+
+    <div class="tutorial-copy reveal">
+      <p data-i18n="guideMechanism">La diferencia entre los tonos no es un tercer sonido físico en los auriculares: el sistema auditivo la integra como un pulso percibido. El cerebro muestra actividad eléctrica en distintas bandas durante el sueño, la vigilia, la atención o la relajación; el audio no mide ni controla esa actividad, sino que ofrece una señal sonora para acompañar una rutina.</p>
+      <p data-i18n="guideEvidence">Se estudia si el cerebro puede sincronizar parcialmente su actividad con la frecuencia del pulso percibido, un fenómeno conocido como respuesta de seguimiento de frecuencia. Aún no hay consenso sobre cómo se traduciría eso en atención, estado de ánimo o memoria: los estudios muestran resultados mixtos y no reemplazan tratamiento ni consejo profesional.</p>
+    </div>
+
+    <div class="wave-guide reveal">
+      <article class="wave-guide-item delta">
+        <span class="wave-range">0,5–4 Hz</span>
+        <h3 data-i18n="deltaGuideTitle">Delta</h3>
+        <p data-i18n="deltaGuideText">Predomina habitualmente durante el sueño profundo. Se usa como fondo para rutinas nocturnas o pausas de descanso.</p>
+      </article>
+      <article class="wave-guide-item theta">
+        <span class="wave-range">4–8 Hz</span>
+        <h3 data-i18n="thetaGuideTitle">Theta</h3>
+        <p data-i18n="thetaGuideText">Se observa en somnolencia, imaginación y prácticas contemplativas. Puede acompañar meditación o respiración pausada.</p>
+      </article>
+      <article class="wave-guide-item alpha">
+        <span class="wave-range">8–13 Hz</span>
+        <h3 data-i18n="alphaGuideTitle">Alpha</h3>
+        <p data-i18n="alphaGuideText">Se asocia con relajación despierta y atención tranquila. Suele elegirse para bajar el ritmo sin buscar dormir.</p>
+      </article>
+      <article class="wave-guide-item beta">
+        <span class="wave-range">13–30 Hz</span>
+        <h3 data-i18n="betaGuideTitle">Beta</h3>
+        <p data-i18n="betaGuideText">Se vincula con atención y actividad mental. Puede encajar en bloques breves de lectura, estudio o trabajo.</p>
+      </article>
+      <article class="wave-guide-item gamma">
+        <span class="wave-range">30–100 Hz</span>
+        <h3 data-i18n="gammaGuideTitle">Gamma</h3>
+        <p data-i18n="gammaGuideText">Se estudia en relación con procesamiento intenso de información. Úsala con volumen cómodo y en sesiones cortas.</p>
+      </article>
+    </div>
+
+    <div class="tutorial-deep-dive reveal">
+      <article>
+        <span class="tutorial-index">01</span>
+        <h3 data-i18n="guideSessionTitle">Cómo transcurre una sesión</h3>
+        <p data-i18n="guideSessionText">La aplicación reproduce una frecuencia base en un oído y una segunda frecuencia ligeramente distinta en el otro. Por ejemplo, 200 Hz y 210 Hz producen una diferencia de 10 Hz. La frecuencia base define el tono que oyes; la diferencia define el batido binaural percibido.</p>
+      </article>
+      <article>
+        <span class="tutorial-index">02</span>
+        <h3 data-i18n="guideBodyTitle">Qué puede sentirse en el cuerpo</h3>
+        <p data-i18n="guideBodyText">Al escuchar un tono repetitivo en un entorno tranquilo, algunas personas describen cambios de atención, respiración más pausada o una sensación de relajación. Estas respuestas también dependen del volumen, el cansancio, el contexto y las expectativas; no son un efecto asegurado de una frecuencia concreta.</p>
+      </article>
+      <article>
+        <span class="tutorial-index">03</span>
+        <h3 data-i18n="guideChoiceTitle">Cómo elegir una frecuencia</h3>
+        <p data-i18n="guideChoiceText">Para lectura o trabajo, prueba una sesión beta breve. Para una pausa o meditación, comienza con alpha o theta. Para descansar, usa delta sólo cuando no necesites mantenerte alerta. Cambia una variable por vez y anota cómo te resulta.</p>
+      </article>
+    </div>
+
+    <section class="frequency-reference reveal" aria-labelledby="frequency-reference-title">
+      <div>
+        <h3 id="frequency-reference-title" data-i18n="frequencyReferenceTitle">Mapa práctico de frecuencias</h3>
+        <p data-i18n="frequencyReferenceText">Usa esta tabla para elegir un punto de partida. Las etiquetas describen contextos de uso habituales, no efectos garantizados de una frecuencia concreta.</p>
+      </div>
+      <div class="frequency-table-wrap">
+        <table class="frequency-table">
+          <thead><tr><th data-i18n="frequencyTableRange">Rango</th><th data-i18n="frequencyTableBand">Banda</th><th data-i18n="frequencyTableUse">Uso habitual</th></tr></thead>
+          <tbody>
+            <tr><td>0,5–1 Hz</td><td>Delta</td><td data-i18n="frequencyDeltaOne">Rutina de sueño profundo y descanso muy tranquilo</td></tr>
+            <tr><td>1–2 Hz</td><td>Delta</td><td data-i18n="frequencyDeltaTwo">Preparación para descanso reparador</td></tr>
+            <tr><td>2–4 Hz</td><td>Delta</td><td data-i18n="frequencyDeltaThree">Desconexión, pausa nocturna o meditación lenta</td></tr>
+            <tr><td>4–5 Hz</td><td>Theta</td><td data-i18n="frequencyThetaOne">Meditación profunda y atención interior</td></tr>
+            <tr><td>5–6 Hz</td><td>Theta</td><td data-i18n="frequencyThetaTwo">Relajación profunda y exploración creativa</td></tr>
+            <tr><td>6–8 Hz</td><td>Theta</td><td data-i18n="frequencyThetaThree">Visualización, transición al descanso e ideas libres</td></tr>
+            <tr><td>8–10 Hz</td><td>Alpha</td><td data-i18n="frequencyAlphaOne">Calma consciente y reducción del ritmo</td></tr>
+            <tr><td>10–13 Hz</td><td>Alpha</td><td data-i18n="frequencyAlphaTwo">Relajación alerta, visualización o foco sereno</td></tr>
+            <tr><td>13–15 Hz</td><td>Beta</td><td data-i18n="frequencyBetaOne">Atención focalizada para tareas sostenidas</td></tr>
+            <tr><td>15–18 Hz</td><td>Beta</td><td data-i18n="frequencyBetaTwo">Pensamiento activo y resolución de problemas</td></tr>
+            <tr><td>18–22 Hz</td><td>Beta</td><td data-i18n="frequencyBetaThree">Concentración intensa en bloques breves</td></tr>
+            <tr><td>22–30 Hz</td><td>Beta</td><td data-i18n="frequencyBetaFour">Activación alta; prueba sesiones cortas</td></tr>
+            <tr><td>30–40 Hz</td><td>Gamma</td><td data-i18n="frequencyGamma">Atención intensa y procesamiento de detalle</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="frequency-use-grid">
+        <article><h4 data-i18n="goalSleep">Descansar</h4><p data-i18n="goalSleepText">1–3 Hz · 30–60 min antes de dormir</p></article>
+        <article><h4 data-i18n="goalMeditate">Meditar</h4><p data-i18n="goalMeditateText">4–7 Hz · 15–30 min</p></article>
+        <article><h4 data-i18n="goalRelax">Relajarse</h4><p data-i18n="goalRelaxText">8–12 Hz · 15–45 min</p></article>
+        <article><h4 data-i18n="goalStudy">Estudiar</h4><p data-i18n="goalStudyText">14–20 Hz · 25–50 min</p></article>
+      </div>
+      <p class="frequency-examples"><b data-i18n="frequencyExamplesTitle">Valores concretos para explorar:</b> <span data-i18n="frequencyExamplesText">1,05 · 2,5 · 3,6 · 5,5 · 7,83 · 9,6 · 10 · 12 · 14 · 15 · 18 · 20 · 30 · 40 Hz.</span></p>
+    </section>
+
+    <aside class="tutorial-note reveal" data-i18n="guideNote">Empieza con 10 a 20 minutos a volumen bajo o medio y prueba una sola frecuencia por sesión. Si el audio resulta irritante, distrae o empeora tu concentración, detén la sesión. No la uses al conducir ni la dejes sonando toda la noche. Si tienes una condición neurológica, auditiva o médica, consulta antes con un profesional.</aside>
   </section>
 
   <section class="section advice-band" id="consejos">

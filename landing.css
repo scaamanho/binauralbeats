@@ -346,6 +346,38 @@ h2{
 }
 .benefit p{font:400 14px/1.6 'Inter',sans-serif;color:var(--muted);margin-bottom:0}
 
+/* Listening guide */
+.tutorial-section{background:rgba(255,250,240,.36)}
+.tutorial-copy{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;max-width:980px;margin-bottom:38px}
+.tutorial-copy p{margin:0;font:400 16px/1.7 'Inter',sans-serif;color:var(--muted)}
+.wave-guide{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.wave-guide-item{min-height:240px;padding:22px 18px;border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:var(--radius);background:rgba(255,250,240,.82);box-shadow:var(--shadow-sm)}
+.wave-guide-item.delta{--accent:#5c6bc0}.wave-guide-item.theta{--accent:#8e5bbd}.wave-guide-item.alpha{--accent:#2f8a83}.wave-guide-item.beta{--accent:#3b7ea1}.wave-guide-item.gamma{--accent:#c85f3d}
+.wave-range{display:block;margin-bottom:18px;font:700 11px/1 'Inter',sans-serif;letter-spacing:.08em;color:var(--accent)}
+.wave-guide-item h3{margin-bottom:9px;font:600 22px/1.15 'Fraunces',Georgia,serif;color:var(--ink)}
+.wave-guide-item p{margin:0;font:400 13.5px/1.6 'Inter',sans-serif;color:var(--muted)}
+.tutorial-deep-dive{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;max-width:1120px;margin-top:46px}
+.tutorial-deep-dive article{padding:28px 26px;border-top:1px solid var(--line-strong);background:rgba(255,250,240,.48)}
+.tutorial-index{display:block;margin-bottom:18px;font:700 12px/1 'Inter',sans-serif;letter-spacing:.1em;color:var(--clay)}
+.tutorial-deep-dive h3{margin-bottom:12px;font:600 24px/1.2 'Fraunces',Georgia,serif;color:var(--ink)}
+.tutorial-deep-dive p{margin:0;font:400 14.5px/1.65 'Inter',sans-serif;color:var(--muted)}
+.frequency-reference{max-width:1120px;margin-top:44px;padding:28px;border:1px solid var(--line);background:rgba(255,250,240,.72)}
+.frequency-reference h3{margin-bottom:8px;font:600 26px/1.2 'Fraunces',Georgia,serif;color:var(--ink)}
+.frequency-reference p{max-width:680px;margin:0;font:400 14.5px/1.65 'Inter',sans-serif;color:var(--muted)}
+.frequency-table-wrap{margin-top:24px;overflow-x:auto;border:1px solid var(--line)}
+.frequency-table{width:100%;border-collapse:collapse;min-width:620px;background:rgba(255,255,255,.5)}
+.frequency-table th,.frequency-table td{padding:13px 16px;border-bottom:1px solid var(--line);text-align:left;font:400 13px/1.45 'Inter',sans-serif;color:var(--ink-2)}
+.frequency-table th{background:rgba(13,111,98,.10);font-weight:700;color:var(--green-strong)}
+.frequency-table td:first-child,.frequency-table td:nth-child(2){white-space:nowrap;font-weight:600;color:var(--ink)}
+.frequency-table tbody tr:last-child td{border-bottom:0}
+.frequency-use-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:20px}
+.frequency-use-grid article{padding:16px;border-left:3px solid var(--green);background:rgba(13,111,98,.07)}
+.frequency-use-grid h4{margin:0 0 6px;font:700 14px/1 'Inter',sans-serif;color:var(--ink)}
+.frequency-use-grid p{margin:0;font-size:13px;line-height:1.5}
+.frequency-examples{max-width:none !important;margin-top:20px !important;padding-top:18px;border-top:1px solid var(--line)}
+.frequency-examples b{color:var(--ink)}
+.tutorial-note{max-width:980px;margin-top:26px;padding:18px 20px;border-left:3px solid var(--gold);background:rgba(216,166,58,.10);font:500 14px/1.65 'Inter',sans-serif;color:var(--ink-2)}
+
 /* Advice band */
 .advice-band{
   background:
@@ -413,6 +445,9 @@ h2{
 @media (max-width:1080px){
   .benefit-grid{grid-template-columns:repeat(2,1fr)}
   .advice-list{grid-template-columns:repeat(2,1fr)}
+  .wave-guide{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .tutorial-deep-dive{grid-template-columns:1fr}
+  .frequency-use-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:900px){
   .main-nav{display:none}
@@ -431,6 +466,9 @@ h2{
   .hero{padding:28px 16px 24px}
   .section{padding:70px 16px}
   .benefit-grid,.advice-list{grid-template-columns:1fr}
+  .tutorial-copy,.wave-guide,.tutorial-deep-dive{grid-template-columns:1fr}
+  .wave-guide-item{min-height:auto}
+  .frequency-use-grid{grid-template-columns:1fr}
   .advice-list p{min-height:auto}
   .button{width:100%;max-width:100%}
   .trust-row span{width:100%;justify-content:center}
