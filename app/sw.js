@@ -1,4 +1,4 @@
-const CACHE_NAME = 'binaural-beats-pro-v4';
+const CACHE_NAME = 'binaural-beats-pro-v6';
 const APP_SHELL = ['./', './index.html', './styles.css', './app.js'];
 
 self.addEventListener('install', e => {
@@ -19,11 +19,13 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
+  if (e.request.mode === 'navigate') {
+    e.respondWith(fetch(e.request).catch(() => caches.match('./index.html')));
+    return;
+  }
+
   e.respondWith(
     caches.match(e.request).then(cached => {
-      if (e.request.mode === 'navigate') {
-        return cached || caches.match('./index.html');
-      }
       const networkFetch = fetch(e.request).then(response => {
         if (response?.status === 200) {
           const clone = response.clone();
