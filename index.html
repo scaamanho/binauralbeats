@@ -1,133 +1,212 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101820">
-  <meta name="description" content="Binaural Beats Pro: generador de ritmos binaurales para sesiones de enfoque, relajación, meditación y descanso.">
-  <title>Binaural Beats Pro | Ritmos binaurales para foco, calma y descanso</title>
-  <link rel="icon" href="./app/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="./app/icon.svg">
-  <link rel="stylesheet" href="./landing.css?v=2">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#0a1a1f" />
+<meta name="description" content="Binaural Beats Pro — Generador de ondas cerebrales para foco, calma y descanso. PWA instalable, funciona sin cuenta." data-i18n-content="metaDescription" />
+<title data-i18n="pageTitle">Binaural Beats Pro · Ritmos binaurales para foco, calma y descanso</title>
+<link rel="icon" href="./app/icon-192.png" type="image/png" />
+<link rel="apple-touch-icon" href="./app/icon-192.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./landing.css" />
 </head>
 <body>
-  <header class="site-header" aria-label="Cabecera principal">
-    <a class="brand" href="./" aria-label="Binaural Beats Pro">
-      <img src="./app/icon.svg" alt="" width="34" height="34">
-      <span>Binaural Beats Pro</span>
-    </a>
-    <nav class="main-nav" aria-label="Navegación">
-      <a href="#funciona">Cómo funciona</a>
-      <a href="#beneficios">Beneficios</a>
-      <a href="#consejos">Consejos</a>
-    </nav>
-    <a class="header-action" href="./app/">Abrir app</a>
-  </header>
 
-  <main>
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow">Generador de ondas cerebrales</p>
-        <h1 id="hero-title">Crea sesiones binaurales para concentrarte, relajarte o preparar el descanso.</h1>
-        <p class="hero-text">Elige una presintonía, ajusta la frecuencia base y escucha con auriculares. La app genera dos tonos cercanos, uno para cada oído, para producir la percepción de un ritmo binaural.</p>
-        <div class="hero-actions" aria-label="Acciones principales">
-          <a class="button primary" href="./app/">Acceder a la aplicación</a>
-          <a class="button secondary" href="./app/?install=1">Instalar la app</a>
+<div class="bg-decor" aria-hidden="true">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="grid-overlay"></div>
+</div>
+
+<header class="site-header" id="siteHeader">
+  <a class="brand" href="#top" aria-label="Binaural Beats Pro — inicio" data-i18n-aria-label="homeLabel">
+    <img src="./app/icon-192.png" alt="" width="34" height="34" />
+    <span>Binaural Beats <em>Pro</em></span>
+  </a>
+  <nav class="main-nav" aria-label="Navegación principal" data-i18n-aria-label="mainNavigation">
+    <a href="#funciona" data-i18n="howItWorks">Cómo funciona</a>
+    <a href="#beneficios" data-i18n="benefits">Beneficios</a>
+    <a href="#consejos" data-i18n="advice">Consejos</a>
+    <a href="#instalar" data-i18n="install">Instalar</a>
+  </nav>
+  <div class="header-controls">
+    <div class="language-switch">
+      <button type="button" data-language="es" aria-pressed="true">ES</button>
+      <button type="button" data-language="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="header-action" href="./app/" data-i18n="openAppShort">Abrir app →</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">
+        <span class="dot"></span>
+        <span data-i18n="eyebrow">Generador de ondas cerebrales · PWA</span>
+      </span>
+      <h1><span data-i18n="heroHeadingStart">Crea sesiones binaurales para</span> <span class="grad-text" data-i18n="focus">foco</span>, <span class="grad-text" data-i18n="calm">calma</span> <span data-i18n="heroHeadingAnd">y</span> <span class="grad-text" data-i18n="rest">descanso</span>.</h1>
+      <p class="hero-text" data-i18n="heroText">Crea sesiones binaurales personalizadas para concentrarte, relajarte o preparar el descanso. Elige una presintonía, ajusta la frecuencia base y escucha con auriculares.</p>
+
+      <div class="hero-actions">
+        <a class="button ghost" href="./app/">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <span data-i18n="openApplication">Abrir la aplicación</span>
+        </a>
+        <a class="button primary" href="./app/?install=1">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+          <span data-i18n="installAsApp">Instalar como app</span>
+        </a>
+      </div>
+
+      <div class="trust-row" role="list">
+        <span role="listitem">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <span data-i18n="noAccount">Funciona sin cuenta</span>
+        </span>
+        <span role="listitem">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <span data-i18n="savedLocally">Guarda programas localmente</span>
+        </span>
+        <span role="listitem">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <span data-i18n="mobileAndDesktop">Diseñada para móvil y PC</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="phone-frame" aria-hidden="false">
+        <div class="phone-notch"></div>
+        <div class="phone-glow"></div>
+        <iframe src="./app/" title="Binaural Beats Pro" loading="lazy"></iframe>
+      </div>
+      <div class="hero-caption">
+        <span class="live-dot"></span>
+        <span data-i18n="livePreview">Vista previa en vivo · la PWA se instala desde aquí</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="funciona">
+    <div class="section-intro reveal">
+      <span class="section-kicker" data-i18n="howItWorks">Cómo funciona</span>
+      <h2><span data-i18n="howHeadingStart">Dos tonos cercanos crean una</span> <span class="grad-text" data-i18n="thirdRhythm">tercera percepción rítmica</span>.</h2>
+      <p class="section-lead" data-i18n="howLead">La app envía una frecuencia ligeramente distinta a cada oído. Tu cerebro integra ambas y percibe un ritmo a la frecuencia de la diferencia.</p>
+    </div>
+
+    <div class="steps reveal">
+      <article class="step">
+        <div class="step-num">01</div>
+        <div class="step-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3"/><path d="M12 19v3"/><path d="m4.2 4.2 2.1 2.1"/><path d="m17.7 17.7 2.1 2.1"/><path d="M2 12h3"/><path d="M19 12h3"/><path d="m4.2 19.8 2.1-2.1"/><path d="m17.7 6.3 2.1-2.1"/></svg>
         </div>
-        <div class="trust-row" aria-label="Características rápidas">
-          <span>Funciona sin cuenta</span>
-          <span>Guarda programas localmente</span>
-          <span>Diseñada para móvil y PC</span>
+        <h3 data-i18n="stepOneTitle">Elige una intención</h3>
+        <p data-i18n="stepOneText">Presets orientados a foco, calma, meditación, energía, siesta o sueño profundo.</p>
+      </article>
+      <article class="step">
+        <div class="step-num">02</div>
+        <div class="step-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+        </div>
+        <h3 data-i18n="stepTwoTitle">Usa auriculares</h3>
+        <p data-i18n="stepTwoText">La app envía una frecuencia a cada oído. La diferencia entre ambas es el ritmo binaural percibido.</p>
+      </article>
+      <article class="step">
+        <div class="step-num">03</div>
+        <div class="step-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-6"/><path d="M6 20V10"/><path d="M18 20V4"/></svg>
+        </div>
+        <h3 data-i18n="stepThreeTitle">Ajusta tu sesión</h3>
+        <p data-i18n="stepThreeText">Controla volumen y frecuencia base, o crea programas personalizados con cambios en el tiempo.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="beneficios">
+    <div class="section-intro reveal">
+      <span class="section-kicker" data-i18n="benefits">Beneficios</span>
+      <h2><span data-i18n="benefitsHeadingStart">Una herramienta sencilla para</span> <span class="grad-text" data-i18n="mentalRoutines">acompañar rutinas mentales</span>.</h2>
+    </div>
+
+    <div class="benefit-grid reveal">
+      <article class="benefit">
+        <div class="benefit-icon" style="--accent:#0d6f62">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3 data-i18n="focusTitle">Foco sostenido</h3>
+        <p data-i18n="focusText">Presets beta y gamma para sesiones de estudio, lectura o trabajo profundo.</p>
+      </article>
+      <article class="benefit">
+        <div class="benefit-icon" style="--accent:#3b7ea1">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h3 data-i18n="relaxationTitle">Relajación guiada</h3>
+        <p data-i18n="relaxationText">Frecuencias alpha y theta para crear un entorno auditivo más calmado.</p>
+      </article>
+      <article class="benefit">
+        <div class="benefit-icon" style="--accent:#6b4ea0">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </div>
+        <h3 data-i18n="restTitle">Descanso preparado</h3>
+        <p data-i18n="restText">Opciones delta para acompañar rutinas nocturnas o pausas breves.</p>
+      </article>
+      <article class="benefit">
+        <div class="benefit-icon" style="--accent:#c85f3d">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4z"/></svg>
+        </div>
+        <h3 data-i18n="programsTitle">Programas propios</h3>
+        <p data-i18n="programsText">Editor visual para diseñar curvas de frecuencia y guardarlas en el dispositivo.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section advice-band" id="consejos">
+    <div class="section-intro reveal">
+      <span class="section-kicker" data-i18n="adviceKicker">Consejos de uso</span>
+      <h2 data-i18n="adviceHeading">Escucha con intención y volumen cómodo.</h2>
+    </div>
+
+    <div class="advice-list reveal">
+      <p data-i18n="adviceOne">Empieza con sesiones cortas de 10 a 20 minutos y observa cómo te sientes.</p>
+      <p data-i18n="adviceTwo">Mantén el volumen bajo o medio; no hace falta que los tonos dominen el ambiente.</p>
+      <p data-i18n="adviceThree">Evita usarla mientras conduces o realizas tareas que requieran atención externa constante.</p>
+      <p data-i18n="adviceFour">Si tienes condiciones neurológicas, auditivas o médicas, consulta con un profesional antes de usar ritmos binaurales.</p>
+    </div>
+  </section>
+
+  <section class="section" id="instalar">
+    <div class="install-section reveal">
+      <div class="install-text">
+        <span class="section-kicker" data-i18n="install">Instalación</span>
+        <h2 data-i18n="installHeading">Instálala como PWA en móvil o escritorio.</h2>
+        <p class="section-lead" data-i18n="installLead">La instalación se realiza desde la aplicación. Ábrela y usa el aviso de instalación o el menú del navegador para elegir “Instalar aplicación” o “Añadir a pantalla de inicio”.</p>
+        <div class="install-actions">
+          <a class="button primary" href="./app/?install=1">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+            <span data-i18n="openToInstall">Abrir app para instalar</span>
+          </a>
         </div>
       </div>
-      <div class="hero-visual" aria-label="Vista previa de la aplicación">
-        <div class="phone-frame">
-          <iframe title="Vista previa de Binaural Beats Pro" src="./app/" loading="lazy"></iframe>
-        </div>
-      </div>
-    </section>
 
-    <section class="section split" id="funciona" aria-labelledby="funciona-title">
-      <div>
-        <p class="section-kicker">Cómo funciona</p>
-        <h2 id="funciona-title">Dos tonos cercanos crean una tercera percepción rítmica.</h2>
-      </div>
-      <div class="steps">
-        <article>
-          <span>01</span>
-          <h3>Elige una intención</h3>
-          <p>Selecciona presets orientados a foco, calma, meditación, energía, siesta o sueño profundo.</p>
-        </article>
-        <article>
-          <span>02</span>
-          <h3>Usa auriculares</h3>
-          <p>La app envía una frecuencia a cada oído. La diferencia entre ambas es el ritmo binaural percibido.</p>
-        </article>
-        <article>
-          <span>03</span>
-          <h3>Ajusta tu sesión</h3>
-          <p>Controla volumen y frecuencia base, o crea programas personalizados con cambios de frecuencia en el tiempo.</p>
-        </article>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section" id="beneficios" aria-labelledby="beneficios-title">
-      <div class="section-heading">
-        <p class="section-kicker">Beneficios</p>
-        <h2 id="beneficios-title">Una herramienta sencilla para acompañar rutinas mentales.</h2>
-      </div>
-      <div class="benefit-grid">
-        <article>
-          <h3>Foco sostenido</h3>
-          <p>Presets beta y gamma para sesiones de estudio, lectura o trabajo profundo.</p>
-        </article>
-        <article>
-          <h3>Relajación guiada</h3>
-          <p>Frecuencias alpha y theta para crear un entorno auditivo más calmado.</p>
-        </article>
-        <article>
-          <h3>Descanso preparado</h3>
-          <p>Opciones delta para acompañar rutinas nocturnas o pausas breves.</p>
-        </article>
-        <article>
-          <h3>Programas propios</h3>
-          <p>Editor visual para diseñar curvas de frecuencia y guardarlas en el dispositivo.</p>
-        </article>
-      </div>
-    </section>
+</main>
 
-    <section class="section advice-band" id="consejos" aria-labelledby="consejos-title">
-      <div class="section-heading compact">
-        <p class="section-kicker">Consejos de uso</p>
-        <h2 id="consejos-title">Escucha con intención y volumen cómodo.</h2>
-      </div>
-      <div class="advice-list">
-        <p>Empieza con sesiones cortas de 10 a 20 minutos y observa cómo te sientes.</p>
-        <p>Mantén el volumen bajo o medio; no hace falta que los tonos dominen el ambiente.</p>
-        <p>Evita usarla mientras conduces o realizas tareas que requieran atención externa constante.</p>
-        <p>Si tienes condiciones neurológicas, auditivas o médicas, consulta con un profesional antes de usar ritmos binaurales.</p>
-      </div>
-    </section>
-
-    <section class="section install-section" aria-labelledby="install-title">
-      <div>
-        <p class="section-kicker">Instalación</p>
-        <h2 id="install-title">Instálala como PWA en móvil o equipo de escritorio.</h2>
-        <p>La instalación se realiza desde la aplicación. Ábrela y usa el aviso de instalación o el menú del navegador para elegir “Instalar aplicación” o “Añadir a pantalla de inicio”.</p>
-      </div>
-      <div class="install-card">
-        <a class="button primary wide" href="./app/?install=1">Abrir app para instalar</a>
-        <a class="button ghost wide" href="./app/">Abrir sin instalar</a>
-        <output id="installStatus">La PWA corresponde a la aplicación, no a esta landing.</output>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
+<footer class="site-footer">
+  <div class="footer-brand">
+    <img src="./app/icon-192.png" alt="" width="22" height="22" />
     <span>Binaural Beats Pro</span>
-    <a href="./app/">Ir a la aplicación</a>
-  </footer>
+  </div>
+  <a class="footer-cta" href="./app/" data-i18n="goToApp">Ir a la aplicación →</a>
+</footer>
 
-  <script src="./landing.js?v=3"></script>
+<script src="./landing.js"></script>
 </body>
 </html>
