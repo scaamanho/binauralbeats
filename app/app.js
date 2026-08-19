@@ -4,21 +4,31 @@ if('serviceWorker' in navigator){
 }
 let deferredPrompt;
 const installRequested=new URLSearchParams(window.location.search).get('install')==='1';
+const installBanner=document.getElementById('installBanner');
+const showInstallBanner=()=>{installBanner.style.display='block';};
+if(installRequested) showInstallBanner();
 window.addEventListener('beforeinstallprompt',e=>{
   e.preventDefault();
   deferredPrompt=e;
-  if(installRequested){
-    document.getElementById('installBanner').style.display='block';
-  }
+  if(installRequested) showInstallBanner();
 });
 document.getElementById('installBtn').onclick=async()=>{
-  if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;document.getElementById('installBanner').style.display='none';}
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+    deferredPrompt=null;
+    installBanner.style.display='none';
+    return;
+  }
+  const help=language==='es'
+    ? 'Usa el menú del navegador para elegir “Instalar aplicación” o “Añadir a pantalla de inicio”.'
+    : 'Use your browser menu and choose “Install app” or “Add to Home Screen”.';
+  toast(help);
 };
 
 /* ============ PRESETS ============ */
 const TRANSLATIONS={
-  es:{tagline:'Generador de ondas cerebrales',presetsTab:'Presintonías',editorTab:'Editor',savedTab:'Guardados',player:'Reproductor',selectPreset:'Selecciona una presintonía',baseFrequency:'Frecuencia base',volume:'Volumen',start:'▶  INICIAR',stop:'■  DETENER',howToUse:'¿Cómo usar?',editorHelp:'Toca el gráfico para añadir puntos. Arrástralos para definir la frecuencia del batido binaural a lo largo del tiempo. La línea muestra la diferencia entre oídos (Hz).',time:'Tiempo →',clear:'Limpiar',save:'Guardar',play:'Reproducir',totalDuration:'Duración total',savedInfo:'Tus programas personalizados se guardan localmente en este dispositivo.',installAsApp:'Instalar como app',install:'Instalar',addPoints:'Toca para añadir puntos',selectFirst:'Selecciona una presintonía primero',needTwo:'Añade al menos 2 puntos al gráfico',needTwoShort:'Añade al menos 2 puntos',finished:'Programa finalizado',programName:'Nombre del programa:',myProgram:'Mi programa',saved:'✓ Programa guardado',empty:'No hay programas guardados aún.<br>Crea uno en el Editor.',load:'Cargar',delete:'Eliminar',deleted:'Eliminado',loaded:'Cargado en el editor',playing:'▶ Reproduciendo',confirmDelete:'¿Eliminar este programa?',points:'puntos',base:'Base',presets:{memoria:['Memoria','Aprendizaje','Beta 14Hz - Concentración y memoria'],relax:['Relajarse','Calma','Alpha 10Hz - Relajación profunda'],dormir:['Dormir','Sueño profundo','Delta 2Hz - Sueño profundo'],meditar:['Meditación','Atención plena','Theta 6Hz - Meditación'],deseo:['Excitación','Deseo','Theta 5Hz - Sensualidad'],energia:['Energía','Motivación','Beta 20Hz - Energía']}},
-  en:{tagline:'Brainwave generator',presetsTab:'Presets',editorTab:'Editor',savedTab:'Saved',player:'Player',selectPreset:'Select a preset',baseFrequency:'Base frequency',volume:'Volume',start:'▶  START',stop:'■  STOP',howToUse:'How to use',editorHelp:'Tap the graph to add points. Drag them to define the binaural beat frequency over time. The line shows the difference between ears (Hz).',time:'Time →',clear:'Clear',save:'Save',play:'Play',totalDuration:'Total duration',savedInfo:'Your custom programs are stored locally on this device.',installAsApp:'Install as app',install:'Install',addPoints:'Tap to add points',selectFirst:'Select a preset first',needTwo:'Add at least 2 points to the graph',needTwoShort:'Add at least 2 points',finished:'Program finished',programName:'Program name:',myProgram:'My program',saved:'✓ Program saved',empty:'No saved programs yet.<br>Create one in the Editor.',load:'Load',delete:'Delete',deleted:'Deleted',loaded:'Loaded in editor',playing:'▶ Playing',confirmDelete:'Delete this program?',points:'points',base:'Base',presets:{memoria:['Memory','Learning','Beta 14Hz - Focus and memory'],relax:['Relax','Calm','Alpha 10Hz - Deep relaxation'],dormir:['Sleep','Deep sleep','Delta 2Hz - Deep sleep'],meditar:['Meditation','Mindfulness','Theta 6Hz - Meditation'],deseo:['Excitement','Desire','Theta 5Hz - Sensuality'],energia:['Energy','Motivation','Beta 20Hz - Energy']}}
+  es:{tagline:'Generador de ondas cerebrales',presetsTab:'Presintonías',editorTab:'Crear',savedTab:'Sesiones',player:'Reproductor',selectPreset:'Selecciona una presintonía',baseFrequency:'Frecuencia base',volume:'Volumen',start:'▶  INICIAR',stop:'■  DETENER',howToUse:'¿Cómo usar?',editorHelp:'Toca el gráfico para añadir puntos. Arrástralos para definir la frecuencia del batido binaural a lo largo del tiempo. La línea muestra la diferencia entre oídos (Hz).',time:'Tiempo →',clear:'Limpiar',save:'Guardar',play:'Reproducir',totalDuration:'Duración total',savedInfo:'Tus programas personalizados se guardan localmente en este dispositivo.',installAsApp:'Instalar como app',install:'Instalar',addPoints:'Toca para añadir puntos',selectFirst:'Selecciona una presintonía primero',needTwo:'Añade al menos 2 puntos al gráfico',needTwoShort:'Añade al menos 2 puntos',finished:'Programa finalizado',programName:'Nombre del programa:',myProgram:'Mi programa',saved:'✓ Programa guardado',empty:'No hay programas guardados aún.<br>Crea uno en el Editor.',load:'Cargar',delete:'Eliminar',deleted:'Eliminado',loaded:'Cargado en el editor',playing:'▶ Reproduciendo',confirmDelete:'¿Eliminar este programa?',points:'puntos',base:'Base',presets:{memoria:['Memoria','Aprendizaje','Beta 14Hz - Concentración y memoria'],relax:['Relajarse','Calma','Alpha 10Hz - Relajación profunda'],dormir:['Dormir','Sueño profundo','Delta 2Hz - Sueño profundo'],meditar:['Meditación','Atención plena','Theta 6Hz - Meditación'],deseo:['Intimidad','Relajación Sensua','Theta 6Hz - Sensualidad'],energia:['Energía','Motivación','Beta 20Hz - Energía']}},
+  en:{tagline:'Brainwave generator',presetsTab:'Presets',editorTab:'Create',savedTab:'Sessions',player:'Player',selectPreset:'Select a preset',baseFrequency:'Base frequency',volume:'Volume',start:'▶  START',stop:'■  STOP',howToUse:'How to use',editorHelp:'Tap the graph to add points. Drag them to define the binaural beat frequency over time. The line shows the difference between ears (Hz).',time:'Time →',clear:'Clear',save:'Save',play:'Play',totalDuration:'Total duration',savedInfo:'Your custom programs are stored locally on this device.',installAsApp:'Install as app',install:'Install',addPoints:'Tap to add points',selectFirst:'Select a preset first',needTwo:'Add at least 2 points to the graph',needTwoShort:'Add at least 2 points',finished:'Program finished',programName:'Program name:',myProgram:'My program',saved:'✓ Program saved',empty:'No saved programs yet.<br>Create one in the Editor.',load:'Load',delete:'Delete',deleted:'Deleted',loaded:'Loaded in editor',playing:'▶ Playing',confirmDelete:'Delete this program?',points:'points',base:'Base',presets:{memoria:['Memory','Learning','Beta 14Hz - Focus and memory'],relax:['Relax','Calm','Alpha 10Hz - Deep relaxation'],dormir:['Sleep','Deep sleep','Delta 2Hz - Deep sleep'],meditar:['Meditation','Mindfulness','Theta 6Hz - Meditation'],deseo:['Intimacy','Sensual Relax','Theta 6Hz - Sensuality'],energia:['Energy','Motivation','Beta 20Hz - Energy']}}
 };
 Object.assign(TRANSLATIONS.es.presets,{
   creatividad:['Creatividad','Inspiración','Theta 8Hz - Flujo creativo'],
@@ -36,11 +46,57 @@ Object.assign(TRANSLATIONS.en.presets,{
   respiracion:['Breathing','Serenity','Theta 4Hz - Mindful breathing'],
   alerta:['Alertness','Activation','Gamma 30Hz - Alert state']
 });
+Object.assign(TRANSLATIONS.es.presets,{
+  memoria:['Memoria','Aprendizaje','Beta 14Hz - Concentración suave y atención focalizada'],relax:['Relajarse','Calma','Alpha 10Hz - Relajación alerta y reducción de estrés'],dormir:['Dormir','Sueño profundo','Delta 2Hz - Sueño reparador y sanación profunda'],meditar:['Meditación','Atención plena','Theta 6Hz - Meditación ligera y visualización'],intuicion:['Intuición','Conexión interna','Theta 5Hz - Relajación profunda e intuición'],energia:['Energía','Motivación','Beta 20Hz - Concentración intensa y energía mental'],creatividad:['Creatividad','Inspiración','Theta 7Hz - Ideas creativas y estado hipnagógico'],enfoque:['Enfoque profundo','Productividad','Beta 18Hz - Concentración intensa y resolución de problemas'],claridad:['Claridad','Equilibrio','Alpha 12Hz - Pensamiento positivo y visualización clara'],siesta:['Siesta','Descanso breve','Delta 3Hz - Descanso profundo y recuperación física'],respiracion:['Respiración','Serenidad','Theta 4Hz - Meditación profunda y conexión subconsciente'],alerta:['Alerta','Activación','Gamma 30Hz - Procesamiento cognitivo y memoria']
+});
+Object.assign(TRANSLATIONS.en.presets,{
+  memoria:['Memory','Learning','Beta 14Hz - Gentle concentration and focused attention'],relax:['Relax','Calm','Alpha 10Hz - Alert relaxation and stress reduction'],dormir:['Sleep','Deep sleep','Delta 2Hz - Restorative sleep and deep healing'],meditar:['Meditation','Mindfulness','Theta 6Hz - Light meditation and visualization'],intuicion:['Intuition','Inner connection','Theta 5Hz - Deep relaxation and intuition'],energia:['Energy','Motivation','Beta 20Hz - Intense concentration and mental energy'],creatividad:['Creativity','Inspiration','Theta 7Hz - Creative ideas and hypnagogic state'],enfoque:['Deep focus','Productivity','Beta 18Hz - Intense concentration and problem-solving'],claridad:['Clarity','Balance','Alpha 12Hz - Positive thinking and clear visualization'],siesta:['Power nap','Short rest','Delta 3Hz - Deep rest and physical recovery'],respiracion:['Breathing','Serenity','Theta 4Hz - Deep meditation and subconscious connection'],alerta:['Alertness','Activation','Gamma 30Hz - Cognitive processing and memory']
+});
 Object.assign(TRANSLATIONS.es,{
   brainwavesTab:'Ondas',brainwavesIntroTitle:'¿Qué son las ondas cerebrales?',brainwavesIntro:'Son patrones de actividad eléctrica del cerebro que se describen por su frecuencia, medida en hercios (Hz). Las asociaciones siguientes son orientativas y no sustituyen consejo médico.',deltaTitle:'Delta · 0,5–4 Hz',deltaInfo:'Se asocia habitualmente con el sueño profundo y el descanso.',thetaTitle:'Theta · 4–8 Hz',thetaInfo:'Se relaciona con relajación profunda, imaginación y meditación.',alphaTitle:'Alpha · 8–13 Hz',alphaInfo:'Suele aparecer en estados de calma despierta y relajación.',betaTitle:'Beta · 13–30 Hz',betaInfo:'Se vincula normalmente con atención, concentración y actividad mental.',gammaTitle:'Gamma · 30–100 Hz',gammaInfo:'Se estudia en relación con procesamiento de información y atención intensa.',binauralTitle:'¿Cómo funciona esta aplicación?',binauralInfo:'La aplicación reproduce dos tonos parecidos: uno en cada oído. La diferencia entre sus frecuencias crea la sensación de un ritmo binaural. Por ejemplo, 200 Hz en un oído y 210 Hz en el otro producen una diferencia de 10 Hz. Se recomienda usar auriculares y mantener un volumen cómodo.'
 });
 Object.assign(TRANSLATIONS.en,{
   brainwavesTab:'Brainwaves',brainwavesIntroTitle:'What are brainwaves?',brainwavesIntro:'They are patterns of electrical activity in the brain described by their frequency, measured in hertz (Hz). The associations below are general guidance and are not medical advice.',deltaTitle:'Delta · 0.5–4 Hz',deltaInfo:'Commonly associated with deep sleep and rest.',thetaTitle:'Theta · 4–8 Hz',thetaInfo:'Related to deep relaxation, imagination and meditation.',alphaTitle:'Alpha · 8–13 Hz',alphaInfo:'Often present during relaxed, awake states and calm.',betaTitle:'Beta · 13–30 Hz',betaInfo:'Usually linked with attention, concentration and mental activity.',gammaTitle:'Gamma · 30–100 Hz',gammaInfo:'Studied in relation to information processing and intense attention.',binauralTitle:'How does this application work?',binauralInfo:'The application plays two similar tones, one in each ear. The difference between their frequencies creates the perception of a binaural beat. For example, 200 Hz in one ear and 210 Hz in the other create a 10 Hz difference. Headphones and a comfortable volume are recommended.'
+});
+Object.assign(TRANSLATIONS.es,{
+  suggestedUse:'Uso sugerido',effectsNote:'Las respuestas varían entre personas; estas asociaciones no sustituyen atención médica ni garantizan resultados.',
+  presetDetails:{
+    memoria:['Sesión beta suave pensada para acompañar periodos de estudio, lectura o repaso.','Puede favorecer una sensación de atención sostenida y organización mental.'],
+    relax:['Sesión alpha para bajar el ritmo después de una actividad exigente.','Puede acompañar respiración lenta, calma despierta y desconexión gradual.'],
+    dormir:['Sesión delta de ritmo lento para preparar una rutina nocturna tranquila.','Puede acompañar una sensación de somnolencia y transición hacia el descanso.'],
+    meditar:['Sesión theta para crear un fondo estable durante prácticas contemplativas.','Puede acompañar introspección, imaginación y atención a la respiración.'],
+    deseo:['Sesión theta lenta con una intención sensorial y personal.','Puede acompañar relajación corporal y una atmósfera íntima, según el contexto.'],
+    energia:['Sesión beta activa para comenzar tareas o recuperar impulso durante el día.','Puede acompañar activación mental, motivación y disposición para actuar.'],
+    creatividad:['Sesión theta alta para abrir un espacio de exploración sin distracciones.','Puede acompañar asociaciones libres, imaginación y fluidez de ideas.'],
+    enfoque:['Sesión beta para bloques de trabajo que requieren continuidad.','Puede acompañar concentración, ritmo de trabajo y reducción de distracciones.'],
+    claridad:['Sesión alpha alta para hacer una pausa antes de decidir o planificar.','Puede acompañar calma alerta y una sensación de claridad mental.'],
+    siesta:['Sesión delta breve para una pausa de descanso controlada.','Puede acompañar desconexión rápida y recuperación subjetiva durante una pausa.'],
+    respiracion:['Sesión theta lenta diseñada para acompañar ejercicios de respiración consciente.','Puede acompañar un ritmo más pausado, serenidad y atención al cuerpo.'],
+    alerta:['Sesión gamma para tareas puntuales que piden vigilancia y energía mental.','Puede acompañar sensación de activación y atención intensa durante periodos breves.']
+  }
+});
+Object.assign(TRANSLATIONS.es.presetDetails,{
+  memoria:['Sesión beta de 14 Hz para acompañar concentración suave y atención focalizada.','Úsala para lectura, aprendizaje o tareas que requieren atención sostenida.'],relax:['Sesión alpha de 10 Hz para una relajación alerta y reducción de estrés.','Puede acompañar una pausa consciente sin buscar sueño.'],dormir:['Sesión delta de 2 Hz orientada a una rutina de sueño reparador.','Úsala antes de dormir o durante una pausa de descanso profundo.'],meditar:['Sesión theta de 6 Hz para meditación ligera y visualización.','Puede acompañar respiración tranquila y atención plena.'],intuicion:['Sesión theta de 5 Hz para relajación profunda y conexión interna.','Puede acompañar introspección, imaginación y una pausa personal.'],energia:['Sesión beta de 20 Hz para concentración intensa y energía mental.','Úsala en bloques breves de trabajo, estudio o activación.'],creatividad:['Sesión theta de 7 Hz para ideas creativas y transición hipnagógica.','Puede acompañar lluvia de ideas, escritura o exploración creativa.'],enfoque:['Sesión beta de 18 Hz para concentración intensa y resolución de problemas.','Úsala para tareas productivas que necesitan continuidad.'],claridad:['Sesión alpha de 12 Hz para pensamiento positivo y visualización clara.','Puede acompañar planificación, reflexión o una pausa antes de decidir.'],siesta:['Sesión delta de 3 Hz para descanso profundo y recuperación física.','Úsala sólo cuando puedas desconectar y no necesites mantenerte alerta.'],respiracion:['Sesión theta de 4 Hz para meditación profunda y conexión interna.','Puede acompañar ejercicios de respiración lenta y atención al cuerpo.'],alerta:['Sesión gamma de 30 Hz para procesamiento cognitivo y memoria.','Úsala con volumen cómodo durante intervalos breves de atención intensa.']
+});
+Object.assign(TRANSLATIONS.en.presetDetails||(TRANSLATIONS.en.presetDetails={}),{
+  memoria:['A 14 Hz beta session for gentle concentration and focused attention.','Use it for reading, learning or tasks that require sustained attention.'],relax:['A 10 Hz alpha session for alert relaxation and stress reduction.','It can accompany a conscious break without aiming for sleep.'],dormir:['A 2 Hz delta session for a restorative sleep routine.','Use it before sleep or during a deep rest break.'],meditar:['A 6 Hz theta session for light meditation and visualization.','It can accompany calm breathing and mindfulness.'],intuicion:['A 5 Hz theta session for deep relaxation and inner connection.','It can accompany introspection, imagination and a personal pause.'],energia:['A 20 Hz beta session for intense concentration and mental energy.','Use it in short work, study or activation blocks.'],creatividad:['A 7 Hz theta session for creative ideas and a hypnagogic transition.','It can accompany brainstorming, writing or creative exploration.'],enfoque:['An 18 Hz beta session for intense concentration and problem-solving.','Use it for productive tasks that need continuity.'],claridad:['A 12 Hz alpha session for positive thinking and clear visualization.','It can accompany planning, reflection or a pause before deciding.'],siesta:['A 3 Hz delta session for deep rest and physical recovery.','Use it only when you can disconnect and do not need to stay alert.'],respiracion:['A 4 Hz theta session for deep meditation and inner connection.','It can accompany slow breathing exercises and attention to the body.'],alerta:['A 30 Hz gamma session for cognitive processing and memory.','Use it at a comfortable volume during short periods of intense attention.']
+});
+Object.assign(TRANSLATIONS.en,{
+  suggestedUse:'Suggested use',effectsNote:'Responses vary from person to person; these associations are not medical advice and do not guarantee outcomes.',
+  presetDetails:{
+    memoria:['A gentle beta session intended to accompany study, reading or review periods.','May support a sense of sustained attention and mental organization.'],
+    relax:['An alpha session to help slow down after demanding activity.','May accompany slow breathing, relaxed wakefulness and gradual unwinding.'],
+    dormir:['A slow delta session for preparing a calm nighttime routine.','May accompany drowsiness and a transition toward rest.'],
+    meditar:['A theta session that creates a steady background for contemplative practice.','May accompany introspection, imagination and attention to breathing.'],
+    deseo:['A slow theta session with a personal, sensory intention.','May accompany physical relaxation and an intimate atmosphere, depending on context.'],
+    energia:['An active beta session for starting tasks or regaining momentum during the day.','May accompany mental activation, motivation and readiness to act.'],
+    creatividad:['A high-theta session for exploring ideas with fewer distractions.','May accompany free association, imagination and an easier flow of ideas.'],
+    enfoque:['A beta session for work blocks that require continuity.','May accompany concentration, work rhythm and fewer distractions.'],
+    claridad:['A high-alpha session for pausing before decisions or planning.','May accompany calm alertness and a sense of mental clarity.'],
+    siesta:['A brief delta session for a controlled rest break.','May accompany quick disconnection and subjective recovery during a break.'],
+    respiracion:['A slow theta session designed to accompany mindful breathing exercises.','May accompany a slower pace, serenity and attention to the body.'],
+    alerta:['A gamma session for short tasks that call for vigilance and mental energy.','May accompany a sense of activation and intense attention for brief periods.']
+  }
 });
 TRANSLATIONS.es.darkTheme='🌙 Oscuro';
 TRANSLATIONS.es.lightTheme='☀️ Claro';
@@ -52,8 +108,8 @@ TRANSLATIONS.es.closePlayer='Volver';
 TRANSLATIONS.es.closePlayerAria='Volver a las presintonías';
 TRANSLATIONS.en.closePlayer='Back';
 TRANSLATIONS.en.closePlayerAria='Back to presets';
-Object.assign(TRANSLATIONS.es,{settingsTab:'Ajustes',settingsAria:'Abrir ajustes',languageTitle:'Idioma',languageInfo:'Elige el idioma de la aplicación.',themeTitle:'Tema de la aplicación',themeInfo:'Personaliza la apariencia de Binaural Beats Pro.',darkTheme:'Oscuro',darkThemeInfo:'Fondo oscuro para sesiones nocturnas.',lightTheme:'Claro',lightThemeInfo:'Interfaz luminosa para el día.',settingsSaved:'Tus preferencias se guardan automáticamente en este dispositivo.'});
-Object.assign(TRANSLATIONS.en,{settingsTab:'Settings',settingsAria:'Open settings',languageTitle:'Language',languageInfo:'Choose the application language.',themeTitle:'Application theme',themeInfo:'Customize the appearance of Binaural Beats Pro.',darkTheme:'Dark',darkThemeInfo:'Dark background for night sessions.',lightTheme:'Light',lightThemeInfo:'Bright interface for daytime use.',settingsSaved:'Your preferences are saved automatically on this device.'});
+Object.assign(TRANSLATIONS.es,{settingsTab:'Ajustes',settingsAria:'Abrir ajustes',closeSettings:'Volver a presintonías',languageTitle:'Idioma',languageInfo:'Elige el idioma de la aplicación.',themeTitle:'Tema de la aplicación',themeInfo:'Personaliza la apariencia de Binaural Beats Pro.',darkTheme:'Oscuro',darkThemeInfo:'Fondo oscuro para sesiones nocturnas.',lightTheme:'Claro',lightThemeInfo:'Interfaz luminosa para el día.',settingsSaved:'Tus preferencias se guardan automáticamente en este dispositivo.'});
+Object.assign(TRANSLATIONS.en,{settingsTab:'Settings',settingsAria:'Open settings',closeSettings:'Back to presets',languageTitle:'Language',languageInfo:'Choose the application language.',themeTitle:'Application theme',themeInfo:'Customize the appearance of Binaural Beats Pro.',darkTheme:'Dark',darkThemeInfo:'Dark background for night sessions.',lightTheme:'Light',lightThemeInfo:'Bright interface for daytime use.',settingsSaved:'Your preferences are saved automatically on this device.'});
 let language=localStorage.getItem('bb_language')||((navigator.language||'es').toLowerCase().startsWith('en')?'en':'es');
 const t=key=>TRANSLATIONS[language][key]||key;
 const savedTheme=localStorage.getItem('bb_theme');
@@ -76,21 +132,24 @@ function translateStatic(){
   document.getElementById('settingsTrigger').setAttribute('aria-label',t('settingsAria'));
 }
 const PRESETS = [
-  {id:'memoria',name:'Memoria',sub:'Aprendizaje',icon:'🧠',beat:14,base:200,wave:'Beta',grad:'linear-gradient(135deg,#00d4ff,#0066ff)',c1:'#00d4ff',glow:'rgba(0,212,255,0.4)',desc:'Beta 14Hz - Concentración y memoria'},
-  {id:'relax',name:'Relajarse',sub:'Calma',icon:'🌿',beat:10,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#10b981,#059669)',c1:'#10b981',glow:'rgba(16,185,129,0.4)',desc:'Alpha 10Hz - Relajación profunda'},
-  {id:'dormir',name:'Dormir',sub:'Sueño profundo',icon:'🌙',beat:2,base:180,wave:'Delta',grad:'linear-gradient(135deg,#6366f1,#312e81)',c1:'#6366f1',glow:'rgba(99,102,241,0.4)',desc:'Delta 2Hz - Sueño profundo'},
-  {id:'meditar',name:'Meditación',sub:'Atención plena',icon:'🧘',beat:6,base:200,wave:'Theta',grad:'linear-gradient(135deg,#a855f7,#7e22ce)',c1:'#a855f7',glow:'rgba(168,85,247,0.4)',desc:'Theta 6Hz - Meditación'},
-  {id:'deseo',name:'Excitación',sub:'Deseo',icon:'💋',beat:5,base:210,wave:'Theta',grad:'linear-gradient(135deg,#ec4899,#be185d)',c1:'#ec4899',glow:'rgba(236,72,153,0.4)',desc:'Theta 5Hz - Sensualidad'},
-  {id:'energia',name:'Energía',sub:'Motivación',icon:'⚡',beat:20,base:220,wave:'Beta',grad:'linear-gradient(135deg,#f59e0b,#dc2626)',c1:'#f59e0b',glow:'rgba(245,158,11,0.4)',desc:'Beta 20Hz - Energía'},
-  {id:'creatividad',name:'Creatividad',sub:'Inspiración',icon:'💡',beat:8,base:210,wave:'Theta',grad:'linear-gradient(135deg,#f97316,#ea580c)',c1:'#f97316',glow:'rgba(249,115,22,0.4)',desc:'Theta 8Hz - Flujo creativo'},
-  {id:'enfoque',name:'Enfoque profundo',sub:'Productividad',icon:'🎯',beat:18,base:220,wave:'Beta',grad:'linear-gradient(135deg,#14b8a6,#0f766e)',c1:'#14b8a6',glow:'rgba(20,184,166,0.4)',desc:'Beta 18Hz - Atención sostenida'},
-  {id:'claridad',name:'Claridad',sub:'Equilibrio',icon:'🔎',beat:12,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#38bdf8,#0284c7)',c1:'#38bdf8',glow:'rgba(56,189,248,0.4)',desc:'Alpha 12Hz - Claridad mental'},
-  {id:'siesta',name:'Siesta',sub:'Descanso breve',icon:'🛌',beat:3,base:180,wave:'Delta',grad:'linear-gradient(135deg,#818cf8,#4f46e5)',c1:'#818cf8',glow:'rgba(129,140,248,0.4)',desc:'Delta 3Hz - Descanso reparador'},
-  {id:'respiracion',name:'Respiración',sub:'Serenidad',icon:'🌬️',beat:4,base:190,wave:'Theta',grad:'linear-gradient(135deg,#2dd4bf,#0d9488)',c1:'#2dd4bf',glow:'rgba(45,212,191,0.4)',desc:'Theta 4Hz - Respiración consciente'},
-  {id:'alerta',name:'Alerta',sub:'Activación',icon:'🚀',beat:30,base:240,wave:'Gamma',grad:'linear-gradient(135deg,#facc15,#eab308)',c1:'#facc15',glow:'rgba(250,204,21,0.4)',desc:'Gamma 30Hz - Estado de alerta'}
+  {id:'memoria',name:'Memoria',sub:'Aprendizaje',icon:'🧠',beat:14,base:200,wave:'Beta',grad:'linear-gradient(135deg,#00d4ff,#0066ff)',c1:'#00d4ff',glow:'rgba(0,212,255,0.4)',desc:'Beta 14Hz - Concentración suave y atención focalizada'},
+  {id:'relax',name:'Relajarse',sub:'Calma',icon:'🌿',beat:10,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#10b981,#059669)',c1:'#10b981',glow:'rgba(16,185,129,0.4)',desc:'Alpha 10Hz - Relajación alerta y reducción de estrés'},
+  {id:'dormir',name:'Dormir',sub:'Sueño profundo',icon:'🌙',beat:2,base:180,wave:'Delta',grad:'linear-gradient(135deg,#6366f1,#312e81)',c1:'#6366f1',glow:'rgba(99,102,241,0.4)',desc:'Delta 2Hz - Sueño reparador y sanación profunda'},
+  {id:'meditar',name:'Meditación',sub:'Atención plena',icon:'🧘',beat:6,base:200,wave:'Theta',grad:'linear-gradient(135deg,#a855f7,#7e22ce)',c1:'#a855f7',glow:'rgba(168,85,247,0.4)',desc:'Theta 6Hz - Meditación ligera y visualización'},
+  {id:'intuicion',name:'Intuición',sub:'Conexión interna',icon:'🔮',beat:5,base:200,wave:'Theta',grad:'linear-gradient(135deg,#ec4899,#be185d)',c1:'#ec4899',glow:'rgba(236,72,153,0.4)',desc:'Theta 5Hz - Relajación profunda e intuición'},
+  {id:'energia',name:'Energía',sub:'Motivación',icon:'⚡',beat:20,base:220,wave:'Beta',grad:'linear-gradient(135deg,#f59e0b,#dc2626)',c1:'#f59e0b',glow:'rgba(245,158,11,0.4)',desc:'Beta 20Hz - Concentración intensa y energía mental'},
+  {id:'creatividad',name:'Creatividad',sub:'Inspiración',icon:'💡',beat:7,base:210,wave:'Theta',grad:'linear-gradient(135deg,#f97316,#ea580c)',c1:'#f97316',glow:'rgba(249,115,22,0.4)',desc:'Theta 7Hz - Ideas creativas y estado hipnagógico'},
+  {id:'enfoque',name:'Enfoque profundo',sub:'Productividad',icon:'🎯',beat:18,base:220,wave:'Beta',grad:'linear-gradient(135deg,#14b8a6,#0f766e)',c1:'#14b8a6',glow:'rgba(20,184,166,0.4)',desc:'Beta 18Hz - Concentración intensa y resolución de problemas'},
+  {id:'claridad',name:'Claridad',sub:'Equilibrio',icon:'🔎',beat:12,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#38bdf8,#0284c7)',c1:'#38bdf8',glow:'rgba(56,189,248,0.4)',desc:'Alpha 12Hz - Pensamiento positivo y visualización clara'},
+  {id:'siesta',name:'Siesta',sub:'Descanso breve',icon:'🛌',beat:3,base:180,wave:'Delta',grad:'linear-gradient(135deg,#818cf8,#4f46e5)',c1:'#818cf8',glow:'rgba(129,140,248,0.4)',desc:'Delta 3Hz - Descanso profundo y recuperación física'},
+  {id:'respiracion',name:'Respiración',sub:'Serenidad',icon:'🌬️',beat:4,base:190,wave:'Theta',grad:'linear-gradient(135deg,#2dd4bf,#0d9488)',c1:'#2dd4bf',glow:'rgba(45,212,191,0.4)',desc:'Theta 4Hz - Meditación profunda y conexión subconsciente'},
+  {id:'alerta',name:'Alerta',sub:'Activación',icon:'🚀',beat:30,base:240,wave:'Gamma',grad:'linear-gradient(135deg,#facc15,#eab308)',c1:'#facc15',glow:'rgba(250,204,21,0.4)',desc:'Gamma 30Hz - Procesamiento cognitivo y memoria'}
 ];
 
 /* ============ AUDIO ENGINE ============ */
+Object.assign(TRANSLATIONS.en.presetDetails,{
+  memoria:['A 14 Hz beta session for gentle concentration and focused attention.','Use it for reading, learning or tasks that require sustained attention.'],relax:['A 10 Hz alpha session for alert relaxation and stress reduction.','It can accompany a conscious break without aiming for sleep.'],dormir:['A 2 Hz delta session for a restorative sleep routine.','Use it before sleep or during a deep rest break.'],meditar:['A 6 Hz theta session for light meditation and visualization.','It can accompany calm breathing and mindfulness.'],intuicion:['A 5 Hz theta session for deep relaxation and inner connection.','It can accompany introspection, imagination and a personal pause.'],energia:['A 20 Hz beta session for intense concentration and mental energy.','Use it in short work, study or activation blocks.'],creatividad:['A 7 Hz theta session for creative ideas and a hypnagogic transition.','It can accompany brainstorming, writing or creative exploration.'],enfoque:['An 18 Hz beta session for intense concentration and problem-solving.','Use it for productive tasks that need continuity.'],claridad:['A 12 Hz alpha session for positive thinking and clear visualization.','It can accompany planning, reflection or a pause before deciding.'],siesta:['A 3 Hz delta session for deep rest and physical recovery.','Use it only when you can disconnect and do not need to stay alert.'],respiracion:['A 4 Hz theta session for deep meditation and inner connection.','It can accompany slow breathing exercises and attention to the body.'],alerta:['A 30 Hz gamma session for cognitive processing and memory.','Use it at a comfortable volume during short periods of intense attention.']
+});
 let audioCtx=null, leftOsc=null, rightOsc=null, merger=null, gainNode=null, analyser=null;
 let isPlaying=false, currentPreset=null, animId=null;
 let customPlayData=null, customStartTime=0;
@@ -228,6 +287,7 @@ PRESETS.forEach(p=>{
 
 function selectPreset(p){
   const text=TRANSLATIONS[language].presets[p.id];
+  const details=TRANSLATIONS[language].presetDetails[p.id];
   currentPreset=p;
   document.getElementById('presetGrid').style.display='none';
   document.getElementById('playerPanel').classList.remove('hidden');
@@ -236,6 +296,8 @@ function selectPreset(p){
   document.querySelector(`.preset[data-id="${p.id}"]`)?.classList.add('active');
   renderPresetCard(p);
   document.getElementById('currentMode').innerHTML=`${p.icon} ${text[0]} <span class="wave-badge">${text[2]}</span>`;
+  document.getElementById('presetDetailsDescription').textContent=details[0];
+  document.getElementById('presetDetailsEffects').textContent=details[1];
   document.getElementById('baseFreq').value=p.base;
   document.getElementById('baseVal').textContent=p.base;
   if(isPlaying){
@@ -309,6 +371,10 @@ function resizeEditor(){
 }
 window.addEventListener('resize',resizeEditor);
 
+function pointBeat(point){
+  return Math.round(point.y*MAX_BEAT*10)/10;
+}
+
 function drawEditor(){
   const W=editorCanvas.width, H=editorCanvas.height;
   ectx.clearRect(0,0,W,H);
@@ -354,6 +420,19 @@ function drawEditor(){
       ectx.beginPath();ectx.arc(x,y,10,0,Math.PI*2);ectx.fill();
       ectx.fillStyle='#00d4ff';
       ectx.beginPath();ectx.arc(x,y,6,0,Math.PI*2);ectx.fill();
+
+      const beat=pointBeat(p);
+      const label=`${beat.toFixed(1)} Hz`;
+      ectx.font='600 18px sans-serif';
+      const labelWidth=ectx.measureText(label).width+16;
+      const labelX=Math.max(4,Math.min(W-labelWidth-4,x-labelWidth/2));
+      const labelY=y<42?y+16:y-38;
+      ectx.fillStyle='rgba(10,10,31,0.88)';
+      ectx.fillRect(labelX,labelY,labelWidth,26);
+      ectx.fillStyle='#fff';
+      ectx.textAlign='center';
+      ectx.textBaseline='middle';
+      ectx.fillText(label,labelX+labelWidth/2,labelY+13);
     });
   } else {
     ectx.fillStyle='rgba(255,255,255,0.3)';
@@ -366,9 +445,10 @@ function drawEditor(){
 function getPos(e){
   const r=editorCanvas.getBoundingClientRect();
   const t=e.touches?e.touches[0]:e;
+  const rawY=Math.max(0,Math.min(1,1-(t.clientY-r.top)/r.height));
   return {
     x:Math.max(0,Math.min(1,(t.clientX-r.left)/r.width)),
-    y:Math.max(0,Math.min(1,1-(t.clientY-r.top)/r.height))
+    y:Math.round(rawY*MAX_BEAT*10)/(MAX_BEAT*10)
   };
 }
 
@@ -593,6 +673,7 @@ document.getElementById('settingsTrigger').onclick=()=>{
   document.querySelectorAll('.view').forEach(view=>view.classList.remove('active'));
   settingsView.classList.add('active');
 };
+document.getElementById('settingsCloseBtn').onclick=()=>document.querySelector('[data-view="presets"]').click();
 document.querySelectorAll('.language-option').forEach(button=>{
   button.onclick=()=>{
   language=button.dataset.language;

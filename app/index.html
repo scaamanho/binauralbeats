@@ -23,9 +23,8 @@
 <main>
   <div class="tabs">
     <div class="tab active" data-view="presets" data-i18n="presetsTab">Presintonías</div>
-    <div class="tab" data-view="editor" data-i18n="editorTab">Editor</div>
-    <div class="tab" data-view="saved" data-i18n="savedTab">Guardados</div>
-    <div class="tab" data-view="brainwaves" data-i18n="brainwavesTab">Ondas</div>
+    <div class="tab" data-view="editor" data-i18n="editorTab">Crear</div>
+    <div class="tab" data-view="saved" data-i18n="savedTab">Sesiones</div>
   </div>
 
   <!-- VISTA PRESETS -->
@@ -49,6 +48,12 @@
       <button class="play-btn" id="playBtn" data-i18n="start">▶  INICIAR</button>
 
       <canvas class="visualizer" id="visualizer"></canvas>
+
+      <section class="preset-details" id="presetDetails" aria-live="polite">
+        <p class="preset-details-description" id="presetDetailsDescription"></p>
+        <p class="preset-details-effects"><b data-i18n="suggestedUse">Uso sugerido</b><span id="presetDetailsEffects"></span></p>
+        <p class="preset-details-note" data-i18n="effectsNote">Las respuestas varían entre personas; estas asociaciones no sustituyen atención médica ni garantizan resultados.</p>
+      </section>
     </div>
   </div>
 
@@ -61,9 +66,15 @@
     <div class="canvas-wrap">
       <canvas id="editor"></canvas>
       <div class="canvas-labels">
-        <span class="yl">40 Hz</span>
-        <span class="ym">20 Hz</span>
-        <span class="yb">0 Hz</span>
+        <span class="y-axis-label" style="--y:0%">40 Hz</span>
+        <span class="y-axis-label" style="--y:12.5%">35 Hz</span>
+        <span class="y-axis-label" style="--y:25%">30 Hz</span>
+        <span class="y-axis-label" style="--y:37.5%">25 Hz</span>
+        <span class="y-axis-label" style="--y:50%">20 Hz</span>
+        <span class="y-axis-label" style="--y:62.5%">15 Hz</span>
+        <span class="y-axis-label" style="--y:75%">10 Hz</span>
+        <span class="y-axis-label" style="--y:87.5%">5 Hz</span>
+        <span class="y-axis-label" style="--y:100%">0 Hz</span>
         <span class="xl" data-i18n="time">Tiempo →</span>
       </div>
     </div>
@@ -91,7 +102,7 @@
   </div>
 
   <!-- VISTA ONDAS CEREBRALES -->
-  <div class="view" id="view-brainwaves">
+  <div class="view" id="view-brainwaves" hidden>
     <div class="info-box">
       <b data-i18n="brainwavesIntroTitle">¿Qué son las ondas cerebrales?</b>
       <span data-i18n="brainwavesIntro">Son patrones de actividad eléctrica del cerebro que se describen por su frecuencia, medida en hercios (Hz). Las asociaciones siguientes son orientativas y no sustituyen consejo médico.</span>
@@ -150,6 +161,7 @@
       </div>
       <div class="settings-note" data-i18n="settingsSaved">Tus preferencias se guardan automáticamente en este dispositivo.</div>
     </div>
+    <button class="settings-close" id="settingsCloseBtn" type="button"><span aria-hidden="true">←</span><span data-i18n="closeSettings">Volver a presintonías</span></button>
   </div>
 </main>
 
