@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a1f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Binaural Beats Pro</title>
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+<header>
+  <button class="settings-trigger" id="settingsTrigger" type="button" aria-label="Abrir ajustes">⚙</button>
+  <h1>🎧 BINAURAL BEATS PRO</h1>
+  <p data-i18n="tagline">Generador de ondas cerebrales</p>
+</header>
+
+<main>
+  <div class="tabs">
+    <div class="tab active" data-view="presets" data-i18n="presetsTab">Presintonías</div>
+    <div class="tab" data-view="editor" data-i18n="editorTab">Editor</div>
+    <div class="tab" data-view="saved" data-i18n="savedTab">Guardados</div>
+    <div class="tab" data-view="brainwaves" data-i18n="brainwavesTab">Ondas</div>
+  </div>
+
+  <!-- VISTA PRESETS -->
+  <div class="view active" id="view-presets">
+    <div class="presets" id="presetGrid"></div>
+
+    <div class="player hidden" id="playerPanel">
+      <button class="close-player" id="closePlayerBtn" aria-label="Volver a las presintonías"><span aria-hidden="true">←</span><span data-i18n="closePlayer">Volver</span></button>
+      <div class="player-title" data-i18n="player">Reproductor</div>
+      <div class="player-mode" id="currentMode" data-i18n="selectPreset">Selecciona un preset</div>
+
+      <div class="slider-group">
+        <div class="slider-label"><span data-i18n="baseFrequency">Frecuencia base</span><b><span id="baseVal">200</span> Hz</b></div>
+        <input type="range" id="baseFreq" min="100" max="500" value="200" step="1">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label"><span data-i18n="volume">Volumen</span><b><span id="volVal">50</span>%</b></div>
+        <input type="range" id="volume" min="0" max="100" value="50">
+      </div>
+
+      <button class="play-btn" id="playBtn" data-i18n="start">▶  INICIAR</button>
+
+      <canvas class="visualizer" id="visualizer"></canvas>
+    </div>
+  </div>
+
+  <!-- VISTA EDITOR -->
+  <div class="view" id="view-editor">
+    <div class="info-box">
+      <b data-i18n="howToUse">¿Cómo usar?</b> <span data-i18n="editorHelp">Toca el gráfico para añadir puntos. Arrástralos para definir la frecuencia del batido binaural a lo largo del tiempo. La línea muestra la diferencia entre oídos (Hz).</span>
+    </div>
+
+    <div class="canvas-wrap">
+      <canvas id="editor"></canvas>
+      <div class="canvas-labels">
+        <span class="yl">40 Hz</span>
+        <span class="ym">20 Hz</span>
+        <span class="yb">0 Hz</span>
+        <span class="xl" data-i18n="time">Tiempo →</span>
+      </div>
+    </div>
+
+    <div class="editor-tools">
+      <button class="tool-btn" id="clearBtn">⌫ <span data-i18n="clear">Limpiar</span></button>
+      <button class="tool-btn" id="saveBtn">▣ <span data-i18n="save">Guardar</span></button>
+      <button class="tool-btn primary" id="playCustomBtn">▶ <span data-i18n="play">Reproducir</span></button>
+    </div>
+
+    <div class="slider-group">
+      <div class="slider-label"><span data-i18n="totalDuration">Duración total</span><b><span id="durVal">60</span>s</b></div>
+      <input type="range" id="duration" min="10" max="600" value="60" step="5">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span data-i18n="baseFrequency">Frecuencia base</span><b><span id="baseVal2">200</span> Hz</b></div>
+      <input type="range" id="baseFreq2" min="100" max="500" value="200" step="1">
+    </div>
+  </div>
+
+  <!-- VISTA GUARDADOS -->
+  <div class="view" id="view-saved">
+    <div class="info-box" data-i18n="savedInfo">Tus programas personalizados se guardan localmente en este dispositivo.</div>
+    <div class="saved-list" id="savedList"></div>
+  </div>
+
+  <!-- VISTA ONDAS CEREBRALES -->
+  <div class="view" id="view-brainwaves">
+    <div class="info-box">
+      <b data-i18n="brainwavesIntroTitle">¿Qué son las ondas cerebrales?</b>
+      <span data-i18n="brainwavesIntro">Son patrones de actividad eléctrica del cerebro que se describen por su frecuencia, medida en hercios (Hz). Las asociaciones siguientes son orientativas y no sustituyen consejo médico.</span>
+    </div>
+    <div class="brainwave-list">
+      <article class="brainwave-card"><h3 data-i18n="deltaTitle">Delta · 0,5–4 Hz</h3><p data-i18n="deltaInfo">Se asocia habitualmente con el sueño profundo y el descanso.</p></article>
+      <article class="brainwave-card"><h3 data-i18n="thetaTitle">Theta · 4–8 Hz</h3><p data-i18n="thetaInfo">Se relaciona con relajación profunda, imaginación y meditación.</p></article>
+      <article class="brainwave-card"><h3 data-i18n="alphaTitle">Alpha · 8–13 Hz</h3><p data-i18n="alphaInfo">Suele aparecer en estados de calma despierta y relajación.</p></article>
+      <article class="brainwave-card"><h3 data-i18n="betaTitle">Beta · 13–30 Hz</h3><p data-i18n="betaInfo">Se vincula normalmente con atención, concentración y actividad mental.</p></article>
+      <article class="brainwave-card"><h3 data-i18n="gammaTitle">Gamma · 30–100 Hz</h3><p data-i18n="gammaInfo">Se estudia en relación con procesamiento de información y atención intensa.</p></article>
+    </div>
+    <div class="info-box">
+      <b data-i18n="binauralTitle">¿Cómo funciona esta aplicación?</b>
+      <span data-i18n="binauralInfo">La aplicación reproduce dos tonos parecidos: uno en cada oído. La diferencia entre sus frecuencias crea la sensación de un ritmo binaural. Por ejemplo, 200 Hz en un oído y 210 Hz en el otro producen una diferencia de 10 Hz. Se recomienda usar auriculares y mantener un volumen cómodo.</span>
+    </div>
+  </div>
+
+  <!-- VISTA AJUSTES -->
+  <div class="view" id="view-settings">
+    <div class="settings-section">
+      <h2 data-i18n="languageTitle">Idioma</h2>
+      <p data-i18n="languageInfo">Elige el idioma de la aplicación.</p>
+      <div class="language-options" aria-label="Idioma">
+        <button class="language-option" type="button" data-language="es">Español</button>
+        <button class="language-option" type="button" data-language="en">English</button>
+      </div>
+    </div>
+    <div class="settings-section">
+      <h2 data-i18n="themeTitle">Tema de la aplicación</h2>
+      <p data-i18n="themeInfo">Personaliza la apariencia de Binaural Beats Pro.</p>
+      <div class="theme-options">
+        <button class="theme-option" type="button" data-theme="dark">
+          <strong data-i18n="darkTheme">Oscuro</strong>
+          <span data-i18n="darkThemeInfo">Fondo oscuro para sesiones nocturnas.</span>
+        </button>
+        <button class="theme-option" type="button" data-theme="light">
+          <strong data-i18n="lightTheme">Claro</strong>
+          <span data-i18n="lightThemeInfo">Interfaz luminosa para el día.</span>
+        </button>
+        <button class="theme-option" type="button" data-theme="monokai">
+          <strong data-i18n="monokaiTheme">Monokai</strong>
+          <span data-i18n="monokaiThemeInfo">Contraste cálido para código y foco.</span>
+        </button>
+        <button class="theme-option" type="button" data-theme="desert">
+          <strong data-i18n="desertTheme">Arena</strong>
+          <span data-i18n="desertThemeInfo">Paleta suave y cálida para el día.</span>
+        </button>
+        <button class="theme-option" type="button" data-theme="ocean">
+          <strong data-i18n="oceanTheme">Océano</strong>
+          <span data-i18n="oceanThemeInfo">Azules profundos y turquesa.</span>
+        </button>
+        <button class="theme-option" type="button" data-theme="solarized">
+          <strong data-i18n="solarizedTheme">Solarizado</strong>
+          <span data-i18n="solarizedThemeInfo">Baja fatiga visual y tonos suaves.</span>
+        </button>
+      </div>
+      <div class="settings-note" data-i18n="settingsSaved">Tus preferencias se guardan automáticamente en este dispositivo.</div>
+    </div>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+<div class="install-banner" id="installBanner">
+  ▣ <span data-i18n="installAsApp">Instalar como app</span>
+  <button id="installBtn" data-i18n="install">Instalar</button>
+</div>
+
+<script src="./app.js"></script>
+</body>
+</html>

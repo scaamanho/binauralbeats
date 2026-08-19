@@ -3,9 +3,13 @@ if('serviceWorker' in navigator){
   navigator.serviceWorker.register('./sw.js').catch(()=>{});
 }
 let deferredPrompt;
+const installRequested=new URLSearchParams(window.location.search).get('install')==='1';
 window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();
   deferredPrompt=e;
-  document.getElementById('installBanner').style.display='block';
+  if(installRequested){
+    document.getElementById('installBanner').style.display='block';
+  }
 });
 document.getElementById('installBtn').onclick=async()=>{
   if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;document.getElementById('installBanner').style.display='none';}
