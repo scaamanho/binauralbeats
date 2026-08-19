@@ -37,7 +37,7 @@ const translations = {
   es: {
     pageTitle: 'Binaural Beats Pro · Ritmos binaurales para foco, calma y descanso',
     metaDescription: 'Binaural Beats Pro — Generador de ondas cerebrales para foco, calma y descanso. PWA instalable, funciona sin cuenta.',
-    homeLabel: 'Binaural Beats Pro — inicio', mainNavigation: 'Navegación principal', howItWorks: 'Cómo funciona', benefits: 'Beneficios', guide: 'Guía', advice: 'Consejos', install: 'Instalar', openAppShort: 'Abrir app →',
+    homeLabel: 'Binaural Beats Pro — inicio', mainNavigation: 'Navegación principal', howItWorks: 'Cómo funciona', benefits: 'Beneficios', guide: 'Guía', advice: 'Consejos', install: 'Instalar', openAppShort: 'Instalar app →',
     eyebrow: 'Generador de ondas cerebrales · PWA', heroHeadingStart: 'Crea sesiones binaurales para', focus: 'foco', calm: 'calma', heroHeadingAnd: 'y', rest: 'descanso',
     heroText: 'Crea sesiones binaurales personalizadas para concentrarte, relajarte o preparar el descanso. Elige una presintonía, ajusta la frecuencia base y escucha con auriculares.',
     openApplication: 'Abrir la aplicación', installAsApp: 'Instalar como app', noAccount: 'Funciona sin cuenta', savedLocally: 'Guarda programas localmente', mobileAndDesktop: 'Diseñada para móvil y PC', livePreview: 'Vista previa en vivo · la PWA se instala desde aquí',
@@ -50,7 +50,7 @@ const translations = {
   en: {
     pageTitle: 'Binaural Beats Pro · Binaural rhythms for focus, calm and rest',
     metaDescription: 'Binaural Beats Pro — A brainwave generator for focus, calm and rest. Installable PWA with no account required.',
-    homeLabel: 'Binaural Beats Pro — home', mainNavigation: 'Main navigation', howItWorks: 'How it works', benefits: 'Benefits', guide: 'Guide', advice: 'Advice', install: 'Install', openAppShort: 'Open app →',
+    homeLabel: 'Binaural Beats Pro — home', mainNavigation: 'Main navigation', howItWorks: 'How it works', benefits: 'Benefits', guide: 'Guide', advice: 'Advice', install: 'Install', openAppShort: 'Install app →',
     eyebrow: 'Brainwave generator · PWA', heroHeadingStart: 'Create binaural sessions for', focus: 'focus', calm: 'calm', heroHeadingAnd: 'and', rest: 'rest',
     heroText: 'Create custom binaural sessions to focus, relax or prepare for rest. Choose a preset, adjust the base frequency and listen with headphones.',
     openApplication: 'Open the app', installAsApp: 'Install as app', noAccount: 'No account needed', savedLocally: 'Programs saved locally', mobileAndDesktop: 'Built for mobile and desktop', livePreview: 'Live preview · install the PWA from here',
