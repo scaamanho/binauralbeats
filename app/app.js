@@ -148,8 +148,8 @@ TRANSLATIONS.es.closePlayer='Volver';
 TRANSLATIONS.es.closePlayerAria='Volver a las presintonías';
 TRANSLATIONS.en.closePlayer='Back';
 TRANSLATIONS.en.closePlayerAria='Back to presets';
-Object.assign(TRANSLATIONS.es,{settingsTab:'Ajustes',settingsAria:'Abrir ajustes',closeSettings:'Volver a presintonías',languageTitle:'Idioma',languageInfo:'Elige el idioma de la aplicación.',themeTitle:'Tema de la aplicación',themeInfo:'Personaliza la apariencia de Binaural Beats Pro.',darkTheme:'Oscuro',darkThemeInfo:'Fondo oscuro para sesiones nocturnas.',lightTheme:'Claro',lightThemeInfo:'Interfaz luminosa para el día.',settingsSaved:'Tus preferencias se guardan automáticamente en este dispositivo.',eightDTitle:'Audio 8D',eightDInfo:'Rota el sonido entre los auriculares con un período proporcional a la frecuencia elegida.',eightDToggleLabel:'Activar audio 8D',eightDToggleInfo:'Opcional. Si está desactivado, el comportamiento es el habitual (sin rotación).'});
-Object.assign(TRANSLATIONS.en,{settingsTab:'Settings',settingsAria:'Open settings',closeSettings:'Back to presets',languageTitle:'Language',languageInfo:'Choose the application language.',themeTitle:'Application theme',themeInfo:'Customize the appearance of Binaural Beats Pro.',darkTheme:'Dark',darkThemeInfo:'Dark background for night sessions.',lightTheme:'Light',lightThemeInfo:'Bright interface for daytime use.',settingsSaved:'Your preferences are saved automatically on this device.',eightDTitle:'8D audio',eightDInfo:'Rotates the sound between headphone channels with a period proportional to the chosen frequency.',eightDToggleLabel:'Enable 8D audio',eightDToggleInfo:'Optional. When disabled, playback behaves as usual (no rotation).'});
+Object.assign(TRANSLATIONS.es,{settingsTab:'Ajustes',settingsAria:'Abrir ajustes',closeSettings:'Volver a presintonías',languageTitle:'Idioma',languageInfo:'Elige el idioma de la aplicación.',themeTitle:'Tema de la aplicación',themeInfo:'Personaliza la apariencia de Binaural Beats Pro.',darkTheme:'Oscuro',darkThemeInfo:'Fondo oscuro para sesiones nocturnas.',lightTheme:'Claro',lightThemeInfo:'Interfaz luminosa para el día.',settingsSaved:'Tus preferencias se guardan automáticamente en este dispositivo.',eightDTitle:'Audio 8D',eightDInfo:'Rota el sonido entre los auriculares con un período proporcional a la frecuencia elegida.',eightDToggleLabel:'Activar audio 8D',eightDToggleInfo:'Opcional. Si está desactivado, el comportamiento es el habitual (sin rotación).',channelLeft:'Izquierdo',channelRight:'Derecho'});
+Object.assign(TRANSLATIONS.en,{settingsTab:'Settings',settingsAria:'Open settings',closeSettings:'Back to presets',languageTitle:'Language',languageInfo:'Choose the application language.',themeTitle:'Application theme',themeInfo:'Customize the appearance of Binaural Beats Pro.',darkTheme:'Dark',darkThemeInfo:'Dark background for night sessions.',lightTheme:'Light',lightThemeInfo:'Bright interface for daytime use.',settingsSaved:'Your preferences are saved automatically on this device.',eightDTitle:'8D audio',eightDInfo:'Rotates the sound between headphone channels with a period proportional to the chosen frequency.',eightDToggleLabel:'Enable 8D audio',eightDToggleInfo:'Optional. When disabled, playback behaves as usual (no rotation).',channelLeft:'Left',channelRight:'Right'});
 let language=localStorage.getItem('bb_language')||((navigator.language||'es').toLowerCase().startsWith('en')?'en':'es');
 const t=key=>TRANSLATIONS[language][key]||key;
 const savedTheme=localStorage.getItem('bb_theme');
@@ -344,6 +344,16 @@ function resizeViz(){vizCanvas.width=vizCanvas.offsetWidth*2;vizCanvas.height=vi
 resizeViz();
 window.addEventListener('resize',resizeViz);
 
+// Oscurece un color hex un cierto porcentaje, para el segundo stop de los degradados de barras
+function shadeHex(hex,percent){
+  const num=parseInt(hex.replace('#',''),16);
+  const amt=Math.round(2.55*percent);
+  const r=Math.max(0,Math.min(255,(num>>16)+amt));
+  const g=Math.max(0,Math.min(255,((num>>8)&0xff)+amt));
+  const b=Math.max(0,Math.min(255,(num&0xff)+amt));
+  return `rgb(${r},${g},${b})`;
+}
+
 function startVisualizer(){
   if(!analyserL||!analyserR) return;
   // Buffers de frecuencia para el canal izquierdo y derecho
@@ -370,14 +380,35 @@ function startVisualizer(){
     if(!isPlaying){vizCtx.clearRect(0,0,vizCanvas.width,vizCanvas.height);return;}
     analyserL.getByteFrequencyData(dataL);
     analyserR.getByteFrequencyData(dataR);
-    vizCtx.fillStyle='rgba(0,0,0,0.2)';
+    // Estela con el color de fondo real del canvas (varía por tema) en vez de negro fijo
+    const canvasStyle=getComputedStyle(vizCanvas);
+    vizCtx.fillStyle=canvasStyle.backgroundColor;
     vizCtx.fillRect(0,0,vizCanvas.width,vizCanvas.height);
+    // Colores de canal según el tema activo (--viz-left/--viz-right), no fijos
+    const rootStyle=getComputedStyle(document.body);
+    const leftColor=rootStyle.getPropertyValue('--viz-left').trim()||'#00d4ff';
+    const rightColor=rootStyle.getPropertyValue('--viz-right').trim()||'#a855f7';
     // Canal izquierdo y derecho lado a lado, en la misma fila
     const half=vizCanvas.width/2;
-    drawChannelBars(dataL,0,half,'#00d4ff','#0066ff');
-    drawChannelBars(dataR,half,half,'#a855f7','#7e22ce');
+    drawChannelBars(dataL,0,half,leftColor,shadeHex(leftColor,-35));
+    drawChannelBars(dataR,half,half,rightColor,shadeHex(rightColor,-35));
     vizCtx.fillStyle='rgba(255,255,255,0.08)';
     vizCtx.fillRect(half-1,0,2,vizCanvas.height);
+    // Etiqueta de canal y frecuencia en tiempo real, arriba a la izquierda de cada mitad
+    if(leftOsc&&rightOsc){
+      // El canvas se renderiza al doble de resolución que su tamaño en CSS; escalamos texto y margen igual
+      const scale=vizCanvas.width/(vizCanvas.offsetWidth||vizCanvas.width);
+      const pad=10*scale;
+      vizCtx.textBaseline='top';
+      vizCtx.font=`bold ${13*scale}px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif`;
+      vizCtx.shadowColor='rgba(0,0,0,0.6)';
+      vizCtx.shadowBlur=4*scale;
+      vizCtx.fillStyle=leftColor;
+      vizCtx.fillText(`${t('channelLeft')} · ${leftOsc.frequency.value.toFixed(1)}Hz`,pad,pad);
+      vizCtx.fillStyle=rightColor;
+      vizCtx.fillText(`${t('channelRight')} · ${rightOsc.frequency.value.toFixed(1)}Hz`,half+pad,pad);
+      vizCtx.shadowBlur=0;
+    }
     animId=requestAnimationFrame(draw);
   }
   draw();
