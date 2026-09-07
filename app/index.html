@@ -38,11 +38,11 @@
 
       <div class="slider-group">
         <div class="slider-label"><span data-i18n="baseFrequency">Frecuencia base</span><b><span id="baseVal">200</span> Hz</b></div>
-        <input type="range" id="baseFreq" min="100" max="500" value="200" step="1">
+        <input type="range" id="baseFreq" min="100" max="300" value="200" step="1">
       </div>
       <div class="slider-group">
-        <div class="slider-label"><span data-i18n="volume">Volumen</span><b><span id="volVal">50</span>%</b></div>
-        <input type="range" id="volume" min="0" max="100" value="50">
+        <div class="slider-label"><span data-i18n="volume">Volumen</span><b><span id="volVal">20</span>%</b></div>
+        <input type="range" id="volume" min="0" max="100" value="20">
       </div>
 
       <button class="play-btn" id="playBtn" data-i18n="start">▶  INICIAR</button>
@@ -91,7 +91,7 @@
     </div>
     <div class="slider-group">
       <div class="slider-label"><span data-i18n="baseFrequency">Frecuencia base</span><b><span id="baseVal2">200</span> Hz</b></div>
-      <input type="range" id="baseFreq2" min="100" max="500" value="200" step="1">
+      <input type="range" id="baseFreq2" min="100" max="300" value="200" step="1">
     </div>
   </div>
 
@@ -160,6 +160,16 @@
         </button>
       </div>
       <div class="settings-note" data-i18n="settingsSaved">Tus preferencias se guardan automáticamente en este dispositivo.</div>
+    </div>
+    <div class="settings-section">
+      <h2 data-i18n="eightDTitle">Audio 8D</h2>
+      <p data-i18n="eightDInfo">Rota el sonido entre los auriculares con un período proporcional a la frecuencia elegida.</p>
+      <div class="theme-options toggle-options">
+        <button class="theme-option" id="eightDToggle" type="button">
+          <strong data-i18n="eightDToggleLabel">Activar audio 8D</strong>
+          <span data-i18n="eightDToggleInfo">Opcional. Si está desactivado, el comportamiento es el habitual (sin rotación).</span>
+        </button>
+      </div>
     </div>
     <button class="settings-close" id="settingsCloseBtn" type="button"><span aria-hidden="true">←</span><span data-i18n="closeSettings">Volver a presintonías</span></button>
   </div>
