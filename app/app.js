@@ -98,6 +98,46 @@ Object.assign(TRANSLATIONS.en,{
     alerta:['A gamma session for short tasks that call for vigilance and mental energy.','May accompany a sense of activation and intense attention for brief periods.']
   }
 });
+Object.assign(TRANSLATIONS.es.presets,{
+  sanacion:['Sanación','Restauración','Delta 1.5Hz - Sueño muy profundo y restauración física'],
+  alegria:['Alegría','Bienestar','Alpha 9Hz - Estado de ánimo positivo y bienestar'],
+  estudio:['Estudio','Aprendizaje intensivo','Beta 16Hz - Atención sostenida para sesiones de estudio largas'],
+  calma:['Calma profunda','Descompresión','Delta 3.5Hz - Descompresión física y mental profunda'],
+  equilibrio:['Equilibrio','Estabilidad emocional','Alpha 13Hz - Estabilidad emocional y equilibrio interior'],
+  percepcion:['Percepción','Agudeza sensorial','Gamma 40Hz - Procesamiento sensorial y percepción aguda'],
+  lucidez:['Lucidez','Atención plena intensa','Gamma 35Hz - Lucidez mental y atención plena intensa'],
+  expansion:['Expansión mental','Integración cognitiva','Gamma 45Hz - Expansión de la conciencia e integración cognitiva']
+});
+Object.assign(TRANSLATIONS.en.presets,{
+  sanacion:['Healing','Restoration','Delta 1.5Hz - Very deep sleep and physical restoration'],
+  alegria:['Joy','Wellbeing','Alpha 9Hz - Positive mood and wellbeing'],
+  estudio:['Study','Intensive learning','Beta 16Hz - Sustained attention for long study sessions'],
+  calma:['Deep calm','Decompression','Delta 3.5Hz - Deep physical and mental decompression'],
+  equilibrio:['Balance','Emotional stability','Alpha 13Hz - Emotional stability and inner balance'],
+  percepcion:['Perception','Sensory sharpness','Gamma 40Hz - Sensory processing and sharp perception'],
+  lucidez:['Lucidity','Intense mindfulness','Gamma 35Hz - Mental lucidity and intense mindfulness'],
+  expansion:['Mental expansion','Cognitive integration','Gamma 45Hz - Expanded awareness and cognitive integration']
+});
+Object.assign(TRANSLATIONS.es.presetDetails,{
+  sanacion:['Sesión delta muy lenta pensada para acompañar un sueño largo y reparador.','Puede acompañar una sensación de descanso físico profundo y recuperación.'],
+  alegria:['Sesión alpha para sostener un estado de ánimo positivo durante el día.','Puede acompañar ligereza emocional y una actitud optimista.'],
+  estudio:['Sesión beta pensada para bloques largos de estudio o lectura técnica.','Puede acompañar concentración sostenida y retención durante sesiones extensas.'],
+  calma:['Sesión delta lenta para soltar tensión acumulada tras un día exigente.','Puede acompañar una desconexión progresiva y relajación muscular.'],
+  equilibrio:['Sesión alpha para recuperar estabilidad tras momentos de tensión emocional.','Puede acompañar serenidad y una sensación de centrado interior.'],
+  percepcion:['Sesión gamma asociada clásicamente con procesamiento sensorial fino.','Úsala en periodos breves que requieran atención perceptiva aguda.'],
+  lucidez:['Sesión gamma intensa para sostener una atención plena y muy despierta.','Puede acompañar sensación de lucidez y nitidez mental durante tareas breves.'],
+  expansion:['Sesión gamma alta orientada a integrar información de distintas fuentes.','Puede acompañar una sensación de amplitud de conciencia y visión de conjunto.']
+});
+Object.assign(TRANSLATIONS.en.presetDetails,{
+  sanacion:['A very slow delta session intended to accompany long, restorative sleep.','May accompany a sense of deep physical rest and recovery.'],
+  alegria:['An alpha session to sustain a positive mood throughout the day.','May accompany emotional lightness and an optimistic attitude.'],
+  estudio:['A beta session designed for long study or technical reading blocks.','May accompany sustained concentration and retention during extended sessions.'],
+  calma:['A slow delta session to release tension built up after a demanding day.','May accompany progressive unwinding and muscle relaxation.'],
+  equilibrio:['An alpha session to regain stability after emotionally tense moments.','May accompany serenity and a sense of inner centering.'],
+  percepcion:['A gamma session classically associated with fine sensory processing.','Use it in short periods that call for sharp perceptual attention.'],
+  lucidez:['An intense gamma session to sustain sharp, wide-awake attention.','May accompany a sense of mental lucidity and clarity during short tasks.'],
+  expansion:['A high-gamma session aimed at integrating information from different sources.','May accompany a sense of expanded awareness and a broader perspective.']
+});
 TRANSLATIONS.es.darkTheme='🌙 Oscuro';
 TRANSLATIONS.es.lightTheme='☀️ Claro';
 TRANSLATIONS.en.darkTheme='🌙 Dark';
@@ -132,18 +172,27 @@ function translateStatic(){
   document.getElementById('settingsTrigger').setAttribute('aria-label',t('settingsAria'));
 }
 const PRESETS = [
-  {id:'memoria',name:'Memoria',sub:'Aprendizaje',icon:'🧠',beat:14,base:200,wave:'Beta',grad:'linear-gradient(135deg,#00d4ff,#0066ff)',c1:'#00d4ff',glow:'rgba(0,212,255,0.4)',desc:'Beta 14Hz - Concentración suave y atención focalizada'},
-  {id:'relax',name:'Relajarse',sub:'Calma',icon:'🌿',beat:10,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#10b981,#059669)',c1:'#10b981',glow:'rgba(16,185,129,0.4)',desc:'Alpha 10Hz - Relajación alerta y reducción de estrés'},
+  // Agrupadas por onda (Delta→Theta→Alpha→Beta→Gamma) y ascendente por Hz dentro de cada grupo
+  {id:'sanacion',name:'Sanación',sub:'Restauración',icon:'💧',beat:1.5,base:174,wave:'Delta',grad:'linear-gradient(135deg,#0ea5e9,#0369a1)',c1:'#0ea5e9',glow:'rgba(14,165,233,0.4)',desc:'Delta 1.5Hz - Sueño muy profundo y restauración física'},
   {id:'dormir',name:'Dormir',sub:'Sueño profundo',icon:'🌙',beat:2,base:180,wave:'Delta',grad:'linear-gradient(135deg,#6366f1,#312e81)',c1:'#6366f1',glow:'rgba(99,102,241,0.4)',desc:'Delta 2Hz - Sueño reparador y sanación profunda'},
-  {id:'meditar',name:'Meditación',sub:'Atención plena',icon:'🧘',beat:6,base:200,wave:'Theta',grad:'linear-gradient(135deg,#a855f7,#7e22ce)',c1:'#a855f7',glow:'rgba(168,85,247,0.4)',desc:'Theta 6Hz - Meditación ligera y visualización'},
-  {id:'intuicion',name:'Intuición',sub:'Conexión interna',icon:'🔮',beat:5,base:200,wave:'Theta',grad:'linear-gradient(135deg,#ec4899,#be185d)',c1:'#ec4899',glow:'rgba(236,72,153,0.4)',desc:'Theta 5Hz - Relajación profunda e intuición'},
-  {id:'energia',name:'Energía',sub:'Motivación',icon:'⚡',beat:20,base:220,wave:'Beta',grad:'linear-gradient(135deg,#f59e0b,#dc2626)',c1:'#f59e0b',glow:'rgba(245,158,11,0.4)',desc:'Beta 20Hz - Concentración intensa y energía mental'},
-  {id:'creatividad',name:'Creatividad',sub:'Inspiración',icon:'💡',beat:7,base:210,wave:'Theta',grad:'linear-gradient(135deg,#f97316,#ea580c)',c1:'#f97316',glow:'rgba(249,115,22,0.4)',desc:'Theta 7Hz - Ideas creativas y estado hipnagógico'},
-  {id:'enfoque',name:'Enfoque profundo',sub:'Productividad',icon:'🎯',beat:18,base:220,wave:'Beta',grad:'linear-gradient(135deg,#14b8a6,#0f766e)',c1:'#14b8a6',glow:'rgba(20,184,166,0.4)',desc:'Beta 18Hz - Concentración intensa y resolución de problemas'},
-  {id:'claridad',name:'Claridad',sub:'Equilibrio',icon:'🔎',beat:12,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#38bdf8,#0284c7)',c1:'#38bdf8',glow:'rgba(56,189,248,0.4)',desc:'Alpha 12Hz - Pensamiento positivo y visualización clara'},
   {id:'siesta',name:'Siesta',sub:'Descanso breve',icon:'🛌',beat:3,base:180,wave:'Delta',grad:'linear-gradient(135deg,#818cf8,#4f46e5)',c1:'#818cf8',glow:'rgba(129,140,248,0.4)',desc:'Delta 3Hz - Descanso profundo y recuperación física'},
+  {id:'calma',name:'Calma profunda',sub:'Descompresión',icon:'🕯️',beat:3.5,base:170,wave:'Delta',grad:'linear-gradient(135deg,#4338ca,#1e1b4b)',c1:'#4338ca',glow:'rgba(67,56,202,0.4)',desc:'Delta 3.5Hz - Descompresión física y mental profunda'},
   {id:'respiracion',name:'Respiración',sub:'Serenidad',icon:'🌬️',beat:4,base:190,wave:'Theta',grad:'linear-gradient(135deg,#2dd4bf,#0d9488)',c1:'#2dd4bf',glow:'rgba(45,212,191,0.4)',desc:'Theta 4Hz - Meditación profunda y conexión subconsciente'},
-  {id:'alerta',name:'Alerta',sub:'Activación',icon:'🚀',beat:30,base:240,wave:'Gamma',grad:'linear-gradient(135deg,#facc15,#eab308)',c1:'#facc15',glow:'rgba(250,204,21,0.4)',desc:'Gamma 30Hz - Procesamiento cognitivo y memoria'}
+  {id:'intuicion',name:'Intuición',sub:'Conexión interna',icon:'🔮',beat:5,base:200,wave:'Theta',grad:'linear-gradient(135deg,#ec4899,#be185d)',c1:'#ec4899',glow:'rgba(236,72,153,0.4)',desc:'Theta 5Hz - Relajación profunda e intuición'},
+  {id:'meditar',name:'Meditación',sub:'Atención plena',icon:'🧘',beat:6,base:200,wave:'Theta',grad:'linear-gradient(135deg,#a855f7,#7e22ce)',c1:'#a855f7',glow:'rgba(168,85,247,0.4)',desc:'Theta 6Hz - Meditación ligera y visualización'},
+  {id:'creatividad',name:'Creatividad',sub:'Inspiración',icon:'💡',beat:7,base:210,wave:'Theta',grad:'linear-gradient(135deg,#f97316,#ea580c)',c1:'#f97316',glow:'rgba(249,115,22,0.4)',desc:'Theta 7Hz - Ideas creativas y estado hipnagógico'},
+  {id:'alegria',name:'Alegría',sub:'Bienestar',icon:'😊',beat:9,base:210,wave:'Alpha',grad:'linear-gradient(135deg,#fb7185,#e11d48)',c1:'#fb7185',glow:'rgba(251,113,133,0.4)',desc:'Alpha 9Hz - Estado de ánimo positivo y bienestar'},
+  {id:'relax',name:'Relajarse',sub:'Calma',icon:'🌿',beat:10,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#10b981,#059669)',c1:'#10b981',glow:'rgba(16,185,129,0.4)',desc:'Alpha 10Hz - Relajación alerta y reducción de estrés'},
+  {id:'claridad',name:'Claridad',sub:'Equilibrio',icon:'🔎',beat:12,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#38bdf8,#0284c7)',c1:'#38bdf8',glow:'rgba(56,189,248,0.4)',desc:'Alpha 12Hz - Pensamiento positivo y visualización clara'},
+  {id:'equilibrio',name:'Equilibrio',sub:'Estabilidad emocional',icon:'⚖️',beat:13,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#34d399,#059669)',c1:'#34d399',glow:'rgba(52,211,153,0.4)',desc:'Alpha 13Hz - Estabilidad emocional y equilibrio interior'},
+  {id:'memoria',name:'Memoria',sub:'Aprendizaje',icon:'🧠',beat:14,base:200,wave:'Beta',grad:'linear-gradient(135deg,#00d4ff,#0066ff)',c1:'#00d4ff',glow:'rgba(0,212,255,0.4)',desc:'Beta 14Hz - Concentración suave y atención focalizada'},
+  {id:'estudio',name:'Estudio',sub:'Aprendizaje intensivo',icon:'📚',beat:16,base:230,wave:'Beta',grad:'linear-gradient(135deg,#22d3ee,#0891b2)',c1:'#22d3ee',glow:'rgba(34,211,238,0.4)',desc:'Beta 16Hz - Atención sostenida para sesiones de estudio largas'},
+  {id:'enfoque',name:'Enfoque profundo',sub:'Productividad',icon:'🎯',beat:18,base:220,wave:'Beta',grad:'linear-gradient(135deg,#14b8a6,#0f766e)',c1:'#14b8a6',glow:'rgba(20,184,166,0.4)',desc:'Beta 18Hz - Concentración intensa y resolución de problemas'},
+  {id:'energia',name:'Energía',sub:'Motivación',icon:'⚡',beat:20,base:220,wave:'Beta',grad:'linear-gradient(135deg,#f59e0b,#dc2626)',c1:'#f59e0b',glow:'rgba(245,158,11,0.4)',desc:'Beta 20Hz - Concentración intensa y energía mental'},
+  {id:'alerta',name:'Alerta',sub:'Activación',icon:'🚀',beat:30,base:240,wave:'Gamma',grad:'linear-gradient(135deg,#facc15,#eab308)',c1:'#facc15',glow:'rgba(250,204,21,0.4)',desc:'Gamma 30Hz - Procesamiento cognitivo y memoria'},
+  {id:'lucidez',name:'Lucidez',sub:'Atención plena intensa',icon:'👁️',beat:35,base:245,wave:'Gamma',grad:'linear-gradient(135deg,#fde047,#ca8a04)',c1:'#fde047',glow:'rgba(253,224,71,0.4)',desc:'Gamma 35Hz - Lucidez mental y atención plena intensa'},
+  {id:'percepcion',name:'Percepción',sub:'Agudeza sensorial',icon:'✨',beat:40,base:250,wave:'Gamma',grad:'linear-gradient(135deg,#e879f9,#a21caf)',c1:'#e879f9',glow:'rgba(232,121,249,0.4)',desc:'Gamma 40Hz - Procesamiento sensorial y percepción aguda'},
+  {id:'expansion',name:'Expansión mental',sub:'Integración cognitiva',icon:'🌟',beat:45,base:255,wave:'Gamma',grad:'linear-gradient(135deg,#c084fc,#7e22ce)',c1:'#c084fc',glow:'rgba(192,132,252,0.4)',desc:'Gamma 45Hz - Expansión de la conciencia e integración cognitiva'}
 ];
 
 /* ============ AUDIO ENGINE ============ */
@@ -298,6 +347,13 @@ function renderPresetCard(p){
   card.querySelector('.hz').textContent=`${p.beat}Hz · ${text[1]}`;
 }
 PRESETS.forEach(p=>{
+  if(p.wave!==presetGrid.dataset.lastWave){
+    presetGrid.dataset.lastWave=p.wave;
+    const header=document.createElement('div');
+    header.className='preset-group-title';
+    header.textContent=p.wave;
+    presetGrid.appendChild(header);
+  }
   const el=document.createElement('div');
   el.className='preset';
   el.dataset.id=p.id;
