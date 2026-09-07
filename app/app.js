@@ -108,8 +108,8 @@ TRANSLATIONS.es.closePlayer='Volver';
 TRANSLATIONS.es.closePlayerAria='Volver a las presintonías';
 TRANSLATIONS.en.closePlayer='Back';
 TRANSLATIONS.en.closePlayerAria='Back to presets';
-Object.assign(TRANSLATIONS.es,{settingsTab:'Ajustes',settingsAria:'Abrir ajustes',closeSettings:'Volver a presintonías',languageTitle:'Idioma',languageInfo:'Elige el idioma de la aplicación.',themeTitle:'Tema de la aplicación',themeInfo:'Personaliza la apariencia de Binaural Beats Pro.',darkTheme:'Oscuro',darkThemeInfo:'Fondo oscuro para sesiones nocturnas.',lightTheme:'Claro',lightThemeInfo:'Interfaz luminosa para el día.',settingsSaved:'Tus preferencias se guardan automáticamente en este dispositivo.'});
-Object.assign(TRANSLATIONS.en,{settingsTab:'Settings',settingsAria:'Open settings',closeSettings:'Back to presets',languageTitle:'Language',languageInfo:'Choose the application language.',themeTitle:'Application theme',themeInfo:'Customize the appearance of Binaural Beats Pro.',darkTheme:'Dark',darkThemeInfo:'Dark background for night sessions.',lightTheme:'Light',lightThemeInfo:'Bright interface for daytime use.',settingsSaved:'Your preferences are saved automatically on this device.'});
+Object.assign(TRANSLATIONS.es,{settingsTab:'Ajustes',settingsAria:'Abrir ajustes',closeSettings:'Volver a presintonías',languageTitle:'Idioma',languageInfo:'Elige el idioma de la aplicación.',themeTitle:'Tema de la aplicación',themeInfo:'Personaliza la apariencia de Binaural Beats Pro.',darkTheme:'Oscuro',darkThemeInfo:'Fondo oscuro para sesiones nocturnas.',lightTheme:'Claro',lightThemeInfo:'Interfaz luminosa para el día.',settingsSaved:'Tus preferencias se guardan automáticamente en este dispositivo.',eightDTitle:'Audio 8D',eightDInfo:'Rota el sonido entre los auriculares con un período proporcional a la frecuencia elegida.',eightDToggleLabel:'Activar audio 8D',eightDToggleInfo:'Opcional. Si está desactivado, el comportamiento es el habitual (sin rotación).'});
+Object.assign(TRANSLATIONS.en,{settingsTab:'Settings',settingsAria:'Open settings',closeSettings:'Back to presets',languageTitle:'Language',languageInfo:'Choose the application language.',themeTitle:'Application theme',themeInfo:'Customize the appearance of Binaural Beats Pro.',darkTheme:'Dark',darkThemeInfo:'Dark background for night sessions.',lightTheme:'Light',lightThemeInfo:'Bright interface for daytime use.',settingsSaved:'Your preferences are saved automatically on this device.',eightDTitle:'8D audio',eightDInfo:'Rotates the sound between headphone channels with a period proportional to the chosen frequency.',eightDToggleLabel:'Enable 8D audio',eightDToggleInfo:'Optional. When disabled, playback behaves as usual (no rotation).'});
 let language=localStorage.getItem('bb_language')||((navigator.language||'es').toLowerCase().startsWith('en')?'en':'es');
 const t=key=>TRANSLATIONS[language][key]||key;
 const savedTheme=localStorage.getItem('bb_theme');
@@ -150,9 +150,11 @@ const PRESETS = [
 Object.assign(TRANSLATIONS.en.presetDetails,{
   memoria:['A 14 Hz beta session for gentle concentration and focused attention.','Use it for reading, learning or tasks that require sustained attention.'],relax:['A 10 Hz alpha session for alert relaxation and stress reduction.','It can accompany a conscious break without aiming for sleep.'],dormir:['A 2 Hz delta session for a restorative sleep routine.','Use it before sleep or during a deep rest break.'],meditar:['A 6 Hz theta session for light meditation and visualization.','It can accompany calm breathing and mindfulness.'],intuicion:['A 5 Hz theta session for deep relaxation and inner connection.','It can accompany introspection, imagination and a personal pause.'],energia:['A 20 Hz beta session for intense concentration and mental energy.','Use it in short work, study or activation blocks.'],creatividad:['A 7 Hz theta session for creative ideas and a hypnagogic transition.','It can accompany brainstorming, writing or creative exploration.'],enfoque:['An 18 Hz beta session for intense concentration and problem-solving.','Use it for productive tasks that need continuity.'],claridad:['A 12 Hz alpha session for positive thinking and clear visualization.','It can accompany planning, reflection or a pause before deciding.'],siesta:['A 3 Hz delta session for deep rest and physical recovery.','Use it only when you can disconnect and do not need to stay alert.'],respiracion:['A 4 Hz theta session for deep meditation and inner connection.','It can accompany slow breathing exercises and attention to the body.'],alerta:['A 30 Hz gamma session for cognitive processing and memory.','Use it at a comfortable volume during short periods of intense attention.']
 });
-let audioCtx=null, leftOsc=null, rightOsc=null, merger=null, gainNode=null, analyser=null;
+let audioCtx=null, leftOsc=null, rightOsc=null, merger=null, gainNode=null, analyser=null, panNode=null, panLfo=null, panLfoGain=null;
 let isPlaying=false, currentPreset=null, animId=null;
 let customPlayData=null, customStartTime=0;
+// Ajuste opcional: audio 8D (rotación de panorama). Persistido en localStorage.
+let eightD=localStorage.getItem('bb_8d')==='1';
 
 // Initialize AudioContext and related nodes
 function initAudio(){
@@ -169,8 +171,11 @@ function initAudio(){
   analyser.fftSize=256;
   // Create a ChannelMergerNode to merge left and right channels
   merger=audioCtx.createChannelMerger(2);
-  // Connect the nodes: merger -> gainNode -> analyser -> destination
-  gainNode.connect(analyser);
+  // StereoPannerNode usado por el efecto opcional de audio 8D (centrado si está desactivado)
+  panNode=audioCtx.createStereoPanner();
+  // Connect the nodes: merger -> gainNode -> panNode -> analyser -> destination
+  gainNode.connect(panNode);
+  panNode.connect(analyser);
   // Connect the analyser to the audio context's destination (speakers/headphones)
   analyser.connect(audioCtx.destination);
 }
@@ -207,6 +212,7 @@ function startTone(baseFreq, beatFreq, volume){
   isPlaying=true;
   // Start the visualizer to display audio data
   startVisualizer();
+  startPanRotation(beatFreq);
 }
 
 function stopTone(){
@@ -215,6 +221,26 @@ function stopTone(){
   isPlaying=false;
   if(animId){cancelAnimationFrame(animId);animId=null;}
   customPlayData=null;
+  stopPanRotation();
+}
+
+// Arranca un LFO que mueve panNode.pan; el período (s) es proporcional a beatFreq. Sólo si el ajuste 8D está activo.
+function startPanRotation(beatFreq){
+  stopPanRotation();
+  if(!eightD || !panNode || !audioCtx) return;
+  const period=Math.max(2, Math.abs(beatFreq)||1);
+  panLfo=audioCtx.createOscillator();
+  panLfo.type='sine';
+  panLfo.frequency.value=1/period;
+  panLfoGain=audioCtx.createGain();
+  panLfoGain.gain.value=1;
+  panLfo.connect(panLfoGain).connect(panNode.pan);
+  panLfo.start();
+}
+function stopPanRotation(){
+  if(panLfo){try{panLfo.stop();}catch(e){}panLfo.disconnect();panLfo=null;}
+  if(panLfoGain){panLfoGain.disconnect();panLfoGain=null;}
+  if(panNode && audioCtx) panNode.pan.setValueAtTime(0, audioCtx.currentTime);
 }
 
 function updateBeat(beatFreq){
@@ -547,6 +573,8 @@ playCustomBtn.onclick=()=>{
   playCustomBtn.classList.add('playing');
   playCustomBtn.classList.remove('primary');
   startVisualizer();
+  const avgBeat=sorted.reduce((s,p)=>s+p.y*MAX_BEAT,0)/sorted.length;
+  startPanRotation(avgBeat);
 };
 
 /* ============ GUARDAR / CARGAR ============ */
@@ -647,6 +675,9 @@ function playSaved(s){
   isPlaying=true;
   startVisualizer();
   toast(`${t('playing')} ${s.name}`);
+  const sortedPoints=[...s.points].sort((a,b)=>a.x-b.x);
+  const avgBeat=sortedPoints.reduce((sum,p)=>sum+p.y*MAX_BEAT,0)/sortedPoints.length;
+  startPanRotation(avgBeat);
 }
 
 /* ============ TOAST ============ */
@@ -661,8 +692,23 @@ function toast(msg){
 
 /* ============ INIT ============ */
 document.querySelectorAll('.theme-option').forEach(button=>{
+  if(!button.dataset.theme) return;
   button.onclick=()=>setTheme(button.dataset.theme);
 });
+const eightDToggle=document.getElementById('eightDToggle');
+function updateEightDUI(){
+  eightDToggle?.classList.toggle('active',eightD);
+}
+eightDToggle.onclick=()=>{
+  eightD=!eightD;
+  localStorage.setItem('bb_8d',eightD?'1':'0');
+  updateEightDUI();
+  if(isPlaying){
+    if(eightD) startPanRotation(currentPreset?currentPreset.beat:(customPlayData?customPlayData.sorted.reduce((s,p)=>s+p.y*MAX_BEAT,0)/customPlayData.sorted.length:0));
+    else stopPanRotation();
+  }
+};
+updateEightDUI();
 document.getElementById('settingsTrigger').onclick=()=>{
   const settingsView=document.getElementById('view-settings');
   if(settingsView.classList.contains('active')){
