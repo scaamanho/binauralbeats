@@ -173,33 +173,33 @@ function translateStatic(){
 }
 const PRESETS = [
   // Agrupadas por onda (Delta→Theta→Alpha→Beta→Gamma) y ascendente por Hz dentro de cada grupo
-  {id:'sanacion',name:'Sanación',sub:'Restauración',icon:'💧',beat:1.5,base:174,wave:'Delta',grad:'linear-gradient(135deg,#0ea5e9,#0369a1)',c1:'#0ea5e9',glow:'rgba(14,165,233,0.4)',desc:'Delta 1.5Hz - Sueño muy profundo y restauración física'},
-  {id:'dormir',name:'Dormir',sub:'Sueño profundo',icon:'🌙',beat:2,base:180,wave:'Delta',grad:'linear-gradient(135deg,#6366f1,#312e81)',c1:'#6366f1',glow:'rgba(99,102,241,0.4)',desc:'Delta 2Hz - Sueño reparador y sanación profunda'},
-  {id:'siesta',name:'Siesta',sub:'Descanso breve',icon:'🛌',beat:3,base:180,wave:'Delta',grad:'linear-gradient(135deg,#818cf8,#4f46e5)',c1:'#818cf8',glow:'rgba(129,140,248,0.4)',desc:'Delta 3Hz - Descanso profundo y recuperación física'},
-  {id:'calma',name:'Calma profunda',sub:'Descompresión',icon:'🕯️',beat:3.5,base:170,wave:'Delta',grad:'linear-gradient(135deg,#4338ca,#1e1b4b)',c1:'#4338ca',glow:'rgba(67,56,202,0.4)',desc:'Delta 3.5Hz - Descompresión física y mental profunda'},
-  {id:'respiracion',name:'Respiración',sub:'Serenidad',icon:'🌬️',beat:4,base:190,wave:'Theta',grad:'linear-gradient(135deg,#2dd4bf,#0d9488)',c1:'#2dd4bf',glow:'rgba(45,212,191,0.4)',desc:'Theta 4Hz - Meditación profunda y conexión subconsciente'},
+  {id:'sanacion',name:'Sanación',sub:'Restauración',icon:'💧',beat:1.5,base:200,wave:'Delta',grad:'linear-gradient(135deg,#0ea5e9,#0369a1)',c1:'#0ea5e9',glow:'rgba(14,165,233,0.4)',desc:'Delta 1.5Hz - Sueño muy profundo y restauración física'},
+  {id:'dormir',name:'Dormir',sub:'Sueño profundo',icon:'🌙',beat:2,base:200,wave:'Delta',grad:'linear-gradient(135deg,#6366f1,#312e81)',c1:'#6366f1',glow:'rgba(99,102,241,0.4)',desc:'Delta 2Hz - Sueño reparador y sanación profunda'},
+  {id:'siesta',name:'Siesta',sub:'Descanso breve',icon:'🛌',beat:3,base:200,wave:'Delta',grad:'linear-gradient(135deg,#818cf8,#4f46e5)',c1:'#818cf8',glow:'rgba(129,140,248,0.4)',desc:'Delta 3Hz - Descanso profundo y recuperación física'},
+  {id:'calma',name:'Calma profunda',sub:'Descompresión',icon:'🕯️',beat:3.5,base:200,wave:'Delta',grad:'linear-gradient(135deg,#4338ca,#1e1b4b)',c1:'#4338ca',glow:'rgba(67,56,202,0.4)',desc:'Delta 3.5Hz - Descompresión física y mental profunda'},
+  {id:'respiracion',name:'Respiración',sub:'Serenidad',icon:'🌬️',beat:4,base:200,wave:'Theta',grad:'linear-gradient(135deg,#2dd4bf,#0d9488)',c1:'#2dd4bf',glow:'rgba(45,212,191,0.4)',desc:'Theta 4Hz - Meditación profunda y conexión subconsciente'},
   {id:'intuicion',name:'Intuición',sub:'Conexión interna',icon:'🔮',beat:5,base:200,wave:'Theta',grad:'linear-gradient(135deg,#ec4899,#be185d)',c1:'#ec4899',glow:'rgba(236,72,153,0.4)',desc:'Theta 5Hz - Relajación profunda e intuición'},
   {id:'meditar',name:'Meditación',sub:'Atención plena',icon:'🧘',beat:6,base:200,wave:'Theta',grad:'linear-gradient(135deg,#a855f7,#7e22ce)',c1:'#a855f7',glow:'rgba(168,85,247,0.4)',desc:'Theta 6Hz - Meditación ligera y visualización'},
-  {id:'creatividad',name:'Creatividad',sub:'Inspiración',icon:'💡',beat:7,base:210,wave:'Theta',grad:'linear-gradient(135deg,#f97316,#ea580c)',c1:'#f97316',glow:'rgba(249,115,22,0.4)',desc:'Theta 7Hz - Ideas creativas y estado hipnagógico'},
-  {id:'alegria',name:'Alegría',sub:'Bienestar',icon:'😊',beat:9,base:210,wave:'Alpha',grad:'linear-gradient(135deg,#fb7185,#e11d48)',c1:'#fb7185',glow:'rgba(251,113,133,0.4)',desc:'Alpha 9Hz - Estado de ánimo positivo y bienestar'},
+  {id:'creatividad',name:'Creatividad',sub:'Inspiración',icon:'💡',beat:7,base:200,wave:'Theta',grad:'linear-gradient(135deg,#f97316,#ea580c)',c1:'#f97316',glow:'rgba(249,115,22,0.4)',desc:'Theta 7Hz - Ideas creativas y estado hipnagógico'},
+  {id:'alegria',name:'Alegría',sub:'Bienestar',icon:'😊',beat:9,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#fb7185,#e11d48)',c1:'#fb7185',glow:'rgba(251,113,133,0.4)',desc:'Alpha 9Hz - Estado de ánimo positivo y bienestar'},
   {id:'relax',name:'Relajarse',sub:'Calma',icon:'🌿',beat:10,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#10b981,#059669)',c1:'#10b981',glow:'rgba(16,185,129,0.4)',desc:'Alpha 10Hz - Relajación alerta y reducción de estrés'},
   {id:'claridad',name:'Claridad',sub:'Equilibrio',icon:'🔎',beat:12,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#38bdf8,#0284c7)',c1:'#38bdf8',glow:'rgba(56,189,248,0.4)',desc:'Alpha 12Hz - Pensamiento positivo y visualización clara'},
   {id:'equilibrio',name:'Equilibrio',sub:'Estabilidad emocional',icon:'⚖️',beat:13,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#34d399,#059669)',c1:'#34d399',glow:'rgba(52,211,153,0.4)',desc:'Alpha 13Hz - Estabilidad emocional y equilibrio interior'},
   {id:'memoria',name:'Memoria',sub:'Aprendizaje',icon:'🧠',beat:14,base:200,wave:'Beta',grad:'linear-gradient(135deg,#00d4ff,#0066ff)',c1:'#00d4ff',glow:'rgba(0,212,255,0.4)',desc:'Beta 14Hz - Concentración suave y atención focalizada'},
-  {id:'estudio',name:'Estudio',sub:'Aprendizaje intensivo',icon:'📚',beat:16,base:230,wave:'Beta',grad:'linear-gradient(135deg,#22d3ee,#0891b2)',c1:'#22d3ee',glow:'rgba(34,211,238,0.4)',desc:'Beta 16Hz - Atención sostenida para sesiones de estudio largas'},
-  {id:'enfoque',name:'Enfoque profundo',sub:'Productividad',icon:'🎯',beat:18,base:220,wave:'Beta',grad:'linear-gradient(135deg,#14b8a6,#0f766e)',c1:'#14b8a6',glow:'rgba(20,184,166,0.4)',desc:'Beta 18Hz - Concentración intensa y resolución de problemas'},
-  {id:'energia',name:'Energía',sub:'Motivación',icon:'⚡',beat:20,base:220,wave:'Beta',grad:'linear-gradient(135deg,#f59e0b,#dc2626)',c1:'#f59e0b',glow:'rgba(245,158,11,0.4)',desc:'Beta 20Hz - Concentración intensa y energía mental'},
-  {id:'alerta',name:'Alerta',sub:'Activación',icon:'🚀',beat:30,base:240,wave:'Gamma',grad:'linear-gradient(135deg,#facc15,#eab308)',c1:'#facc15',glow:'rgba(250,204,21,0.4)',desc:'Gamma 30Hz - Procesamiento cognitivo y memoria'},
-  {id:'lucidez',name:'Lucidez',sub:'Atención plena intensa',icon:'👁️',beat:35,base:245,wave:'Gamma',grad:'linear-gradient(135deg,#fde047,#ca8a04)',c1:'#fde047',glow:'rgba(253,224,71,0.4)',desc:'Gamma 35Hz - Lucidez mental y atención plena intensa'},
-  {id:'percepcion',name:'Percepción',sub:'Agudeza sensorial',icon:'✨',beat:40,base:250,wave:'Gamma',grad:'linear-gradient(135deg,#e879f9,#a21caf)',c1:'#e879f9',glow:'rgba(232,121,249,0.4)',desc:'Gamma 40Hz - Procesamiento sensorial y percepción aguda'},
-  {id:'expansion',name:'Expansión mental',sub:'Integración cognitiva',icon:'🌟',beat:45,base:255,wave:'Gamma',grad:'linear-gradient(135deg,#c084fc,#7e22ce)',c1:'#c084fc',glow:'rgba(192,132,252,0.4)',desc:'Gamma 45Hz - Expansión de la conciencia e integración cognitiva'}
+  {id:'estudio',name:'Estudio',sub:'Aprendizaje intensivo',icon:'📚',beat:16,base:200,wave:'Beta',grad:'linear-gradient(135deg,#22d3ee,#0891b2)',c1:'#22d3ee',glow:'rgba(34,211,238,0.4)',desc:'Beta 16Hz - Atención sostenida para sesiones de estudio largas'},
+  {id:'enfoque',name:'Enfoque profundo',sub:'Productividad',icon:'🎯',beat:18,base:200,wave:'Beta',grad:'linear-gradient(135deg,#14b8a6,#0f766e)',c1:'#14b8a6',glow:'rgba(20,184,166,0.4)',desc:'Beta 18Hz - Concentración intensa y resolución de problemas'},
+  {id:'energia',name:'Energía',sub:'Motivación',icon:'⚡',beat:20,base:200,wave:'Beta',grad:'linear-gradient(135deg,#f59e0b,#dc2626)',c1:'#f59e0b',glow:'rgba(245,158,11,0.4)',desc:'Beta 20Hz - Concentración intensa y energía mental'},
+  {id:'alerta',name:'Alerta',sub:'Activación',icon:'🚀',beat:30,base:200,wave:'Gamma',grad:'linear-gradient(135deg,#facc15,#eab308)',c1:'#facc15',glow:'rgba(250,204,21,0.4)',desc:'Gamma 30Hz - Procesamiento cognitivo y memoria'},
+  {id:'lucidez',name:'Lucidez',sub:'Atención plena intensa',icon:'👁️',beat:35,base:200,wave:'Gamma',grad:'linear-gradient(135deg,#fde047,#ca8a04)',c1:'#fde047',glow:'rgba(253,224,71,0.4)',desc:'Gamma 35Hz - Lucidez mental y atención plena intensa'},
+  {id:'percepcion',name:'Percepción',sub:'Agudeza sensorial',icon:'✨',beat:40,base:200,wave:'Gamma',grad:'linear-gradient(135deg,#e879f9,#a21caf)',c1:'#e879f9',glow:'rgba(232,121,249,0.4)',desc:'Gamma 40Hz - Procesamiento sensorial y percepción aguda'},
+  {id:'expansion',name:'Expansión mental',sub:'Integración cognitiva',icon:'🌟',beat:45,base:200,wave:'Gamma',grad:'linear-gradient(135deg,#c084fc,#7e22ce)',c1:'#c084fc',glow:'rgba(192,132,252,0.4)',desc:'Gamma 45Hz - Expansión de la conciencia e integración cognitiva'}
 ];
 
 /* ============ AUDIO ENGINE ============ */
 Object.assign(TRANSLATIONS.en.presetDetails,{
   memoria:['A 14 Hz beta session for gentle concentration and focused attention.','Use it for reading, learning or tasks that require sustained attention.'],relax:['A 10 Hz alpha session for alert relaxation and stress reduction.','It can accompany a conscious break without aiming for sleep.'],dormir:['A 2 Hz delta session for a restorative sleep routine.','Use it before sleep or during a deep rest break.'],meditar:['A 6 Hz theta session for light meditation and visualization.','It can accompany calm breathing and mindfulness.'],intuicion:['A 5 Hz theta session for deep relaxation and inner connection.','It can accompany introspection, imagination and a personal pause.'],energia:['A 20 Hz beta session for intense concentration and mental energy.','Use it in short work, study or activation blocks.'],creatividad:['A 7 Hz theta session for creative ideas and a hypnagogic transition.','It can accompany brainstorming, writing or creative exploration.'],enfoque:['An 18 Hz beta session for intense concentration and problem-solving.','Use it for productive tasks that need continuity.'],claridad:['A 12 Hz alpha session for positive thinking and clear visualization.','It can accompany planning, reflection or a pause before deciding.'],siesta:['A 3 Hz delta session for deep rest and physical recovery.','Use it only when you can disconnect and do not need to stay alert.'],respiracion:['A 4 Hz theta session for deep meditation and inner connection.','It can accompany slow breathing exercises and attention to the body.'],alerta:['A 30 Hz gamma session for cognitive processing and memory.','Use it at a comfortable volume during short periods of intense attention.']
 });
-let audioCtx=null, leftOsc=null, rightOsc=null, merger=null, gainNode=null, analyser=null, panNode=null, panLfo=null, panLfoGain=null, eightDFilter=null, eightDDepthGain=null, eightDShaper=null, eightDFilterMod=null, eightDDepthMod=null;
+let audioCtx=null, leftOsc=null, rightOsc=null, merger=null, gainNode=null, analyserL=null, analyserR=null, panNode=null, panLfo=null, panLfoGain=null, eightDFilter=null, eightDDepthGain=null, eightDShaper=null, eightDFilterMod=null, eightDDepthMod=null;
 let isPlaying=false, currentPreset=null, animId=null;
 let customPlayData=null, customStartTime=0;
 // Ajuste opcional: audio 8D (rotación de panorama). Persistido en localStorage.
@@ -221,12 +221,8 @@ function initAudio(){
   audioCtx=new (window.AudioContext||window.webkitAudioContext)();
   // Create a GainNode for volume control
   gainNode=audioCtx.createGain();
-  // Set initial gain value
-  gainNode.gain.value=0.5;
-  // Create an AnalyserNode for visualizations
-  analyser=audioCtx.createAnalyser();
-  // Set the FFT size for the analyser
-  analyser.fftSize=256;
+  // Set initial gain value (20% por defecto)
+  gainNode.gain.value=0.2;
   // Create a ChannelMergerNode to merge left and right channels
   merger=audioCtx.createChannelMerger(2);
   // StereoPannerNode usado por el efecto opcional de audio 8D (centrado si está desactivado)
@@ -237,13 +233,24 @@ function initAudio(){
   eightDFilter.frequency.value=20000; // abierto = transparente cuando el 8D está desactivado
   eightDDepthGain=audioCtx.createGain();
   eightDDepthGain.gain.value=1;
-  // Connect the nodes: gainNode -> panNode -> eightDFilter -> eightDDepthGain -> analyser -> destination
+  // Analizadores por canal (splitter -> L/R -> merger de salida), para el espectrograma dual
+  const splitter=audioCtx.createChannelSplitter(2);
+  analyserL=audioCtx.createAnalyser();
+  analyserR=audioCtx.createAnalyser();
+  // FFT grande para tener buena resolución en graves, ya que sólo se reproduce hasta ~500Hz
+  analyserL.fftSize=2048;
+  analyserR.fftSize=2048;
+  const outMerger=audioCtx.createChannelMerger(2);
+  // Connect the nodes: gainNode -> panNode -> eightDFilter -> eightDDepthGain -> splitter -> analyserL/R -> outMerger -> destination
   gainNode.connect(panNode);
   panNode.connect(eightDFilter);
   eightDFilter.connect(eightDDepthGain);
-  eightDDepthGain.connect(analyser);
-  // Connect the analyser to the audio context's destination (speakers/headphones)
-  analyser.connect(audioCtx.destination);
+  eightDDepthGain.connect(splitter);
+  splitter.connect(analyserL,0);
+  splitter.connect(analyserR,1);
+  analyserL.connect(outMerger,0,0);
+  analyserR.connect(outMerger,0,1);
+  outMerger.connect(audioCtx.destination);
 }
 
 // Start generating binaural beats with specified base frequency, beat frequency, and volume
@@ -338,36 +345,44 @@ resizeViz();
 window.addEventListener('resize',resizeViz);
 
 function startVisualizer(){
-  if(!analyser) return;
-  // Create a Uint8Array to hold the frequency data
-  const data=new Uint8Array(analyser.frequencyBinCount);
-  // Define the draw function to visualize the audio data
-  function draw(){
-    if(!isPlaying){vizCtx.clearRect(0,0,vizCanvas.width,vizCanvas.height);return;}
-    // Get the frequency data from the analyser
-    analyser.getByteFrequencyData(data);
-    // Clear the canvas with a semi-transparent fill to create a fading effect
-    vizCtx.fillStyle='rgba(0,0,0,0.2)';
-    // Fill the entire canvas with the fill style
-    vizCtx.fillRect(0,0,vizCanvas.width,vizCanvas.height);
-    // Calculate the width of each bar in the visualizer
-    const barW=vizCanvas.width/data.length*2.5;
-    let x=0;
-    // Loop through the frequency data and draw bars on the canvas
-    for(let i=0;i<data.length;i++){
+  if(!analyserL||!analyserR) return;
+  // Buffers de frecuencia para el canal izquierdo y derecho
+  const dataL=new Uint8Array(analyserL.frequencyBinCount);
+  const dataR=new Uint8Array(analyserR.frequencyBinCount);
+  // La app nunca reproduce por encima de ~500Hz: recortamos los bins irrelevantes
+  const binHz=audioCtx.sampleRate/analyserL.fftSize;
+  const maxBins=Math.min(dataL.length, Math.max(8,Math.ceil(500/binHz)));
+  function drawChannelBars(data,offsetX,width,colorTop,colorBottom){
+    const barW=(width/maxBins)*0.82;
+    const gap=(width/maxBins)-barW;
+    let x=offsetX;
+    for(let i=0;i<maxBins;i++){
       const h=(data[i]/255)*vizCanvas.height;
       const grad=vizCtx.createLinearGradient(0,vizCanvas.height-h,0,vizCanvas.height);
-      grad.addColorStop(0,'#00d4ff');
-      grad.addColorStop(1,'#a855f7');
+      grad.addColorStop(0,colorTop);
+      grad.addColorStop(1,colorBottom);
       vizCtx.fillStyle=grad;
-      vizCtx.fillRect(x,vizCanvas.height-h,barW-2,h);
-      x+=barW;
-      if(x>vizCanvas.width) break;
+      vizCtx.fillRect(x,vizCanvas.height-h,barW,h);
+      x+=barW+gap;
     }
+  }
+  function draw(){
+    if(!isPlaying){vizCtx.clearRect(0,0,vizCanvas.width,vizCanvas.height);return;}
+    analyserL.getByteFrequencyData(dataL);
+    analyserR.getByteFrequencyData(dataR);
+    vizCtx.fillStyle='rgba(0,0,0,0.2)';
+    vizCtx.fillRect(0,0,vizCanvas.width,vizCanvas.height);
+    // Canal izquierdo y derecho lado a lado, en la misma fila
+    const half=vizCanvas.width/2;
+    drawChannelBars(dataL,0,half,'#00d4ff','#0066ff');
+    drawChannelBars(dataR,half,half,'#a855f7','#7e22ce');
+    vizCtx.fillStyle='rgba(255,255,255,0.08)';
+    vizCtx.fillRect(half-1,0,2,vizCanvas.height);
     animId=requestAnimationFrame(draw);
   }
   draw();
 }
+
 
 /* ============ UI PRESETS ============ */
 const presetGrid=document.getElementById('presetGrid');
