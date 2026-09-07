@@ -199,11 +199,20 @@ const PRESETS = [
 Object.assign(TRANSLATIONS.en.presetDetails,{
   memoria:['A 14 Hz beta session for gentle concentration and focused attention.','Use it for reading, learning or tasks that require sustained attention.'],relax:['A 10 Hz alpha session for alert relaxation and stress reduction.','It can accompany a conscious break without aiming for sleep.'],dormir:['A 2 Hz delta session for a restorative sleep routine.','Use it before sleep or during a deep rest break.'],meditar:['A 6 Hz theta session for light meditation and visualization.','It can accompany calm breathing and mindfulness.'],intuicion:['A 5 Hz theta session for deep relaxation and inner connection.','It can accompany introspection, imagination and a personal pause.'],energia:['A 20 Hz beta session for intense concentration and mental energy.','Use it in short work, study or activation blocks.'],creatividad:['A 7 Hz theta session for creative ideas and a hypnagogic transition.','It can accompany brainstorming, writing or creative exploration.'],enfoque:['An 18 Hz beta session for intense concentration and problem-solving.','Use it for productive tasks that need continuity.'],claridad:['A 12 Hz alpha session for positive thinking and clear visualization.','It can accompany planning, reflection or a pause before deciding.'],siesta:['A 3 Hz delta session for deep rest and physical recovery.','Use it only when you can disconnect and do not need to stay alert.'],respiracion:['A 4 Hz theta session for deep meditation and inner connection.','It can accompany slow breathing exercises and attention to the body.'],alerta:['A 30 Hz gamma session for cognitive processing and memory.','Use it at a comfortable volume during short periods of intense attention.']
 });
-let audioCtx=null, leftOsc=null, rightOsc=null, merger=null, gainNode=null, analyser=null, panNode=null, panLfo=null, panLfoGain=null;
+let audioCtx=null, leftOsc=null, rightOsc=null, merger=null, gainNode=null, analyser=null, panNode=null, panLfo=null, panLfoGain=null, eightDFilter=null, eightDDepthGain=null, eightDShaper=null, eightDFilterMod=null, eightDDepthMod=null;
 let isPlaying=false, currentPreset=null, animId=null;
 let customPlayData=null, customStartTime=0;
 // Ajuste opcional: audio 8D (rotación de panorama). Persistido en localStorage.
 let eightD=localStorage.getItem('bb_8d')==='1';
+// Curva 1-|x| reutilizada para simular acercamiento/alejamiento sincronizado con el pan
+const EIGHT_D_CURVE=(()=>{
+  const curve=new Float32Array(257);
+  for(let i=0;i<curve.length;i++){
+    const x=i/128-1;
+    curve[i]=1-Math.abs(x);
+  }
+  return curve;
+})();
 
 // Initialize AudioContext and related nodes
 function initAudio(){
@@ -222,9 +231,17 @@ function initAudio(){
   merger=audioCtx.createChannelMerger(2);
   // StereoPannerNode usado por el efecto opcional de audio 8D (centrado si está desactivado)
   panNode=audioCtx.createStereoPanner();
-  // Connect the nodes: merger -> gainNode -> panNode -> analyser -> destination
+  // Filtro y ganancia de "profundidad": simulan que el sonido se aleja/atenúa al pasar detrás de la cabeza
+  eightDFilter=audioCtx.createBiquadFilter();
+  eightDFilter.type='lowpass';
+  eightDFilter.frequency.value=20000; // abierto = transparente cuando el 8D está desactivado
+  eightDDepthGain=audioCtx.createGain();
+  eightDDepthGain.gain.value=1;
+  // Connect the nodes: gainNode -> panNode -> eightDFilter -> eightDDepthGain -> analyser -> destination
   gainNode.connect(panNode);
-  panNode.connect(analyser);
+  panNode.connect(eightDFilter);
+  eightDFilter.connect(eightDDepthGain);
+  eightDDepthGain.connect(analyser);
   // Connect the analyser to the audio context's destination (speakers/headphones)
   analyser.connect(audioCtx.destination);
 }
@@ -284,12 +301,27 @@ function startPanRotation(beatFreq){
   panLfoGain=audioCtx.createGain();
   panLfoGain.gain.value=1;
   panLfo.connect(panLfoGain).connect(panNode.pan);
+  // Deriva de la misma LFO una señal "1-|x|" para atenuar volumen y agudos cuando el sonido pasa detrás de la cabeza
+  eightDShaper=audioCtx.createWaveShaper();
+  eightDShaper.curve=EIGHT_D_CURVE;
+  eightDFilterMod=audioCtx.createGain();
+  eightDFilterMod.gain.value=-14000; // 20000Hz (frente) a 6000Hz (detrás)
+  eightDDepthMod=audioCtx.createGain();
+  eightDDepthMod.gain.value=-0.35; // 1.0 (frente) a 0.65 (detrás)
+  panLfo.connect(eightDShaper);
+  eightDShaper.connect(eightDFilterMod).connect(eightDFilter.frequency);
+  eightDShaper.connect(eightDDepthMod).connect(eightDDepthGain.gain);
   panLfo.start();
 }
 function stopPanRotation(){
   if(panLfo){try{panLfo.stop();}catch(e){}panLfo.disconnect();panLfo=null;}
   if(panLfoGain){panLfoGain.disconnect();panLfoGain=null;}
+  if(eightDShaper){eightDShaper.disconnect();eightDShaper=null;}
+  if(eightDFilterMod){eightDFilterMod.disconnect();eightDFilterMod=null;}
+  if(eightDDepthMod){eightDDepthMod.disconnect();eightDDepthMod=null;}
   if(panNode && audioCtx) panNode.pan.setValueAtTime(0, audioCtx.currentTime);
+  if(eightDFilter && audioCtx) eightDFilter.frequency.setValueAtTime(20000, audioCtx.currentTime);
+  if(eightDDepthGain && audioCtx) eightDDepthGain.gain.setValueAtTime(1, audioCtx.currentTime);
 }
 
 function updateBeat(beatFreq){
