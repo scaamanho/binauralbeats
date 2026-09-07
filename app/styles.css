@@ -118,6 +118,7 @@
   .theme-option strong{font-size:14px;margin-bottom:5px}
   .theme-option span{font-size:11px;opacity:0.7}
   .theme-option.active{border-color:#00d4ff;background:rgba(0,212,255,0.16);box-shadow:0 0 0 2px rgba(0,212,255,0.18)}
+  .toggle-options{grid-template-columns:1fr}
   .settings-note{margin-top:12px;padding:10px;border-radius:10px;background:rgba(0,212,255,0.08);font-size:11px;line-height:1.4}
   .saved-list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
   .saved-item{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)}
