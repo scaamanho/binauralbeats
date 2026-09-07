@@ -1,5 +1,5 @@
 ﻿*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
-  :root{--theme-gradient:linear-gradient(135deg,#00d4ff,#a855f7);--theme-gradient-wide:linear-gradient(90deg,#00d4ff,#a855f7,#ec4899);--theme-soft:linear-gradient(135deg,rgba(0,212,255,0.1),rgba(168,85,247,0.1));--theme-accent:#00d4ff;--theme-glow:rgba(0,212,255,0.35)}
+  :root{--theme-gradient:linear-gradient(135deg,#00d4ff,#a855f7);--theme-gradient-wide:linear-gradient(90deg,#00d4ff,#a855f7,#ec4899);--theme-soft:linear-gradient(135deg,rgba(0,212,255,0.1),rgba(168,85,247,0.1));--theme-accent:#00d4ff;--theme-glow:rgba(0,212,255,0.35);--viz-left:#00d4ff;--viz-right:#a855f7}
   html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#fff;background:#0a0a1f}
   body{
     background:radial-gradient(ellipse at top,#1a1a3e 0%,#0a0a1f 50%,#000 100%);
@@ -134,7 +134,7 @@
   .install-banner{position:fixed;bottom:20px;left:16px;right:16px;padding:14px;border-radius:16px;background:linear-gradient(135deg,rgba(0,212,255,0.2),rgba(168,85,247,0.2));border:1px solid rgba(0,212,255,0.3);backdrop-filter:blur(20px);display:none;z-index:50;font-size:13px}
   .install-banner button{margin-left:8px;padding:6px 12px;border-radius:8px;border:none;background:#fff;color:#0a0a1f;font-weight:700;font-size:12px;cursor:pointer}
   .wave-badge{display:inline-block;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:700;margin-left:6px;background:rgba(0,212,255,0.2);color:#00d4ff}
-  body.light{--theme-gradient:linear-gradient(135deg,#0284c7,#2563eb);--theme-gradient-wide:linear-gradient(90deg,#0284c7,#2563eb,#7c3aed);--theme-soft:linear-gradient(135deg,rgba(2,132,199,0.12),rgba(124,58,237,0.1));--theme-accent:#0284c7;--theme-glow:rgba(2,132,199,0.28);color:#172033;background:radial-gradient(ellipse at top,#ffffff 0%,#edf3fb 58%,#dbe7f4 100%)}
+  body.light{--theme-gradient:linear-gradient(135deg,#0284c7,#2563eb);--theme-gradient-wide:linear-gradient(90deg,#0284c7,#2563eb,#7c3aed);--theme-soft:linear-gradient(135deg,rgba(2,132,199,0.12),rgba(124,58,237,0.1));--theme-accent:#0284c7;--theme-glow:rgba(2,132,199,0.28);--viz-left:#0284c7;--viz-right:#7c3aed;color:#172033;background:radial-gradient(ellipse at top,#ffffff 0%,#edf3fb 58%,#dbe7f4 100%)}
   body.light header{background:linear-gradient(180deg,rgba(0,120,180,0.08),transparent)}
   body.light .tabs{background:rgba(23,32,51,0.06);border-color:rgba(23,32,51,0.12)}
   body.light .tab{color:#43516a}
@@ -144,11 +144,12 @@
   body.light .slider-label,.light .player-title,.light .brainwave-card p{color:#43516a}
   body.light .tool-btn{color:#172033}
   body.light .canvas-wrap{background:rgba(255,255,255,0.75);border-color:rgba(23,32,51,0.14)}
+  body.light .visualizer{background:rgba(255,255,255,0.55)}
   body.light input[type=range]{background:rgba(23,32,51,0.16)}
   body.light .info-box{background:rgba(0,150,200,0.1);border-color:rgba(0,130,180,0.3)}
   body.light .empty{color:#43516a}
-  body.light .theme-option,body.light .language-option{background:rgba(255,255,255,0.7);border-color:rgba(23,32,51,0.14);color:#172033}
-  body.theme-monokai{--theme-gradient:linear-gradient(135deg,#a6e22e,#66d9ef);--theme-gradient-wide:linear-gradient(90deg,#a6e22e,#66d9ef,#ae81ff);--theme-soft:linear-gradient(135deg,rgba(166,226,46,0.14),rgba(102,217,239,0.12));--theme-accent:#a6e22e;--theme-glow:rgba(166,226,46,0.35);color:#f8f8f2;background:#272822}
+  body.light .theme-option,body.light .language-option,body.light .settings-close{background:rgba(255,255,255,0.7);border-color:rgba(23,32,51,0.14);color:#172033}
+  body.theme-monokai{--theme-gradient:linear-gradient(135deg,#a6e22e,#66d9ef);--theme-gradient-wide:linear-gradient(90deg,#a6e22e,#66d9ef,#ae81ff);--theme-soft:linear-gradient(135deg,rgba(166,226,46,0.14),rgba(102,217,239,0.12));--theme-accent:#a6e22e;--theme-glow:rgba(166,226,46,0.35);--viz-left:#a6e22e;--viz-right:#ae81ff;color:#f8f8f2;background:#272822}
   body.theme-monokai header{background:linear-gradient(180deg,rgba(166,226,46,0.12),transparent)}
   body.theme-monokai .preset,body.theme-monokai .brainwave-card,body.theme-monokai .saved-item,body.theme-monokai .tool-btn{background:rgba(39,40,34,0.82);border-color:rgba(248,248,242,0.18);color:#f8f8f2}
   body.theme-monokai .tabs{background:rgba(248,248,242,0.08);border-color:rgba(248,248,242,0.18)}
@@ -156,7 +157,8 @@
   body.theme-monokai .slider-label,body.theme-monokai .player-title,body.theme-monokai .brainwave-card p{color:#d6d6c8}
   body.theme-monokai .settings-trigger,body.theme-monokai .theme-option,body.theme-monokai .language-option{background:#3e3d32;color:#f8f8f2}
   body.theme-monokai .theme-option.active{border-color:#a6e22e;background:rgba(166,226,46,0.18)}
-  body.theme-desert{--theme-gradient:linear-gradient(135deg,#b86b35,#d9a441);--theme-gradient-wide:linear-gradient(90deg,#b86b35,#d9a441,#8f5b34);--theme-soft:linear-gradient(135deg,rgba(184,107,53,0.14),rgba(217,164,65,0.16));--theme-accent:#9a5d2e;--theme-glow:rgba(184,107,53,0.3);color:#3f2f23;background:linear-gradient(160deg,#f7eddc,#e5cda8)}
+  body.theme-monokai .visualizer{background:rgba(39,40,34,0.5)}
+  body.theme-desert{--theme-gradient:linear-gradient(135deg,#b86b35,#d9a441);--theme-gradient-wide:linear-gradient(90deg,#b86b35,#d9a441,#8f5b34);--theme-soft:linear-gradient(135deg,rgba(184,107,53,0.14),rgba(217,164,65,0.16));--theme-accent:#9a5d2e;--theme-glow:rgba(184,107,53,0.3);--viz-left:#b86b35;--viz-right:#8f5b34;color:#3f2f23;background:linear-gradient(160deg,#f7eddc,#e5cda8)}
   body.theme-desert header{background:linear-gradient(180deg,rgba(160,93,44,0.12),transparent)}
   body.theme-desert .tabs{background:rgba(255,250,240,0.5);border-color:rgba(63,47,35,0.18)}
   body.theme-desert .tab{color:#664c38}
@@ -164,9 +166,10 @@
   body.theme-desert .preset,body.theme-desert .brainwave-card,body.theme-desert .saved-item,body.theme-desert .tool-btn{background:rgba(255,250,240,0.72);border-color:rgba(63,47,35,0.2);color:#3f2f23}
   body.theme-desert .player{background:rgba(250,235,210,0.82);border-color:rgba(63,47,35,0.2)}
   body.theme-desert .slider-label,body.theme-desert .player-title,body.theme-desert .brainwave-card p{color:#664c38}
-  body.theme-desert .settings-trigger,body.theme-desert .theme-option,body.theme-desert .language-option{background:#fff8eb;color:#3f2f23}
+  body.theme-desert .settings-trigger,body.theme-desert .theme-option,body.theme-desert .language-option,body.theme-desert .settings-close{background:#fff8eb;color:#3f2f23;border-color:rgba(63,47,35,0.2)}
   body.theme-desert .theme-option.active{border-color:#b86b35;background:rgba(184,107,53,0.16)}
-  body.theme-ocean{--theme-gradient:linear-gradient(135deg,#2dd4bf,#0284c7);--theme-gradient-wide:linear-gradient(90deg,#2dd4bf,#0284c7,#2563eb);--theme-soft:linear-gradient(135deg,rgba(45,212,191,0.14),rgba(2,132,199,0.16));--theme-accent:#5eead4;--theme-glow:rgba(45,212,191,0.32);color:#e5f7ff;background:linear-gradient(160deg,#082f49,#0f766e)}
+  body.theme-desert .visualizer{background:rgba(255,250,240,0.55)}
+  body.theme-ocean{--theme-gradient:linear-gradient(135deg,#2dd4bf,#0284c7);--theme-gradient-wide:linear-gradient(90deg,#2dd4bf,#0284c7,#2563eb);--theme-soft:linear-gradient(135deg,rgba(45,212,191,0.14),rgba(2,132,199,0.16));--theme-accent:#5eead4;--theme-glow:rgba(45,212,191,0.32);--viz-left:#2dd4bf;--viz-right:#2563eb;color:#e5f7ff;background:linear-gradient(160deg,#082f49,#0f766e)}
   body.theme-ocean header{background:linear-gradient(180deg,rgba(45,212,191,0.16),transparent)}
   body.theme-ocean .tabs{background:rgba(229,247,255,0.08);border-color:rgba(229,247,255,0.2)}
   body.theme-ocean .preset,body.theme-ocean .brainwave-card,body.theme-ocean .saved-item,body.theme-ocean .tool-btn{background:rgba(8,47,73,0.72);border-color:rgba(229,247,255,0.2);color:#e5f7ff}
@@ -174,7 +177,8 @@
   body.theme-ocean .slider-label,body.theme-ocean .player-title,body.theme-ocean .brainwave-card p{color:#b9e8ef}
   body.theme-ocean .settings-trigger,body.theme-ocean .theme-option,body.theme-ocean .language-option{background:#0b486b;color:#e5f7ff}
   body.theme-ocean .theme-option.active{border-color:#5eead4;background:rgba(45,212,191,0.18)}
-  body.theme-solarized{--theme-gradient:linear-gradient(135deg,#268bd2,#2aa198);--theme-gradient-wide:linear-gradient(90deg,#268bd2,#2aa198,#859900);--theme-soft:linear-gradient(135deg,rgba(38,139,210,0.12),rgba(42,161,152,0.14));--theme-accent:#268bd2;--theme-glow:rgba(38,139,210,0.28);color:#586e75;background:#fdf6e3}
+  body.theme-ocean .visualizer{background:rgba(8,47,73,0.55)}
+  body.theme-solarized{--theme-gradient:linear-gradient(135deg,#268bd2,#2aa198);--theme-gradient-wide:linear-gradient(90deg,#268bd2,#2aa198,#859900);--theme-soft:linear-gradient(135deg,rgba(38,139,210,0.12),rgba(42,161,152,0.14));--theme-accent:#268bd2;--theme-glow:rgba(38,139,210,0.28);--viz-left:#268bd2;--viz-right:#2aa198;color:#586e75;background:#fdf6e3}
   body.theme-solarized header{background:linear-gradient(180deg,rgba(38,139,210,0.1),transparent)}
   body.theme-solarized .tabs{background:rgba(88,110,117,0.08);border-color:rgba(88,110,117,0.2)}
   body.theme-solarized .tab{color:#657b83}
@@ -182,5 +186,6 @@
   body.theme-solarized .preset,body.theme-solarized .brainwave-card,body.theme-solarized .saved-item,body.theme-solarized .tool-btn{background:rgba(255,255,255,0.5);border-color:rgba(88,110,117,0.2);color:#586e75}
   body.theme-solarized .player{background:rgba(238,232,213,0.8);border-color:rgba(88,110,117,0.2)}
   body.theme-solarized .slider-label,body.theme-solarized .player-title,body.theme-solarized .brainwave-card p{color:#657b83}
-  body.theme-solarized .settings-trigger,body.theme-solarized .theme-option,body.theme-solarized .language-option{background:#eee8d5;color:#586e75}
+  body.theme-solarized .settings-trigger,body.theme-solarized .theme-option,body.theme-solarized .language-option,body.theme-solarized .settings-close{background:#eee8d5;color:#586e75;border-color:rgba(88,110,117,0.2)}
   body.theme-solarized .theme-option.active{border-color:#268bd2;background:rgba(38,139,210,0.14)}
+  body.theme-solarized .visualizer{background:rgba(238,232,213,0.55)}
