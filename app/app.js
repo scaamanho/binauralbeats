@@ -153,6 +153,8 @@ Object.assign(TRANSLATIONS.es,{settingsTab:'Ajustes',settingsAria:'Abrir ajustes
 Object.assign(TRANSLATIONS.en,{settingsTab:'Settings',settingsAria:'Open settings',closeSettings:'Back to presets',languageTitle:'Language',languageInfo:'Choose the application language.',themeTitle:'Application theme',themeInfo:'Customize the appearance of Binaural Beats Lab.',darkTheme:'Dark',darkThemeInfo:'Dark background for night sessions.',lightTheme:'Light',lightThemeInfo:'Bright interface for daytime use.',settingsSaved:'Your preferences are saved automatically on this device.',eightDTitle:'8D audio',eightDInfo:'Rotates the sound between headphone channels with a period proportional to the chosen frequency.',eightDToggleLabel:'Enable 8D audio',eightDToggleInfo:'Optional. When disabled, playback behaves as usual (no rotation).',channelLeft:'Left',channelRight:'Right'});
 Object.assign(TRANSLATIONS.es,{importClipboard:'Importar del portapapeles',share:'Compartir',shareClipboard:'Compartir por portapapeles',shareWhatsApp:'Compartir por WhatsApp',shareTelegram:'Compartir por Telegram',shareEmail:'Compartir por correo',appLinkLabel:'Reprodúcelo con Binaural Beats Lab:',productLinkLabel:'Conoce Binaural Beats Lab:',clipboardCopied:'Mensaje de sesión copiado al portapapeles',clipboardReadError:'No se pudo leer el portapapeles. Comprueba los permisos del navegador.',clipboardWriteError:'No se pudo copiar al portapapeles. Comprueba los permisos del navegador.',invalidSharedSession:'El contenido del portapapeles no contiene una sesión válida.',replaceSegments:'Esto reemplazará los tramos actuales del editor. ¿Continuar?',sessionBase:'Base',sessionDuration:'Duración',sessionSegments:'Tramos'});
 Object.assign(TRANSLATIONS.en,{importClipboard:'Import from clipboard',share:'Share',shareClipboard:'Share via clipboard',shareWhatsApp:'Share via WhatsApp',shareTelegram:'Share via Telegram',shareEmail:'Share via email',appLinkLabel:'Play it with Binaural Beats Lab:',productLinkLabel:'Discover Binaural Beats Lab:',clipboardCopied:'Session message copied to clipboard',clipboardReadError:'Could not read the clipboard. Check your browser permissions.',clipboardWriteError:'Could not copy to the clipboard. Check your browser permissions.',invalidSharedSession:'The clipboard content does not contain a valid session.',replaceSegments:'This will replace the current editor sections. Continue?',sessionBase:'Base',sessionDuration:'Duration',sessionSegments:'Sections'});
+Object.assign(TRANSLATIONS.es,{segmentName:'Nombre del tramo',segmentNamePlaceholder:'Ej. Relajación inicial',segmentCopy:'copia'});
+Object.assign(TRANSLATIONS.en,{segmentName:'Section name',segmentNamePlaceholder:'e.g. Initial relaxation',segmentCopy:'copy'});
 let language=localStorage.getItem('bb_language')||((navigator.language||'es').toLowerCase().startsWith('en')?'en':'es');
 const t=key=>TRANSLATIONS[language][key]||key;
 const savedTheme=localStorage.getItem('bb_theme');
@@ -565,9 +567,13 @@ function formatDuration(seconds){
 function totalSegmentDuration(){
   return segments.reduce((total,segment)=>total+segment.duration,0);
 }
+function escapeHTML(value){
+  return String(value).replace(/[&<>"']/g,character=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+}
 function normalizeSegments(program){
   if(Array.isArray(program.segments)){
-    return program.segments.map(segment=>({
+    return program.segments.map((segment,index)=>({
+      name:typeof segment.name==='string'&&segment.name.trim()?segment.name.trim().slice(0,60):`${t('segment')} ${index+1}`,
       beat:Math.max(0,Math.min(MAX_BEAT,+segment.beat||0)),
       duration:Math.max(1,+segment.duration||1)
     }));
@@ -575,6 +581,7 @@ function normalizeSegments(program){
   const points=Array.isArray(program.points)?[...program.points].sort((a,b)=>a.x-b.x):[];
   const duration=Math.max(1,+program.duration||60);
   return points.slice(0,-1).map((point,index)=>({
+    name:`${t('segment')} ${index+1}`,
     beat:Math.round(Math.max(0,Math.min(MAX_BEAT,(+point.y||0)*MAX_BEAT))*10)/10,
     duration:Math.max(1,Math.round((points[index+1].x-point.x)*duration))
   }));
@@ -588,7 +595,7 @@ function renderSegments(){
   }
   segmentList.innerHTML=segments.map((segment,index)=>`
     <article class="segment-card" data-index="${index}">
-      <div class="segment-card-heading"><strong>${t('segment')} ${index+1}</strong><span>${segment.beat} Hz · ${segment.duration}s</span></div>
+      <label class="segment-name-field">${t('segmentName')}<input class="segment-input" data-field="name" type="text" maxlength="60" value="${escapeHTML(segment.name)}" placeholder="${escapeHTML(t('segmentNamePlaceholder'))}"></label>
       <div class="segment-values">
         <label>${t('segmentFrequency')}<input class="segment-input" data-field="beat" type="number" min="0" max="${MAX_BEAT}" step="0.1" value="${segment.beat}" inputmode="decimal"></label>
         <label>${t('segmentDuration')}<input class="segment-input" data-field="duration" type="number" min="1" step="1" value="${segment.duration}" inputmode="numeric"></label>
@@ -600,11 +607,20 @@ function renderSegments(){
         <button type="button" data-action="delete" class="danger">${t('delete')}</button>
       </div>
     </article>`).join('');
+  segmentList.querySelectorAll('.segment-input[data-field="name"]').forEach(input=>input.addEventListener('input',()=>{
+    const index=+input.closest('.segment-card').dataset.index;
+    segments[index].name=input.value.slice(0,60);
+  }));
   segmentList.querySelectorAll('.segment-input').forEach(input=>input.addEventListener('change',()=>{
     const card=input.closest('.segment-card');
     const index=+card.dataset.index;
-    const value=+input.value;
     const field=input.dataset.field;
+    if(field==='name'){
+      segments[index].name=input.value.trim()||`${t('segment')} ${index+1}`;
+      renderSegments();
+      return;
+    }
+    const value=+input.value;
     const min=field==='beat'?0:1;
     const max=field==='beat'?MAX_BEAT:Number.MAX_VALUE;
     segments[index][field]=Number.isFinite(value)?Math.max(min,Math.min(max,value||0)):min;
@@ -615,7 +631,7 @@ function renderSegments(){
     const index=+card.dataset.index;
     const action=button.dataset.action;
     if(action==='delete') segments.splice(index,1);
-    if(action==='duplicate') segments.splice(index+1,0,{...segments[index]});
+    if(action==='duplicate') segments.splice(index+1,0,{...segments[index],name:`${segments[index].name} (${t('segmentCopy')})`});
     if(action==='up'&&index>0) [segments[index-1],segments[index]]=[segments[index],segments[index-1]];
     if(action==='down'&&index<segments.length-1) [segments[index],segments[index+1]]=[segments[index+1],segments[index]];
     renderSegments();
@@ -623,7 +639,7 @@ function renderSegments(){
 }
 
 document.getElementById('addSegmentBtn').onclick=()=>{
-  segments.push({beat:10,duration:60});
+  segments.push({name:`${t('segment')} ${segments.length+1}`,beat:10,duration:60});
   renderSegments();
 };
 document.getElementById('clearBtn').onclick=()=>{segments=[];renderSegments();};
@@ -914,9 +930,9 @@ function parseSessionJson(text){
     if(typeof data.name!=='string'||!data.name.trim()||data.name.length>120) return null;
     if(!Number.isFinite(data.base)||data.base<100||data.base>300) return null;
     if(!Array.isArray(data.segments)||data.segments.length<1||data.segments.length>500) return null;
-    const validSegments=data.segments.every(segment=>segment&&Number.isFinite(segment.beat)&&segment.beat>=0&&segment.beat<=MAX_BEAT&&Number.isFinite(segment.duration)&&segment.duration>=1&&segment.duration<=86400);
+    const validSegments=data.segments.every(segment=>segment&&Number.isFinite(segment.beat)&&segment.beat>=0&&segment.beat<=MAX_BEAT&&Number.isFinite(segment.duration)&&segment.duration>=1&&segment.duration<=86400&&(segment.name===undefined||(typeof segment.name==='string'&&segment.name.length<=60)));
     if(!validSegments) return null;
-    return {name:data.name.trim(),base:data.base,segments:data.segments.map(segment=>({beat:segment.beat,duration:segment.duration}))};
+    return {name:data.name.trim(),base:data.base,segments:data.segments.map((segment,index)=>({name:typeof segment.name==='string'&&segment.name.trim()?segment.name.trim():`${t('segment')} ${index+1}`,beat:segment.beat,duration:segment.duration}))};
   }catch(error){
     return null;
   }

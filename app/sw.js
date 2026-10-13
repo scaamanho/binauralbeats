@@ -1,4 +1,4 @@
-const CACHE_NAME = 'binaural-beats-pro-v30';
+const CACHE_NAME = 'binaural-beats-pro-v32';
 const APP_SHELL = ['./', './index.html', './styles.css', './app.js'];
 
 self.addEventListener('install', e => {

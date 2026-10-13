@@ -105,6 +105,8 @@
   .segment-card{padding:12px;border:1px solid rgba(255,255,255,0.12);border-radius:14px;background:rgba(255,255,255,0.045)}
   .segment-card-heading{display:flex;justify-content:space-between;gap:8px;margin-bottom:10px;font-size:13px}
   .segment-card-heading span{opacity:.65}
+  .segment-name-field{display:grid;gap:5px;margin-bottom:10px;font-size:11px;opacity:.8}
+  .segment-name-field .segment-input{min-height:40px;font-size:14px}
   .segment-values{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .segment-values label{display:grid;gap:5px;font-size:11px;opacity:.8}
   .segment-input{box-sizing:border-box;width:100%;min-height:44px;padding:8px 10px;border:1px solid rgba(255,255,255,.16);border-radius:10px;background:rgba(0,0,0,.2);color:inherit;font:inherit;font-size:16px}
