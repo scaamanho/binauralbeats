@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1600" fill="none">
+  <defs>
+    <radialGradient id="night" cx="0" cy="0" r="1" gradientTransform="matrix(560 820 -690 470 390 370)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#102957"/><stop offset=".5" stop-color="#090f2c"/><stop offset="1" stop-color="#030717"/>
+    </radialGradient>
+    <radialGradient id="cyanGlow" cx="0" cy="0" r="1" gradientTransform="matrix(360 0 0 430 170 780)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00dfff" stop-opacity=".2"/><stop offset="1" stop-color="#00dfff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="pinkGlow" cx="0" cy="0" r="1" gradientTransform="matrix(340 0 0 420 760 850)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e145ff" stop-opacity=".18"/><stop offset="1" stop-color="#e145ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="trace" x1="44" x2="868" y1="0" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#21eaff" stop-opacity="0"/><stop offset=".22" stop-color="#28dff5" stop-opacity=".8"/><stop offset=".53" stop-color="#ae70ff" stop-opacity=".66"/><stop offset=".81" stop-color="#f14de0" stop-opacity=".86"/><stop offset="1" stop-color="#f14de0" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="gridFade" x1="450" x2="450" y1="0" y2="1600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#39cffa" stop-opacity=".12"/><stop offset=".55" stop-color="#39cffa" stop-opacity=".05"/><stop offset="1" stop-color="#ab6cff" stop-opacity=".12"/>
+    </linearGradient>
+    <pattern id="grid" width="45" height="45" patternUnits="userSpaceOnUse">
+      <path d="M45 0H0v45" stroke="#4ddfff" stroke-opacity=".2" stroke-width=".8"/>
+    </pattern>
+    <pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#72dffa" fill-opacity=".36"/>
+    </pattern>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <path fill="url(#night)" d="M0 0h900v1600H0z"/>
+  <path fill="url(#grid)" d="M0 0h900v1600H0z"/>
+  <path fill="url(#dots)" opacity=".45" d="M0 0h900v1600H0z"/>
+  <path fill="url(#gridFade)" d="M0 0h900v1600H0z"/>
+  <path fill="url(#cyanGlow)" d="M0 0h900v1600H0z"/><path fill="url(#pinkGlow)" d="M0 0h900v1600H0z"/>
+
+  <!-- Escáner cerebral holográfico -->
+  <g opacity=".5" stroke="#51dcff" stroke-width="2">
+    <path d="M450 400c-58-76-162-43-160 36-49 3-75 52-47 93-36 42-15 97 28 107-9 51 29 84 75 80 17 45 65 58 104 30"/>
+    <path d="M450 400c58-76 162-43 160 36 49 3 75 52 47 93 36 42 15 97-28 107 9 51-29 84-75 80-17 45-65 58-104 30" stroke="#d45eff"/>
+    <path d="M450 408v326M409 429c20 14 22 33 10 48m-80-5c31-7 53 9 56 36m-101 21c34-14 67-1 75 30m-57 82c32-23 63-18 79 8m-30 48c19-3 37 5 48 24"/>
+    <path d="M491 429c-20 14-22 33-10 48m80-5c-31-7-53 9-56 36m101 21c-34-14-67-1-75 30m57 82c-32-23-63-18-79 8m30 48c-19-3-37 5-48 24" stroke="#d45eff"/>
+  </g>
+  <ellipse cx="450" cy="560" rx="260" ry="230" stroke="url(#trace)" stroke-opacity=".4" stroke-width="2" stroke-dasharray="4 12"/>
+  <ellipse cx="450" cy="560" rx="220" ry="190" stroke="#58dff5" stroke-opacity=".18" stroke-width="1"/>
+  <path d="M60 590c64 0 72-81 133-81s62 126 125 126 70-172 133-172 64 178 127 178 67-114 129-114 65 63 133 63" stroke="url(#trace)" stroke-width="3" filter="url(#glow)"/>
+
+  <!-- HUD radial de laboratorio -->
+  <g stroke="#42dfff" stroke-opacity=".48" fill="none">
+    <circle cx="130" cy="920" r="72" stroke-dasharray="2 8"/><circle cx="130" cy="920" r="57" stroke-dasharray="28 7 4 7"/><circle cx="130" cy="920" r="37"/>
+    <path d="M42 920h48m80 0h48M130 832v49m0 78v49"/>
+    <circle cx="755" cy="350" r="64" stroke-dasharray="2 7"/><circle cx="755" cy="350" r="47" stroke-dasharray="24 9"/><circle cx="755" cy="350" r="28"/>
+    <circle cx="710" cy="1210" r="94" stroke-dasharray="2 9"/><circle cx="710" cy="1210" r="72" stroke-dasharray="35 11 5 11"/><circle cx="710" cy="1210" r="49"/>
+  </g>
+  <g stroke="url(#trace)" stroke-width="2">
+    <path d="M0 270h220l20-10 20 20 18-10h105M900 310H720l-22 12-22-22-18 10H560"/>
+    <path d="M0 1110h175l22-12 18 24 18-12h152M900 1050H735l-22 12-20-24-18 12H540"/>
+  </g>
+
+  <!-- Campo de partículas -->
+  <g filter="url(#glow)">
+    <circle cx="84" cy="378" r="3" fill="#54eaff"/><circle cx="194" cy="342" r="2" fill="#68eaff"/><circle cx="720" cy="470" r="3" fill="#ee65f4"/>
+    <circle cx="806" cy="565" r="2" fill="#d987ff"/><circle cx="75" cy="715" r="2" fill="#57eaff"/><circle cx="230" cy="825" r="3" fill="#4de2fc"/>
+    <circle cx="680" cy="740" r="2" fill="#e17cff"/><circle cx="832" cy="880" r="3" fill="#e360f6"/><circle cx="362" cy="960" r="2" fill="#67eaff"/>
+    <circle cx="568" cy="1005" r="3" fill="#dc66ff"/><circle cx="260" cy="1190" r="2" fill="#60eaff"/><circle cx="815" cy="1330" r="2" fill="#e36cf9"/>
+    <circle cx="142" cy="1405" r="3" fill="#47ddff"/><circle cx="440" cy="1490" r="2" fill="#e768fa"/>
+  </g>
+  <g fill="#8beaff" opacity=".68"><circle cx="115" cy="440" r="1.4"/><circle cx="778" cy="660" r="1.6"/><circle cx="315" cy="710" r="1.2"/><circle cx="602" cy="875" r="1.4"/><circle cx="90" cy="1030" r="1.6"/><circle cx="520" cy="1250" r="1.3"/><circle cx="370" cy="1360" r="1.5"/></g>
+
+  <!-- Ondas y horizonte de datos -->
+  <path d="M-40 1280c95-18 112-114 203-97 87 16 104 119 191 105 84-13 88-100 174-104 93-4 111 102 200 96 75-5 99-76 179-74" stroke="url(#trace)" stroke-width="3"/>
+  <path d="M-30 1310c108-16 122-74 210-64 90 11 114 88 198 78 84-10 99-68 180-69 88-1 113 76 200 69 88-7 105-58 183-56" stroke="url(#trace)" stroke-opacity=".55" stroke-width="1.5"/>
+  <g stroke="#75dfff" stroke-opacity=".27" stroke-width="1">
+    <path d="M0 1465h900M0 1495h900M0 1525h900"/><path d="M60 1415v185m48-145v145m48-120v120m48-160v160m48-135v135m48-105v105m48-148v148m48-115v115m48-138v138m48-98v98m48-160v160m48-123v123m48-142v142m48-105v105m48-152v152m48-120v120m48-96v96"/>
+  </g>
+</svg>

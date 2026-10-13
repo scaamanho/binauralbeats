@@ -149,6 +149,8 @@ TRANSLATIONS.es.closePlayer='Volver';
 TRANSLATIONS.es.closePlayerAria='Volver a las presintonías';
 TRANSLATIONS.en.closePlayer='Back';
 TRANSLATIONS.en.closePlayerAria='Back to presets';
+TRANSLATIONS.es.savedSession='Sesión guardada';
+TRANSLATIONS.en.savedSession='Saved session';
 Object.assign(TRANSLATIONS.es,{settingsTab:'Ajustes',settingsAria:'Abrir ajustes',closeSettings:'Volver a presintonías',languageTitle:'Idioma',languageInfo:'Elige el idioma de la aplicación.',themeTitle:'Tema de la aplicación',themeInfo:'Personaliza la apariencia de Binaural Beats Lab.',darkTheme:'Oscuro',darkThemeInfo:'Fondo oscuro para sesiones nocturnas.',lightTheme:'Claro',lightThemeInfo:'Interfaz luminosa para el día.',settingsSaved:'Tus preferencias se guardan automáticamente en este dispositivo.',eightDTitle:'Audio 8D',eightDInfo:'Rota el sonido entre los auriculares con un período proporcional a la frecuencia elegida.',eightDToggleLabel:'Activar audio 8D',eightDToggleInfo:'Opcional. Si está desactivado, el comportamiento es el habitual (sin rotación).',channelLeft:'Izquierdo',channelRight:'Derecho'});
 Object.assign(TRANSLATIONS.en,{settingsTab:'Settings',settingsAria:'Open settings',closeSettings:'Back to presets',languageTitle:'Language',languageInfo:'Choose the application language.',themeTitle:'Application theme',themeInfo:'Customize the appearance of Binaural Beats Lab.',darkTheme:'Dark',darkThemeInfo:'Dark background for night sessions.',lightTheme:'Light',lightThemeInfo:'Bright interface for daytime use.',settingsSaved:'Your preferences are saved automatically on this device.',eightDTitle:'8D audio',eightDInfo:'Rotates the sound between headphone channels with a period proportional to the chosen frequency.',eightDToggleLabel:'Enable 8D audio',eightDToggleInfo:'Optional. When disabled, playback behaves as usual (no rotation).',channelLeft:'Left',channelRight:'Right'});
 Object.assign(TRANSLATIONS.es,{importClipboard:'Importar del portapapeles',share:'Compartir',shareClipboard:'Compartir por portapapeles',shareWhatsApp:'Compartir por WhatsApp',shareTelegram:'Compartir por Telegram',shareEmail:'Compartir por correo',appLinkLabel:'Reprodúcelo con Binaural Beats Lab:',productLinkLabel:'Conoce Binaural Beats Lab:',clipboardCopied:'Mensaje de sesión copiado al portapapeles',clipboardReadError:'No se pudo leer el portapapeles. Comprueba los permisos del navegador.',clipboardWriteError:'No se pudo copiar al portapapeles. Comprueba los permisos del navegador.',invalidSharedSession:'El contenido del portapapeles no contiene una sesión válida.',replaceSegments:'Esto reemplazará los tramos actuales del editor. ¿Continuar?',sessionBase:'Base',sessionDuration:'Duración',sessionSegments:'Tramos'});
@@ -160,7 +162,7 @@ const t=key=>TRANSLATIONS[language][key]||key;
 const savedTheme=localStorage.getItem('bb_theme');
 let theme=savedTheme||((window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark');
 function setTheme(value){
-  const themes=['dark','light','monokai','desert','ocean','solarized'];
+  const themes=['dark','light'];
   theme=themes.includes(value)?value:'dark';
   document.body.classList.remove('light','theme-monokai','theme-desert','theme-ocean','theme-solarized');
   document.body.classList.toggle('light',theme==='light');
@@ -175,6 +177,7 @@ function translateStatic(){
   document.querySelector('.theme-options').setAttribute('aria-label',language==='es'?'Tema':'Theme');
   document.getElementById('closePlayerBtn').setAttribute('aria-label',t('closePlayerAria'));
   document.getElementById('settingsTrigger').setAttribute('aria-label',t('settingsAria'));
+  if(currentSavedSession) document.getElementById('playerTitle').textContent=t('savedSession');
 }
 const PRESETS = [
   // Agrupadas por onda (Delta→Theta→Alpha→Beta→Gamma) y ascendente por Hz dentro de cada grupo
@@ -205,8 +208,9 @@ Object.assign(TRANSLATIONS.en.presetDetails,{
   memoria:['A 14 Hz beta session for gentle concentration and focused attention.','Use it for reading, learning or tasks that require sustained attention.'],relax:['A 10 Hz alpha session for alert relaxation and stress reduction.','It can accompany a conscious break without aiming for sleep.'],dormir:['A 2 Hz delta session for a restorative sleep routine.','Use it before sleep or during a deep rest break.'],meditar:['A 6 Hz theta session for light meditation and visualization.','It can accompany calm breathing and mindfulness.'],intuicion:['A 5 Hz theta session for deep relaxation and inner connection.','It can accompany introspection, imagination and a personal pause.'],energia:['A 20 Hz beta session for intense concentration and mental energy.','Use it in short work, study or activation blocks.'],creatividad:['A 7 Hz theta session for creative ideas and a hypnagogic transition.','It can accompany brainstorming, writing or creative exploration.'],enfoque:['An 18 Hz beta session for intense concentration and problem-solving.','Use it for productive tasks that need continuity.'],claridad:['A 12 Hz alpha session for positive thinking and clear visualization.','It can accompany planning, reflection or a pause before deciding.'],siesta:['A 3 Hz delta session for deep rest and physical recovery.','Use it only when you can disconnect and do not need to stay alert.'],respiracion:['A 4 Hz theta session for deep meditation and inner connection.','It can accompany slow breathing exercises and attention to the body.'],alerta:['A 30 Hz gamma session for cognitive processing and memory.','Use it at a comfortable volume during short periods of intense attention.']
 });
 let audioCtx=null, leftOsc=null, rightOsc=null, merger=null, gainNode=null, analyserL=null, analyserR=null, panNode=null, panLfo=null, panLfoGain=null, eightDFilter=null, eightDDepthGain=null, eightDShaper=null, eightDFilterMod=null, eightDDepthMod=null;
-let isPlaying=false, currentPreset=null, animId=null;
+let isPlaying=false, currentPreset=null, currentSavedSession=null, animId=null;
 let customPlayData=null, customStartTime=0, playbackTimer=null;
+let savedPlaybackStartTime=0;
 // Ajuste opcional: audio 8D (rotación de panorama). Persistido en localStorage.
 let eightD=localStorage.getItem('bb_8d')==='1';
 // Curva 1-|x| reutilizada para simular acercamiento/alejamiento sincronizado con el pan
@@ -300,8 +304,13 @@ function stopTone(){
   isPlaying=false;
   if(animId){cancelAnimationFrame(animId);animId=null;}
   customPlayData=null;
+  savedPlaybackStartTime=0;
   stopPanRotation();
   document.getElementById('globalPlayback').hidden=true;
+  if(currentSavedSession){
+    playBtn.textContent=t('start');
+    playBtn.classList.remove('playing');
+  }
   playBtn.textContent=t('start');
   playBtn.classList.remove('playing');
   playCustomBtn.innerHTML=`▶ <span>${t('play')}</span>`;
@@ -484,6 +493,10 @@ function selectPreset(p){
   const text=TRANSLATIONS[language].presets[p.id];
   const details=TRANSLATIONS[language].presetDetails[p.id];
   currentPreset=p;
+  currentSavedSession=null;
+  playBtn.hidden=false;
+  document.getElementById('playerTitle').textContent=t('player');
+  document.getElementById('presetDetails').hidden=false;
   document.getElementById('presetGrid').style.display='none';
   document.getElementById('playerPanel').classList.remove('hidden');
   requestAnimationFrame(resizeViz);
@@ -509,6 +522,9 @@ document.getElementById('closePlayerBtn').onclick=()=>{
   playBtn.textContent=t('start');
   playBtn.classList.remove('playing');
   currentPreset=null;
+  currentSavedSession=null;
+  document.getElementById('playerTitle').textContent=t('player');
+  document.getElementById('presetDetails').hidden=false;
   document.getElementById('playerPanel').classList.add('hidden');
   document.getElementById('presetGrid').style.display='grid';
 };
@@ -518,6 +534,7 @@ playBtn.onclick=()=>{
     playBtn.textContent=t('start');
     playBtn.classList.remove('playing');
   } else {
+    if(currentSavedSession){playSaved(currentSavedSession.program);return;}
     if(!currentPreset){toast(t('selectFirst'));return;}
     const base=+document.getElementById('baseFreq').value;
     const vol=+document.getElementById('volume').value/100;
@@ -531,6 +548,10 @@ playBtn.onclick=()=>{
 
 document.getElementById('baseFreq').oninput=e=>{
   document.getElementById('baseVal').textContent=e.target.value;
+  if(isPlaying&&currentSavedSession){
+    updateSavedSessionBase(+e.target.value);
+    return;
+  }
   if(isPlaying && currentPreset){
     leftOsc.frequency.setValueAtTime(+e.target.value, audioCtx.currentTime);
     rightOsc.frequency.setValueAtTime(+e.target.value+currentPreset.beat, audioCtx.currentTime);
@@ -543,15 +564,61 @@ document.getElementById('volume').oninput=e=>{
 
 /* ============ TABS ============ */
 document.querySelectorAll('.tab').forEach(t=>{
-  t.onclick=()=>{
+  t.onclick=event=>{
+    if(suppressTabClick&&event.detail!==0){suppressTabClick=false;return;}
+    const previousIndex=carouselTabs.findIndex(tab=>tab.classList.contains('active'));
+    const nextIndex=carouselTabs.indexOf(t);
     document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
     document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
     t.classList.add('active');
-    document.getElementById('view-'+t.dataset.view).classList.add('active');
+    const nextView=document.getElementById('view-'+t.dataset.view);
+    nextView.classList.remove('slide-from-left','slide-from-right');
+    nextView.classList.add(nextIndex>=previousIndex?'slide-from-right':'slide-from-left','active');
+    nextView.addEventListener('animationend',()=>nextView.classList.remove('slide-from-left','slide-from-right'),{once:true});
     if(t.dataset.view==='editor') renderSegments();
     if(t.dataset.view==='saved') renderSaved();
   };
 });
+
+/* Horizontal swipe / mouse drag between the three main views */
+const carouselTabs=[...document.querySelectorAll('.tab[data-view]')];
+let dragStart=null,suppressTabClick=false,suppressDragClick=false;
+const swipeIgnore='button,input,textarea,select,a,[contenteditable="true"],.saved-actions,.segment-actions,.tabs';
+document.querySelector('main').addEventListener('pointerdown',event=>{
+  if(event.pointerType==='mouse'&&event.button!==0) return;
+  if(event.target.closest(swipeIgnore)) return;
+  const activeIndex=carouselTabs.findIndex(tab=>tab.classList.contains('active'));
+  if(activeIndex<0) return;
+  dragStart={x:event.clientX,y:event.clientY,pointerId:event.pointerId,index:activeIndex,moved:false};
+});
+document.querySelector('main').addEventListener('pointermove',event=>{
+  if(!dragStart||dragStart.pointerId!==event.pointerId) return;
+  const dx=event.clientX-dragStart.x,dy=event.clientY-dragStart.y;
+  if(Math.abs(dx)>12&&Math.abs(dx)>Math.abs(dy)*1.25){
+    dragStart.moved=true;
+    if(event.cancelable) event.preventDefault();
+  }
+});
+function finishCarouselDrag(event){
+  if(!dragStart||dragStart.pointerId!==event.pointerId) return;
+  const {x,y,index,moved}=dragStart;
+  const dx=event.clientX-x,dy=event.clientY-y;
+  dragStart=null;
+  if(!moved||Math.abs(dx)<56||Math.abs(dx)<Math.abs(dy)*1.25) return;
+  const nextIndex=Math.max(0,Math.min(carouselTabs.length-1,index+(dx<0?1:-1)));
+  if(nextIndex===index) return;
+  suppressTabClick=true;
+  suppressDragClick=true;
+  carouselTabs[nextIndex].click();
+  setTimeout(()=>{suppressTabClick=false;suppressDragClick=false;},250);
+}
+document.addEventListener('click',event=>{
+  if(!suppressDragClick||event.detail===0) return;
+  event.preventDefault();
+  event.stopImmediatePropagation();
+},true);
+window.addEventListener('pointerup',finishCarouselDrag);
+window.addEventListener('pointercancel',()=>{dragStart=null;});
 
 /* ============ EDITOR ============ */
 const MAX_BEAT=40;
@@ -976,16 +1043,32 @@ function shareSavedSession(program,destination){
 
 function playSaved(s){
   if(isPlaying) stopTone();
-  initAudio();
-  gainNode.gain.value=+document.getElementById('volume').value/100;
   const savedSegments=normalizeSegments(s);
   if(!savedSegments.length){toast(t('needSegment'));return;}
+  document.querySelector('[data-view="presets"]').click();
+  currentPreset=null;
+  currentSavedSession={program:s,segments:savedSegments};
+  document.getElementById('presetGrid').style.display='none';
+  document.getElementById('playerPanel').classList.remove('hidden');
+  document.getElementById('playerTitle').textContent=t('savedSession');
+  document.getElementById('currentMode').textContent=`🎵 ${s.name}`;
+  document.getElementById('presetDetailsDescription').textContent='';
+  document.getElementById('presetDetailsEffects').textContent='';
+  document.getElementById('presetDetails').hidden=true;
+  document.getElementById('baseFreq').value=s.base;
+  document.getElementById('baseVal').textContent=s.base;
+  playBtn.hidden=false;
+  playBtn.textContent=t('stop');
+  playBtn.classList.add('playing');
+  initAudio();
+  gainNode.gain.value=+document.getElementById('volume').value/100;
   leftOsc=audioCtx.createOscillator();
   rightOsc=audioCtx.createOscillator();
   leftOsc.type='sine';rightOsc.type='sine';
   const duration=savedSegments.reduce((total,segment)=>total+segment.duration,0);
-  leftOsc.frequency.value=s.base;
-  rightOsc.frequency.value=s.base;
+  const base=+document.getElementById('baseFreq').value;
+  leftOsc.frequency.value=base;
+  rightOsc.frequency.value=base;
   const gL=audioCtx.createGain();const gR=audioCtx.createGain();
   const v=+document.getElementById('volume').value/100;
   gL.gain.value=v;gR.gain.value=v;
@@ -995,7 +1078,7 @@ function playSaved(s){
   const now=audioCtx.currentTime;
   let offset=0;
   savedSegments.forEach(segment=>{
-    rightOsc.frequency.setValueAtTime(s.base+segment.beat,now+offset);
+    rightOsc.frequency.setValueAtTime(base+segment.beat,now+offset);
     offset+=segment.duration;
   });
   schedulePlaybackEnd(duration,()=>{
@@ -1006,10 +1089,32 @@ function playSaved(s){
   });
   leftOsc.start();rightOsc.start();
   isPlaying=true;
+  savedPlaybackStartTime=performance.now();
+  requestAnimationFrame(resizeViz);
   startVisualizer();
   toast(`${t('playing')} ${s.name}`);
   const avgBeat=savedSegments.reduce((sum,segment)=>sum+segment.beat,0)/savedSegments.length;
   startPanRotation(avgBeat);
+}
+
+function updateSavedSessionBase(base){
+  if(!audioCtx||!leftOsc||!rightOsc||!currentSavedSession) return;
+  const now=audioCtx.currentTime;
+  const elapsed=Math.max(0,(performance.now()-savedPlaybackStartTime)/1000);
+  let segmentOffset=0,currentBeat=currentSavedSession.segments[0].beat;
+  for(const segment of currentSavedSession.segments){
+    const end=segmentOffset+segment.duration;
+    if(elapsed<end){currentBeat=segment.beat;break;}
+    segmentOffset=end;
+  }
+  leftOsc.frequency.setValueAtTime(base,now);
+  rightOsc.frequency.cancelScheduledValues(now);
+  rightOsc.frequency.setValueAtTime(base+currentBeat,now);
+  segmentOffset=0;
+  for(const segment of currentSavedSession.segments){
+    segmentOffset+=segment.duration;
+    if(segmentOffset>elapsed) rightOsc.frequency.setValueAtTime(base+segment.beat,now+(segmentOffset-elapsed));
+  }
 }
 
 /* ============ TOAST ============ */

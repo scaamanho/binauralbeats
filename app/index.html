@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#0a0a1f">
+<meta name="theme-color" content="#05091b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Binaural Beats Lab</title>
@@ -16,7 +16,10 @@
 
 <header>
   <button class="settings-trigger" id="settingsTrigger" type="button" aria-label="Abrir ajustes">⚙</button>
-  <h1><img class="app-title-icon" src="./icon-192.png" alt=""> BINAURAL BEATS LAB</h1>
+  <h1 class="brand-title">
+    <img class="app-title-icon" src="./icon-192.png" alt="">
+    <span class="title-copy"><span class="title-word word-binaural">BINAURAL</span><span class="title-word word-beats">BEATS</span><span class="title-word word-lab">LAB</span></span>
+  </h1>
   <p data-i18n="tagline">Generador de ondas cerebrales</p>
 </header>
 
@@ -41,7 +44,7 @@
 
     <div class="player hidden" id="playerPanel">
       <button class="close-player" id="closePlayerBtn" aria-label="Volver a las presintonías"><span aria-hidden="true">←</span><span data-i18n="closePlayer">Volver</span></button>
-      <div class="player-title" data-i18n="player">Reproductor</div>
+      <div class="player-title" id="playerTitle" data-i18n="player">Reproductor</div>
       <div class="player-mode" id="currentMode" data-i18n="selectPreset">Selecciona un preset</div>
 
       <div class="slider-group">
@@ -135,22 +138,6 @@
         <button class="theme-option" type="button" data-theme="light">
           <strong data-i18n="lightTheme">Claro</strong>
           <span data-i18n="lightThemeInfo">Interfaz luminosa para el día.</span>
-        </button>
-        <button class="theme-option" type="button" data-theme="monokai">
-          <strong data-i18n="monokaiTheme">Monokai</strong>
-          <span data-i18n="monokaiThemeInfo">Contraste cálido para código y foco.</span>
-        </button>
-        <button class="theme-option" type="button" data-theme="desert">
-          <strong data-i18n="desertTheme">Arena</strong>
-          <span data-i18n="desertThemeInfo">Paleta suave y cálida para el día.</span>
-        </button>
-        <button class="theme-option" type="button" data-theme="ocean">
-          <strong data-i18n="oceanTheme">Océano</strong>
-          <span data-i18n="oceanThemeInfo">Azules profundos y turquesa.</span>
-        </button>
-        <button class="theme-option" type="button" data-theme="solarized">
-          <strong data-i18n="solarizedTheme">Solarizado</strong>
-          <span data-i18n="solarizedThemeInfo">Baja fatiga visual y tonos suaves.</span>
         </button>
       </div>
       <div class="settings-note" data-i18n="settingsSaved">Tus preferencias se guardan automáticamente en este dispositivo.</div>
