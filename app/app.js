@@ -27,8 +27,8 @@ document.getElementById('installBtn').onclick=async()=>{
 
 /* ============ PRESETS ============ */
 const TRANSLATIONS={
-  es:{tagline:'Generador de ondas cerebrales',presetsTab:'Presintonías',editorTab:'Crear',savedTab:'Sesiones',player:'Reproductor',selectPreset:'Selecciona una presintonía',baseFrequency:'Frecuencia base',volume:'Volumen',start:'▶  INICIAR',stop:'■  DETENER',howToUse:'¿Cómo usar?',editorHelp:'Toca el gráfico para añadir puntos. Arrástralos para definir la frecuencia del batido binaural a lo largo del tiempo. La línea muestra la diferencia entre oídos (Hz).',time:'Tiempo →',clear:'Limpiar',save:'Guardar',play:'Reproducir',totalDuration:'Duración total',savedInfo:'Tus programas personalizados se guardan localmente en este dispositivo.',installAsApp:'Instalar como app',install:'Instalar',addPoints:'Toca para añadir puntos',selectFirst:'Selecciona una presintonía primero',needTwo:'Añade al menos 2 puntos al gráfico',needTwoShort:'Añade al menos 2 puntos',finished:'Programa finalizado',programName:'Nombre del programa:',myProgram:'Mi programa',saved:'✓ Programa guardado',empty:'No hay programas guardados aún.<br>Crea uno en el Editor.',load:'Cargar',delete:'Eliminar',deleted:'Eliminado',loaded:'Cargado en el editor',playing:'▶ Reproduciendo',confirmDelete:'¿Eliminar este programa?',points:'puntos',base:'Base',presets:{memoria:['Memoria','Aprendizaje','Beta 14Hz - Concentración y memoria'],relax:['Relajarse','Calma','Alpha 10Hz - Relajación profunda'],dormir:['Dormir','Sueño profundo','Delta 2Hz - Sueño profundo'],meditar:['Meditación','Atención plena','Theta 6Hz - Meditación'],deseo:['Intimidad','Relajación Sensua','Theta 6Hz - Sensualidad'],energia:['Energía','Motivación','Beta 20Hz - Energía']}},
-  en:{tagline:'Brainwave generator',presetsTab:'Presets',editorTab:'Create',savedTab:'Sessions',player:'Player',selectPreset:'Select a preset',baseFrequency:'Base frequency',volume:'Volume',start:'▶  START',stop:'■  STOP',howToUse:'How to use',editorHelp:'Tap the graph to add points. Drag them to define the binaural beat frequency over time. The line shows the difference between ears (Hz).',time:'Time →',clear:'Clear',save:'Save',play:'Play',totalDuration:'Total duration',savedInfo:'Your custom programs are stored locally on this device.',installAsApp:'Install as app',install:'Install',addPoints:'Tap to add points',selectFirst:'Select a preset first',needTwo:'Add at least 2 points to the graph',needTwoShort:'Add at least 2 points',finished:'Program finished',programName:'Program name:',myProgram:'My program',saved:'✓ Program saved',empty:'No saved programs yet.<br>Create one in the Editor.',load:'Load',delete:'Delete',deleted:'Deleted',loaded:'Loaded in editor',playing:'▶ Playing',confirmDelete:'Delete this program?',points:'points',base:'Base',presets:{memoria:['Memory','Learning','Beta 14Hz - Focus and memory'],relax:['Relax','Calm','Alpha 10Hz - Deep relaxation'],dormir:['Sleep','Deep sleep','Delta 2Hz - Deep sleep'],meditar:['Meditation','Mindfulness','Theta 6Hz - Meditation'],deseo:['Intimacy','Sensual Relax','Theta 6Hz - Sensuality'],energia:['Energy','Motivation','Beta 20Hz - Energy']}}
+  es:{tagline:'Generador de ondas cerebrales',presetsTab:'Presintonías',editorTab:'Crear',savedTab:'Sesiones',player:'Reproductor',selectPreset:'Selecciona una presintonía',baseFrequency:'Frecuencia base',volume:'Volumen',start:'▶  INICIAR',stop:'■  DETENER',howToUse:'¿Cómo usar?',editorHelp:'Añade tramos con una frecuencia y duración. La suma de los tramos forma la sintonía completa.',clear:'Limpiar',save:'Guardar',play:'Reproducir',totalDuration:'Duración total',savedInfo:'Tus programas personalizados se guardan localmente en este dispositivo.',installAsApp:'Instalar como app',install:'Instalar',addSegment:'Añadir tramo',editSegment:'Editar tramo',segment:'Tramo',segments:'tramos',segmentFrequency:'Frecuencia del batido',segmentDuration:'Duración',seconds:'segundos',add:'Añadir',cancel:'Cancelar',duplicate:'Duplicar',moveUp:'Subir',moveDown:'Bajar',emptySegments:'Aún no hay tramos. Añade el primero para crear tu sintonía.',needSegment:'Añade al menos un tramo',invalidSegment:'Indica una frecuencia y duración válidas',selectFirst:'Selecciona una presintonía primero',finished:'Programa finalizado',programName:'Nombre del programa:',myProgram:'Mi programa',saved:'✓ Programa guardado',empty:'No hay programas guardados aún.<br>Crea uno en el Editor.',load:'Cargar',delete:'Eliminar',deleted:'Eliminado',loaded:'Cargado en el editor',playing:'▶ Reproduciendo',confirmDelete:'¿Eliminar este programa?',points:'puntos',base:'Base',presets:{memoria:['Memoria','Aprendizaje','Beta 14Hz - Concentración y memoria'],relax:['Relajarse','Calma','Alpha 10Hz - Relajación profunda'],dormir:['Dormir','Sueño profundo','Delta 2Hz - Sueño profundo'],meditar:['Meditación','Atención plena','Theta 6Hz - Meditación'],deseo:['Intimidad','Relajación Sensua','Theta 6Hz - Sensualidad'],energia:['Energía','Motivación','Beta 20Hz - Energía']}},
+  en:{tagline:'Brainwave generator',presetsTab:'Presets',editorTab:'Create',savedTab:'Sessions',player:'Player',selectPreset:'Select a preset',baseFrequency:'Base frequency',volume:'Volume',start:'▶  START',stop:'■  STOP',howToUse:'How to use',editorHelp:'Add sections with a beat frequency and duration. Together, the sections form the complete session.',clear:'Clear',save:'Save',play:'Play',totalDuration:'Total duration',savedInfo:'Your custom programs are stored locally on this device.',installAsApp:'Install as app',install:'Install',addSegment:'Add section',editSegment:'Edit section',segment:'Section',segments:'sections',segmentFrequency:'Beat frequency',segmentDuration:'Duration',seconds:'seconds',add:'Add',cancel:'Cancel',duplicate:'Duplicate',moveUp:'Move up',moveDown:'Move down',emptySegments:'No sections yet. Add the first one to create your session.',needSegment:'Add at least one section',invalidSegment:'Enter a valid frequency and duration',selectFirst:'Select a preset first',finished:'Program finished',programName:'Program name:',myProgram:'My program',saved:'✓ Program saved',empty:'No saved programs yet.<br>Create one in the Editor.',load:'Load',delete:'Delete',deleted:'Deleted',loaded:'Loaded in editor',playing:'▶ Playing',confirmDelete:'Delete this program?',points:'points',base:'Base',presets:{memoria:['Memory','Learning','Beta 14Hz - Focus and memory'],relax:['Relax','Calm','Alpha 10Hz - Deep relaxation'],dormir:['Sleep','Deep sleep','Delta 2Hz - Deep sleep'],meditar:['Meditation','Mindfulness','Theta 6Hz - Meditation'],deseo:['Intimacy','Sensual Relax','Theta 6Hz - Sensuality'],energia:['Energy','Motivation','Beta 20Hz - Energy']}}
 };
 Object.assign(TRANSLATIONS.es.presets,{
   creatividad:['Creatividad','Inspiración','Theta 8Hz - Flujo creativo'],
@@ -201,7 +201,7 @@ Object.assign(TRANSLATIONS.en.presetDetails,{
 });
 let audioCtx=null, leftOsc=null, rightOsc=null, merger=null, gainNode=null, analyserL=null, analyserR=null, panNode=null, panLfo=null, panLfoGain=null, eightDFilter=null, eightDDepthGain=null, eightDShaper=null, eightDFilterMod=null, eightDDepthMod=null;
 let isPlaying=false, currentPreset=null, animId=null;
-let customPlayData=null, customStartTime=0;
+let customPlayData=null, customStartTime=0, playbackTimer=null;
 // Ajuste opcional: audio 8D (rotación de panorama). Persistido en localStorage.
 let eightD=localStorage.getItem('bb_8d')==='1';
 // Curva 1-|x| reutilizada para simular acercamiento/alejamiento sincronizado con el pan
@@ -289,12 +289,34 @@ function startTone(baseFreq, beatFreq, volume){
 }
 
 function stopTone(){
+  if(playbackTimer){clearTimeout(playbackTimer);playbackTimer=null;}
   if(leftOsc){try{leftOsc.stop();}catch(e){}leftOsc.disconnect();leftOsc=null;}
   if(rightOsc){try{rightOsc.stop();}catch(e){}rightOsc.disconnect();rightOsc=null;}
   isPlaying=false;
   if(animId){cancelAnimationFrame(animId);animId=null;}
   customPlayData=null;
   stopPanRotation();
+  document.getElementById('globalPlayback').hidden=true;
+  playBtn.textContent=t('start');
+  playBtn.classList.remove('playing');
+  playCustomBtn.innerHTML=`▶ <span>${t('play')}</span>`;
+  playCustomBtn.classList.remove('playing');
+  playCustomBtn.classList.add('primary');
+}
+
+function schedulePlaybackEnd(duration,onFinish){
+  if(playbackTimer) clearTimeout(playbackTimer);
+  let remaining=duration;
+  let previous=performance.now();
+  const maxTimeoutMs=2147483000;
+  const tick=()=>{
+    const now=performance.now();
+    remaining-=(now-previous)/1000;
+    previous=now;
+    if(remaining<=0){playbackTimer=null;onFinish();return;}
+    playbackTimer=setTimeout(tick,Math.min(remaining*1000,maxTimeoutMs));
+  };
+  playbackTimer=setTimeout(tick,Math.min(remaining*1000,maxTimeoutMs));
 }
 
 // Arranca un LFO que mueve panNode.pan; el período (s) es proporcional a beatFreq. Sólo si el ajuste 8D está activo.
@@ -340,7 +362,12 @@ function updateBeat(beatFreq){
 /* ============ VISUALIZER ============ */
 const vizCanvas=document.getElementById('visualizer');
 const vizCtx=vizCanvas.getContext('2d');
-function resizeViz(){vizCanvas.width=vizCanvas.offsetWidth*2;vizCanvas.height=vizCanvas.offsetHeight*2;}
+function resizeViz(){
+  const width=vizCanvas.clientWidth;
+  if(!width) return;
+  vizCanvas.width=width*2;
+  vizCanvas.height=vizCanvas.clientHeight*2;
+}
 resizeViz();
 window.addEventListener('resize',resizeViz);
 
@@ -356,6 +383,8 @@ function shadeHex(hex,percent){
 
 function startVisualizer(){
   if(!analyserL||!analyserR) return;
+  document.getElementById('globalPlayback').hidden=false;
+  requestAnimationFrame(resizeViz);
   // Buffers de frecuencia para el canal izquierdo y derecho
   const dataL=new Uint8Array(analyserL.frequencyBinCount);
   const dataR=new Uint8Array(analyserR.frequencyBinCount);
@@ -378,6 +407,7 @@ function startVisualizer(){
   }
   function draw(){
     if(!isPlaying){vizCtx.clearRect(0,0,vizCanvas.width,vizCanvas.height);return;}
+    if(!vizCanvas.clientWidth){animId=requestAnimationFrame(draw);return;}
     analyserL.getByteFrequencyData(dataL);
     analyserR.getByteFrequencyData(dataR);
     // Estela con el color de fondo real del canvas (varía por tema) en vez de negro fijo
@@ -468,6 +498,7 @@ function selectPreset(p){
 
 /* ============ CONTROLES ============ */
 const playBtn=document.getElementById('playBtn');
+document.getElementById('globalStopBtn').onclick=()=>stopTone();
 document.getElementById('closePlayerBtn').onclick=()=>{
   if(isPlaying) stopTone();
   playBtn.textContent=t('start');
@@ -512,142 +543,86 @@ document.querySelectorAll('.tab').forEach(t=>{
     document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
     t.classList.add('active');
     document.getElementById('view-'+t.dataset.view).classList.add('active');
-    if(t.dataset.view==='editor') resizeEditor();
+    if(t.dataset.view==='editor') renderSegments();
     if(t.dataset.view==='saved') renderSaved();
   };
 });
 
 /* ============ EDITOR ============ */
-const editorCanvas=document.getElementById('editor');
-const ectx=editorCanvas.getContext('2d');
-let points=[]; // {x:0..1, y:0..1} y=0 es 0Hz, y=1 es 40Hz
-let dragging=null;
 const MAX_BEAT=40;
+let segments=[];
+const segmentList=document.getElementById('segmentList');
 
-function resizeEditor(){
-  editorCanvas.width=editorCanvas.offsetWidth*2;
-  editorCanvas.height=editorCanvas.offsetHeight*2;
-  drawEditor();
+function formatDuration(seconds){
+  const minutes=Math.floor(seconds/60);
+  const remaining=seconds%60;
+  return `${minutes}:${String(remaining).padStart(2,'0')}`;
 }
-window.addEventListener('resize',resizeEditor);
-
-function pointBeat(point){
-  return Math.round(point.y*MAX_BEAT*10)/10;
+function totalSegmentDuration(){
+  return segments.reduce((total,segment)=>total+segment.duration,0);
 }
-
-function drawEditor(){
-  const W=editorCanvas.width, H=editorCanvas.height;
-  ectx.clearRect(0,0,W,H);
-  // grid
-  ectx.strokeStyle='rgba(255,255,255,0.06)';
-  ectx.lineWidth=1;
-  for(let i=1;i<8;i++){
-    const y=H*i/8;
-    ectx.beginPath();ectx.moveTo(0,y);ectx.lineTo(W,y);ectx.stroke();
+function normalizeSegments(program){
+  if(Array.isArray(program.segments)){
+    return program.segments.map(segment=>({
+      beat:Math.max(0,Math.min(MAX_BEAT,+segment.beat||0)),
+      duration:Math.max(1,+segment.duration||1)
+    }));
   }
-  for(let i=1;i<10;i++){
-    const x=W*i/10;
-    ectx.beginPath();ectx.moveTo(x,0);ectx.lineTo(x,H);ectx.stroke();
+  const points=Array.isArray(program.points)?[...program.points].sort((a,b)=>a.x-b.x):[];
+  const duration=Math.max(1,+program.duration||60);
+  return points.slice(0,-1).map((point,index)=>({
+    beat:Math.round(Math.max(0,Math.min(MAX_BEAT,(+point.y||0)*MAX_BEAT))*10)/10,
+    duration:Math.max(1,Math.round((points[index+1].x-point.x)*duration))
+  }));
+}
+function renderSegments(){
+  document.getElementById('segmentCount').textContent=segments.length;
+  document.getElementById('durVal').textContent=formatDuration(totalSegmentDuration());
+  if(!segments.length){
+    segmentList.innerHTML=`<div class="empty-segments">${t('emptySegments')}</div>`;
+    return;
   }
-  // curva
-  if(points.length>0){
-    const sorted=[...points].sort((a,b)=>a.x-b.x);
-    const grad=ectx.createLinearGradient(0,0,W,0);
-    grad.addColorStop(0,'#00d4ff');
-    grad.addColorStop(0.5,'#a855f7');
-    grad.addColorStop(1,'#ec4899');
-    ectx.strokeStyle=grad;
-    ectx.lineWidth=4;
-    ectx.beginPath();
-    sorted.forEach((p,i)=>{
-      const x=p.x*W, y=H-p.y*H;
-      if(i===0) ectx.moveTo(x,y); else ectx.lineTo(x,y);
-    });
-    ectx.stroke();
-    // relleno
-    ectx.lineTo(sorted[sorted.length-1].x*W, H);
-    ectx.lineTo(sorted[0].x*W, H);
-    ectx.closePath();
-    const fillGrad=ectx.createLinearGradient(0,0,0,H);
-    fillGrad.addColorStop(0,'rgba(168,85,247,0.3)');
-    fillGrad.addColorStop(1,'rgba(0,212,255,0)');
-    ectx.fillStyle=fillGrad;
-    ectx.fill();
-    // puntos
-    sorted.forEach(p=>{
-      const x=p.x*W, y=H-p.y*H;
-      ectx.fillStyle='#fff';
-      ectx.beginPath();ectx.arc(x,y,10,0,Math.PI*2);ectx.fill();
-      ectx.fillStyle='#00d4ff';
-      ectx.beginPath();ectx.arc(x,y,6,0,Math.PI*2);ectx.fill();
-
-      const beat=pointBeat(p);
-      const label=`${beat.toFixed(1)} Hz`;
-      ectx.font='600 18px sans-serif';
-      const labelWidth=ectx.measureText(label).width+16;
-      const labelX=Math.max(4,Math.min(W-labelWidth-4,x-labelWidth/2));
-      const labelY=y<42?y+16:y-38;
-      ectx.fillStyle='rgba(10,10,31,0.88)';
-      ectx.fillRect(labelX,labelY,labelWidth,26);
-      ectx.fillStyle='#fff';
-      ectx.textAlign='center';
-      ectx.textBaseline='middle';
-      ectx.fillText(label,labelX+labelWidth/2,labelY+13);
-    });
-  } else {
-    ectx.fillStyle='rgba(255,255,255,0.3)';
-    ectx.font='24px sans-serif';
-    ectx.textAlign='center';
-    ectx.fillText(t('addPoints'),W/2,H/2);
-  }
+  segmentList.innerHTML=segments.map((segment,index)=>`
+    <article class="segment-card" data-index="${index}">
+      <div class="segment-card-heading"><strong>${t('segment')} ${index+1}</strong><span>${segment.beat} Hz · ${segment.duration}s</span></div>
+      <div class="segment-values">
+        <label>${t('segmentFrequency')}<input class="segment-input" data-field="beat" type="number" min="0" max="${MAX_BEAT}" step="0.1" value="${segment.beat}" inputmode="decimal"></label>
+        <label>${t('segmentDuration')}<input class="segment-input" data-field="duration" type="number" min="1" step="1" value="${segment.duration}" inputmode="numeric"></label>
+      </div>
+      <div class="segment-actions">
+        <button type="button" data-action="up" aria-label="${t('moveUp')}" ${index===0?'disabled':''}>↑</button>
+        <button type="button" data-action="down" aria-label="${t('moveDown')}" ${index===segments.length-1?'disabled':''}>↓</button>
+        <button type="button" data-action="duplicate">${t('duplicate')}</button>
+        <button type="button" data-action="delete" class="danger">${t('delete')}</button>
+      </div>
+    </article>`).join('');
+  segmentList.querySelectorAll('.segment-input').forEach(input=>input.addEventListener('change',()=>{
+    const card=input.closest('.segment-card');
+    const index=+card.dataset.index;
+    const value=+input.value;
+    const field=input.dataset.field;
+    const min=field==='beat'?0:1;
+    const max=field==='beat'?MAX_BEAT:Number.MAX_VALUE;
+    segments[index][field]=Number.isFinite(value)?Math.max(min,Math.min(max,value||0)):min;
+    renderSegments();
+  }));
+  segmentList.querySelectorAll('[data-action]').forEach(button=>button.addEventListener('click',()=>{
+    const card=button.closest('.segment-card');
+    const index=+card.dataset.index;
+    const action=button.dataset.action;
+    if(action==='delete') segments.splice(index,1);
+    if(action==='duplicate') segments.splice(index+1,0,{...segments[index]});
+    if(action==='up'&&index>0) [segments[index-1],segments[index]]=[segments[index],segments[index-1]];
+    if(action==='down'&&index<segments.length-1) [segments[index],segments[index+1]]=[segments[index+1],segments[index]];
+    renderSegments();
+  }));
 }
 
-function getPos(e){
-  const r=editorCanvas.getBoundingClientRect();
-  const t=e.touches?e.touches[0]:e;
-  const rawY=Math.max(0,Math.min(1,1-(t.clientY-r.top)/r.height));
-  return {
-    x:Math.max(0,Math.min(1,(t.clientX-r.left)/r.width)),
-    y:Math.round(rawY*MAX_BEAT*10)/(MAX_BEAT*10)
-  };
-}
-
-editorCanvas.addEventListener('touchstart',e=>{e.preventDefault();handleDown(e);},{passive:false});
-editorCanvas.addEventListener('touchmove',e=>{e.preventDefault();handleMove(e);},{passive:false});
-editorCanvas.addEventListener('touchend',e=>{e.preventDefault();dragging=null;},{passive:false});
-editorCanvas.addEventListener('mousedown',handleDown);
-editorCanvas.addEventListener('mousemove',handleMove);
-editorCanvas.addEventListener('mouseup',()=>dragging=null);
-editorCanvas.addEventListener('mouseleave',()=>dragging=null);
-
-function handleDown(e){
-  const p=getPos(e);
-  // buscar punto cercano
-  let closest=-1, minD=0.05;
-  points.forEach((pt,i)=>{
-    const d=Math.hypot(pt.x-p.x,pt.y-p.y);
-    if(d<minD){minD=d;closest=i;}
-  });
-  if(closest>=0){
-    dragging=closest;
-  } else {
-    points.push(p);
-    dragging=points.length-1;
-    drawEditor();
-  }
-}
-function handleMove(e){
-  if(dragging===null) return;
-  const p=getPos(e);
-  points[dragging]=p;
-  drawEditor();
-}
-
-document.getElementById('clearBtn').onclick=()=>{points=[];drawEditor();};
-
-document.getElementById('duration').oninput=e=>{
-  document.getElementById('durVal').textContent=e.target.value;
+document.getElementById('addSegmentBtn').onclick=()=>{
+  segments.push({beat:10,duration:60});
+  renderSegments();
 };
+document.getElementById('clearBtn').onclick=()=>{segments=[];renderSegments();};
 document.getElementById('baseFreq2').oninput=e=>{
   document.getElementById('baseVal2').textContent=e.target.value;
 };
@@ -662,11 +637,12 @@ playCustomBtn.onclick=()=>{
     playCustomBtn.classList.add('primary');
     return;
   }
-  if(points.length<2){toast(t('needTwo'));return;}
+  if(!segments.length){toast(t('needSegment'));return;}
   initAudio();
   const base=+document.getElementById('baseFreq2').value;
   const vol=+document.getElementById('volume').value/100;
-  const duration=+document.getElementById('duration').value;
+  const duration=totalSegmentDuration();
+  if(!Number.isFinite(duration)||duration<=0){toast(t('invalidSegment'));return;}
   gainNode.gain.value=vol;
 
   leftOsc=audioCtx.createOscillator();
@@ -680,16 +656,15 @@ playCustomBtn.onclick=()=>{
   rightOsc.connect(gR).connect(merger,0,1);
   merger.connect(gainNode);
 
-  // Programar curva
+  // Programar cada frecuencia al comienzo de su tramo.
   const now=audioCtx.currentTime;
-  const sorted=[...points].sort((a,b)=>a.x-b.x);
-  sorted.forEach(p=>{
-    const t=now+p.x*duration;
-    const freq=base+p.y*MAX_BEAT;
-    rightOsc.frequency.setValueAtTime(freq,t);
+  let offset=0;
+  segments.forEach(segment=>{
+    rightOsc.frequency.setValueAtTime(base+segment.beat,now+offset);
+    offset+=segment.duration;
   });
-  // Auto-stop
-  setTimeout(()=>{
+  // Auto-stop after the total duration, even beyond the browser timer limit.
+  schedulePlaybackEnd(duration,()=>{
     if(isPlaying && customPlayData){
       stopTone();
       playCustomBtn.innerHTML=`▶ <span>${t('play')}</span>`;
@@ -697,31 +672,33 @@ playCustomBtn.onclick=()=>{
       playCustomBtn.classList.add('primary');
       toast(t('finished'));
     }
-  },duration*1000);
+  });
 
   leftOsc.start();rightOsc.start();
   isPlaying=true;
-  customPlayData={base,duration,sorted};
+  customPlayData={base,duration,segments:[...segments]};
   customStartTime=now;
   playCustomBtn.textContent=t('stop');
   playCustomBtn.classList.add('playing');
   playCustomBtn.classList.remove('primary');
   startVisualizer();
-  const avgBeat=sorted.reduce((s,p)=>s+p.y*MAX_BEAT,0)/sorted.length;
+  const avgBeat=segments.reduce((sum,segment)=>sum+segment.beat,0)/segments.length;
   startPanRotation(avgBeat);
 };
 
 /* ============ GUARDAR / CARGAR ============ */
 document.getElementById('saveBtn').onclick=()=>{
-  if(points.length<2){toast(t('needTwoShort'));return;}
+  if(!segments.length){toast(t('needSegment'));return;}
+  const duration=totalSegmentDuration();
+  if(!Number.isFinite(duration)||duration<=0){toast(t('invalidSegment'));return;}
   const name=prompt(t('programName'),t('myProgram'));
   if(!name) return;
   const saved=JSON.parse(localStorage.getItem('bb_saved')||'[]');
   saved.push({
     id:Date.now(),
     name,
-    points:[...points],
-    duration:+document.getElementById('duration').value,
+    segments:segments.map(segment=>({...segment})),
+    duration,
     base:+document.getElementById('baseFreq2').value,
     created:Date.now()
   });
@@ -744,7 +721,7 @@ function renderSaved(){
     el.innerHTML=`
       <div>
         <div class="name">🎵 ${s.name}</div>
-        <div class="meta">${s.points.length} ${t('points')} · ${s.duration}s · ${t('base')} ${s.base}Hz</div>
+       <div class="meta">${normalizeSegments(s).length} ${t('segments')} · ${formatDuration(normalizeSegments(s).reduce((total,segment)=>total+segment.duration,0))} · ${t('base')} ${s.base}Hz</div>
       </div>
       <div>
         <button data-act="load" data-id="${s.id}">${t('load')}</button>
@@ -766,9 +743,7 @@ function renderSaved(){
           toast(t('deleted'));
         }
       } else if(b.dataset.act==='load'){
-        points=[...s.points];
-        document.getElementById('duration').value=s.duration;
-        document.getElementById('durVal').textContent=s.duration;
+        segments=normalizeSegments(s);
         document.getElementById('baseFreq2').value=s.base;
         document.getElementById('baseVal2').textContent=s.base;
         document.querySelector('[data-view="editor"]').click();
@@ -784,9 +759,12 @@ function playSaved(s){
   if(isPlaying) stopTone();
   initAudio();
   gainNode.gain.value=+document.getElementById('volume').value/100;
+  const savedSegments=normalizeSegments(s);
+  if(!savedSegments.length){toast(t('needSegment'));return;}
   leftOsc=audioCtx.createOscillator();
   rightOsc=audioCtx.createOscillator();
   leftOsc.type='sine';rightOsc.type='sine';
+  const duration=savedSegments.reduce((total,segment)=>total+segment.duration,0);
   leftOsc.frequency.value=s.base;
   rightOsc.frequency.value=s.base;
   const gL=audioCtx.createGain();const gR=audioCtx.createGain();
@@ -796,21 +774,22 @@ function playSaved(s){
   rightOsc.connect(gR).connect(merger,0,1);
   merger.connect(gainNode);
   const now=audioCtx.currentTime;
-  [...s.points].sort((a,b)=>a.x-b.x).forEach(p=>{
-    rightOsc.frequency.setValueAtTime(s.base+p.y*MAX_BEAT, now+p.x*s.duration);
+  let offset=0;
+  savedSegments.forEach(segment=>{
+    rightOsc.frequency.setValueAtTime(s.base+segment.beat,now+offset);
+    offset+=segment.duration;
   });
-  setTimeout(()=>{
+  schedulePlaybackEnd(duration,()=>{
     if(isPlaying){
       stopTone();
       toast(t('finished'));
     }
-  },s.duration*1000);
+  });
   leftOsc.start();rightOsc.start();
   isPlaying=true;
   startVisualizer();
   toast(`${t('playing')} ${s.name}`);
-  const sortedPoints=[...s.points].sort((a,b)=>a.x-b.x);
-  const avgBeat=sortedPoints.reduce((sum,p)=>sum+p.y*MAX_BEAT,0)/sortedPoints.length;
+  const avgBeat=savedSegments.reduce((sum,segment)=>sum+segment.beat,0)/savedSegments.length;
   startPanRotation(avgBeat);
 }
 
@@ -838,7 +817,7 @@ eightDToggle.onclick=()=>{
   localStorage.setItem('bb_8d',eightD?'1':'0');
   updateEightDUI();
   if(isPlaying){
-    if(eightD) startPanRotation(currentPreset?currentPreset.beat:(customPlayData?customPlayData.sorted.reduce((s,p)=>s+p.y*MAX_BEAT,0)/customPlayData.sorted.length:0));
+    if(eightD) startPanRotation(currentPreset?currentPreset.beat:(customPlayData?customPlayData.segments.reduce((sum,segment)=>sum+segment.beat,0)/customPlayData.segments.length:0));
     else stopPanRotation();
   }
 };
@@ -862,9 +841,9 @@ document.querySelectorAll('.language-option').forEach(button=>{
   PRESETS.forEach(renderPresetCard);
   if(currentPreset) selectPreset(currentPreset);
   renderSaved();
-  drawEditor();
+   renderSegments();
   };
 });
 setTheme(theme);
 translateStatic();
-resizeEditor();
+renderSegments();

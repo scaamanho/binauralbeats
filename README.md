@@ -9,7 +9,7 @@ Aplicación web para crear y reproducir tonos binaurales estéreo. Ofrece presin
 - Doce presintonías organizadas en bandas Delta, Theta, Alpha, Beta y Gamma.
 - Reproducción de un tono senoidal por cada canal de audio.
 - Ajuste de frecuencia base entre 100 y 500 Hz y volumen entre 0 y 100 %.
-- Editor visual para diseñar variaciones del batido entre 0 y 40 Hz durante una sesión de 10 a 600 segundos.
+- Editor por tramos para diseñar variaciones del batido entre 0 y 40 Hz, sin un límite máximo de duración impuesto por la aplicación.
 - Guardado, carga, reproducción y eliminación de sesiones en el navegador.
 - Interfaz en español e inglés con seis temas visuales.
 - Aplicación instalable (PWA) y caché offline del shell de la app.
@@ -46,7 +46,7 @@ Abre `http://localhost:8080/` para la landing o `http://localhost:8080/app/` par
 1. Abre la aplicación y selecciona una presintonía.
 2. Conecta auriculares estéreo y ajusta el volumen antes de iniciar la reproducción.
 3. Ajusta la frecuencia base si quieres cambiar la altura de los tonos sin cambiar el batido del preset.
-4. En **Crear**, añade al menos dos puntos al gráfico, define duración y frecuencia base, y reproduce o guarda el programa.
+4. En **Crear**, añade tramos con frecuencia y duración, define la frecuencia base y reproduce o guarda el programa.
 5. En **Sesiones**, carga, reproduce o elimina los programas guardados en el dispositivo actual.
 
 ## Cómo se genera el audio

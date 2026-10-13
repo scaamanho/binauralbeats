@@ -89,23 +89,22 @@ sequenceDiagram
 
 ### Sesión personalizada
 
-El lienzo del editor mantiene puntos normalizados `{ x, y }`:
+El editor móvil mantiene una lista de tramos explícitos:
 
-- `x`: posición temporal normalizada en el intervalo $[0, 1]$.
-- `y`: frecuencia de batido normalizada en el intervalo $[0, 1]$.
-- `MAX_BEAT`: 40 Hz.
+```json
+"segments": [
+  { "beat": 10, "duration": 60 },
+  { "beat": 6, "duration": 120 }
+]
+```
 
-Para cada punto, la programación del oscilador derecho calcula:
+`beat` es la frecuencia del batido entre 0 y 40 Hz, `duration` son segundos y la duración total es la suma de los tramos. No hay un límite máximo de duración impuesto por la aplicación. El oscilador izquierdo permanece en la frecuencia base; el derecho usa `base + beat` al comienzo de cada tramo. Los cambios son escalonados mediante `setValueAtTime`, sin interpolación lineal.
 
-$$
-t_i = t_0 + x_i \cdot D \qquad f_{R,i} = f_b + y_i \cdot 40
-$$
-
-donde $D$ es la duración configurada. Los puntos se ordenan por `x` y se programan mediante `setValueAtTime`. Por tanto, entre puntos el valor se mantiene hasta el siguiente cambio programado; no se aplica interpolación lineal. La sesión se detiene con un `setTimeout` al cumplirse la duración.
+Los programas antiguos que contienen `points` se convierten al cargarlos: cada punto define el tramo hasta el siguiente y el último punto marca el estado final. La sesión se detiene con un `setTimeout` al cumplirse la duración total.
 
 ## Estado y persistencia
 
-El estado de ejecución es efímero y reside en variables de módulo: `audioCtx`, osciladores, nodos de audio, `isPlaying`, `currentPreset`, `points` y datos de reproducción personalizada. No existe un store externo.
+El estado de ejecución es efímero y reside en variables de módulo: `audioCtx`, osciladores, nodos de audio, `isPlaying`, `currentPreset`, `segments` y datos de reproducción personalizada. No existe un store externo.
 
 | Clave de `localStorage` | Tipo | Contenido |
 | --- | --- | --- |
@@ -119,8 +118,8 @@ Cada elemento de `bb_saved` tiene la forma:
 {
   "id": 1710000000000,
   "name": "Mi programa",
-  "points": [{ "x": 0, "y": 0.25 }, { "x": 1, "y": 0.5 }],
-  "duration": 60,
+  "segments": [{ "beat": 10, "duration": 60 }, { "beat": 6, "duration": 120 }],
+  "duration": 180,
   "base": 200,
   "created": 1710000000000
 }
@@ -136,7 +135,7 @@ Las operaciones guardar, cargar, reproducir y eliminar actúan directamente sobr
 
 ## PWA y comportamiento offline
 
-Al arrancar, `app.js` registra `./sw.js` si el navegador admite service workers. El worker usa la caché `binaural-beats-pro-v6`.
+Al arrancar, `app.js` registra `./sw.js` si el navegador admite service workers. El worker usa la caché `binaural-beats-pro-v21`.
 
 ```mermaid
 flowchart TD
@@ -164,15 +163,15 @@ py -m http.server 8080
 
 Comprobaciones recomendadas:
 
-1. Confirma que una presintonía separa el audio por los canales izquierdo y derecho usando auriculares.
-2. Crea una sesión de al menos dos puntos y verifica que se detiene al terminar la duración.
-3. Guarda, carga, reproduce y elimina una sesión; revisa `localStorage.bb_saved` en DevTools.
+1. Confirma que una presintonía separa el audio por los canales izquierdo y derecho usando auriculares y que el visualizador aparece durante la reproducción.
+2. Crea una sesión con varios tramos y verifica que cambia de frecuencia y se detiene al terminar la duración total.
+3. Añade, edita, duplica, reordena y elimina tramos; guarda, carga y reproduce una sesión desde **Sesiones**; comprueba que aparece el visualizador y que el botón global de detener funciona al cambiar de pestaña. Revisa `localStorage.bb_saved` en DevTools.
 4. Cambia idioma y tema, recarga y verifica la persistencia.
 5. En DevTools, verifica el service worker y prueba el modo offline tras una primera carga correcta.
 
 ## Límites conocidos
 
 - La reproducción depende de Web Audio API y de que el navegador permita iniciar audio tras una interacción.
-- Las sesiones personalizadas usan cambios escalonados; el editor no suaviza la transición entre puntos.
+- Las sesiones personalizadas usan cambios escalonados; el editor no suaviza la transición entre tramos.
 - Los programas se almacenan sólo en el navegador local y pueden perderse al limpiar datos del sitio.
 - La aplicación produce tonos, no mide actividad cerebral ni ofrece diagnóstico, tratamiento o resultados clínicos.

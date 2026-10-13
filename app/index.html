@@ -27,6 +27,14 @@
     <div class="tab" data-view="saved" data-i18n="savedTab">Sesiones</div>
   </div>
 
+  <section class="global-playback" id="globalPlayback" aria-live="polite" hidden>
+    <div class="global-playback-heading">
+      <strong data-i18n="playing">▶ Reproduciendo</strong>
+      <button class="global-stop-btn" id="globalStopBtn" type="button" data-i18n="stop">■ DETENER</button>
+    </div>
+    <canvas class="visualizer" id="visualizer"></canvas>
+  </section>
+
   <!-- VISTA PRESETS -->
   <div class="view active" id="view-presets">
     <div class="presets" id="presetGrid"></div>
@@ -47,8 +55,6 @@
 
       <button class="play-btn" id="playBtn" data-i18n="start">▶  INICIAR</button>
 
-      <canvas class="visualizer" id="visualizer"></canvas>
-
       <section class="preset-details" id="presetDetails" aria-live="polite">
         <p class="preset-details-description" id="presetDetailsDescription"></p>
         <p class="preset-details-effects"><b data-i18n="suggestedUse">Uso sugerido</b><span id="presetDetailsEffects"></span></p>
@@ -60,24 +66,15 @@
   <!-- VISTA EDITOR -->
   <div class="view" id="view-editor">
     <div class="info-box">
-      <b data-i18n="howToUse">¿Cómo usar?</b> <span data-i18n="editorHelp">Toca el gráfico para añadir puntos. Arrástralos para definir la frecuencia del batido binaural a lo largo del tiempo. La línea muestra la diferencia entre oídos (Hz).</span>
+      <b data-i18n="howToUse">¿Cómo usar?</b> <span data-i18n="editorHelp">Añade tramos con una frecuencia y duración. La suma de los tramos forma la sintonía completa.</span>
     </div>
 
-    <div class="canvas-wrap">
-      <canvas id="editor"></canvas>
-      <div class="canvas-labels">
-        <span class="y-axis-label" style="--y:0%">40 Hz</span>
-        <span class="y-axis-label" style="--y:12.5%">35 Hz</span>
-        <span class="y-axis-label" style="--y:25%">30 Hz</span>
-        <span class="y-axis-label" style="--y:37.5%">25 Hz</span>
-        <span class="y-axis-label" style="--y:50%">20 Hz</span>
-        <span class="y-axis-label" style="--y:62.5%">15 Hz</span>
-        <span class="y-axis-label" style="--y:75%">10 Hz</span>
-        <span class="y-axis-label" style="--y:87.5%">5 Hz</span>
-        <span class="y-axis-label" style="--y:100%">0 Hz</span>
-        <span class="xl" data-i18n="time">Tiempo →</span>
-      </div>
+    <div class="segment-summary">
+      <span><b id="segmentCount">0</b> <span data-i18n="segments">tramos</span></span>
+      <span><span data-i18n="totalDuration">Duración total</span>: <b id="durVal">0:00</b></span>
     </div>
+    <div class="segment-list" id="segmentList"></div>
+    <button class="add-segment-btn" id="addSegmentBtn" type="button">＋ <span data-i18n="addSegment">Añadir tramo</span></button>
 
     <div class="editor-tools">
       <button class="tool-btn" id="clearBtn">⌫ <span data-i18n="clear">Limpiar</span></button>
@@ -85,10 +82,6 @@
       <button class="tool-btn primary" id="playCustomBtn">▶ <span data-i18n="play">Reproducir</span></button>
     </div>
 
-    <div class="slider-group">
-      <div class="slider-label"><span data-i18n="totalDuration">Duración total</span><b><span id="durVal">60</span>s</b></div>
-      <input type="range" id="duration" min="10" max="600" value="60" step="5">
-    </div>
     <div class="slider-group">
       <div class="slider-label"><span data-i18n="baseFrequency">Frecuencia base</span><b><span id="baseVal2">200</span> Hz</b></div>
       <input type="range" id="baseFreq2" min="100" max="300" value="200" step="1">
