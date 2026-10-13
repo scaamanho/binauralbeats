@@ -1,6 +1,6 @@
 {
-  "name": "Binaural Beats Pro",
-  "short_name": "BinauralBeats",
+  "name": "Binaural Beats Lab",
+  "short_name": "Beats Lab",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

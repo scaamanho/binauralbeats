@@ -1,4 +1,4 @@
-# Binaural Beats Pro
+# Binaural Beats Lab
 
 Aplicación web para crear y reproducir tonos binaurales estéreo. Ofrece presintonías, controles de frecuencia y volumen, un editor de sesiones temporizadas y almacenamiento local de los programas creados. La aplicación principal es una PWA instalable y puede seguir funcionando sin conexión después de cargar sus recursos.
 

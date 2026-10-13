@@ -1,4 +1,4 @@
-# Binaural Beats Pro: documentación técnica
+# Binaural Beats Lab: documentación técnica
 
 `app/` es una aplicación web estática, sin dependencias ni servidor de aplicación. Su punto de entrada es `index.html`; `app.js` concentra el estado, el motor Web Audio, la interacción de interfaz y la persistencia local.
 

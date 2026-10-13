@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0a0a1f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Binaural Beats Pro</title>
+<title>Binaural Beats Lab</title>
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" href="./icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="./icon-192.png">
@@ -16,7 +16,7 @@
 
 <header>
   <button class="settings-trigger" id="settingsTrigger" type="button" aria-label="Abrir ajustes">⚙</button>
-  <h1><img class="app-title-icon" src="./icon-192.png" alt=""> BINAURAL BEATS PRO</h1>
+  <h1><img class="app-title-icon" src="./icon-192.png" alt=""> BINAURAL BEATS LAB</h1>
   <p data-i18n="tagline">Generador de ondas cerebrales</p>
 </header>
 
@@ -77,6 +77,7 @@
     <button class="add-segment-btn" id="addSegmentBtn" type="button">＋ <span data-i18n="addSegment">Añadir tramo</span></button>
 
     <div class="editor-tools">
+      <button class="tool-btn" id="importClipboardBtn" type="button">⇩ <span data-i18n="importClipboard">Importar del portapapeles</span></button>
       <button class="tool-btn" id="clearBtn">⌫ <span data-i18n="clear">Limpiar</span></button>
       <button class="tool-btn" id="saveBtn">▣ <span data-i18n="save">Guardar</span></button>
       <button class="tool-btn primary" id="playCustomBtn">▶ <span data-i18n="play">Reproducir</span></button>
@@ -125,7 +126,7 @@
     </div>
     <div class="settings-section">
       <h2 data-i18n="themeTitle">Tema de la aplicación</h2>
-      <p data-i18n="themeInfo">Personaliza la apariencia de Binaural Beats Pro.</p>
+      <p data-i18n="themeInfo">Personaliza la apariencia de Binaural Beats Lab.</p>
       <div class="theme-options">
         <button class="theme-option" type="button" data-theme="dark">
           <strong data-i18n="darkTheme">Oscuro</strong>

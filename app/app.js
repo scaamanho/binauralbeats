@@ -1,4 +1,5 @@
 /* ============ PWA ============ */
+const PRODUCT_URL='https://scaamanho.github.io/binauralbeats/';
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('./sw.js').catch(()=>{});
 }
@@ -27,8 +28,8 @@ document.getElementById('installBtn').onclick=async()=>{
 
 /* ============ PRESETS ============ */
 const TRANSLATIONS={
-  es:{tagline:'Generador de ondas cerebrales',presetsTab:'Presintonías',editorTab:'Crear',savedTab:'Sesiones',player:'Reproductor',selectPreset:'Selecciona una presintonía',baseFrequency:'Frecuencia base',volume:'Volumen',start:'▶  INICIAR',stop:'■  DETENER',howToUse:'¿Cómo usar?',editorHelp:'Añade tramos con una frecuencia y duración. La suma de los tramos forma la sintonía completa.',clear:'Limpiar',save:'Guardar',play:'Reproducir',totalDuration:'Duración total',savedInfo:'Tus programas personalizados se guardan localmente en este dispositivo.',installAsApp:'Instalar como app',install:'Instalar',addSegment:'Añadir tramo',editSegment:'Editar tramo',segment:'Tramo',segments:'tramos',segmentFrequency:'Frecuencia del batido',segmentDuration:'Duración',seconds:'segundos',add:'Añadir',cancel:'Cancelar',duplicate:'Duplicar',moveUp:'Subir',moveDown:'Bajar',emptySegments:'Aún no hay tramos. Añade el primero para crear tu sintonía.',needSegment:'Añade al menos un tramo',invalidSegment:'Indica una frecuencia y duración válidas',selectFirst:'Selecciona una presintonía primero',finished:'Programa finalizado',programName:'Nombre del programa:',myProgram:'Mi programa',saved:'✓ Programa guardado',empty:'No hay programas guardados aún.<br>Crea uno en el Editor.',load:'Cargar',delete:'Eliminar',deleted:'Eliminado',loaded:'Cargado en el editor',playing:'▶ Reproduciendo',confirmDelete:'¿Eliminar este programa?',points:'puntos',base:'Base',presets:{memoria:['Memoria','Aprendizaje','Beta 14Hz - Concentración y memoria'],relax:['Relajarse','Calma','Alpha 10Hz - Relajación profunda'],dormir:['Dormir','Sueño profundo','Delta 2Hz - Sueño profundo'],meditar:['Meditación','Atención plena','Theta 6Hz - Meditación'],deseo:['Intimidad','Relajación Sensua','Theta 6Hz - Sensualidad'],energia:['Energía','Motivación','Beta 20Hz - Energía']}},
-  en:{tagline:'Brainwave generator',presetsTab:'Presets',editorTab:'Create',savedTab:'Sessions',player:'Player',selectPreset:'Select a preset',baseFrequency:'Base frequency',volume:'Volume',start:'▶  START',stop:'■  STOP',howToUse:'How to use',editorHelp:'Add sections with a beat frequency and duration. Together, the sections form the complete session.',clear:'Clear',save:'Save',play:'Play',totalDuration:'Total duration',savedInfo:'Your custom programs are stored locally on this device.',installAsApp:'Install as app',install:'Install',addSegment:'Add section',editSegment:'Edit section',segment:'Section',segments:'sections',segmentFrequency:'Beat frequency',segmentDuration:'Duration',seconds:'seconds',add:'Add',cancel:'Cancel',duplicate:'Duplicate',moveUp:'Move up',moveDown:'Move down',emptySegments:'No sections yet. Add the first one to create your session.',needSegment:'Add at least one section',invalidSegment:'Enter a valid frequency and duration',selectFirst:'Select a preset first',finished:'Program finished',programName:'Program name:',myProgram:'My program',saved:'✓ Program saved',empty:'No saved programs yet.<br>Create one in the Editor.',load:'Load',delete:'Delete',deleted:'Deleted',loaded:'Loaded in editor',playing:'▶ Playing',confirmDelete:'Delete this program?',points:'points',base:'Base',presets:{memoria:['Memory','Learning','Beta 14Hz - Focus and memory'],relax:['Relax','Calm','Alpha 10Hz - Deep relaxation'],dormir:['Sleep','Deep sleep','Delta 2Hz - Deep sleep'],meditar:['Meditation','Mindfulness','Theta 6Hz - Meditation'],deseo:['Intimacy','Sensual Relax','Theta 6Hz - Sensuality'],energia:['Energy','Motivation','Beta 20Hz - Energy']}}
+  es:{tagline:'Generador de ondas cerebrales',presetsTab:'Presintonías',editorTab:'Crear',savedTab:'Sesiones',player:'Reproductor',selectPreset:'Selecciona una presintonía',baseFrequency:'Frecuencia base',volume:'Volumen',start:'▶  INICIAR',stop:'■  DETENER',howToUse:'¿Cómo usar?',editorHelp:'Añade tramos con una frecuencia y duración. La suma de los tramos forma la sintonía completa.',clear:'Limpiar',save:'Guardar',play:'Reproducir',totalDuration:'Duración total',savedInfo:'Tus programas personalizados se guardan localmente en este dispositivo.',installAsApp:'Instalar como app',install:'Instalar',addSegment:'Añadir tramo',editSegment:'Editar tramo',segment:'Tramo',segments:'tramos',segmentFrequency:'Frecuencia del batido',segmentDuration:'Duración',seconds:'segundos',add:'Añadir',cancel:'Cancelar',duplicate:'Duplicar',moveUp:'Subir',moveDown:'Bajar',emptySegments:'Aún no hay tramos. Añade el primero para crear tu sintonía.',needSegment:'Añade al menos un tramo',invalidSegment:'Indica una frecuencia y duración válidas',selectFirst:'Selecciona una presintonía primero',finished:'Programa finalizado',programName:'Nombre del programa:',myProgram:'Mi programa',saved:'✓ Programa guardado',empty:'No hay programas guardados aún.',createSession:'Crear una sesión',load:'Cargar',delete:'Eliminar',deleted:'Eliminado',loaded:'Cargado en el editor',playing:'▶ Reproduciendo',confirmDelete:'¿Eliminar este programa?',points:'puntos',base:'Base',presets:{memoria:['Memoria','Aprendizaje','Beta 14Hz - Concentración y memoria'],relax:['Relajarse','Calma','Alpha 10Hz - Relajación profunda'],dormir:['Dormir','Sueño profundo','Delta 2Hz - Sueño profundo'],meditar:['Meditación','Atención plena','Theta 6Hz - Meditación'],deseo:['Intimidad','Relajación Sensua','Theta 6Hz - Sensualidad'],energia:['Energía','Motivación','Beta 20Hz - Energía']}},
+  en:{tagline:'Brainwave generator',presetsTab:'Presets',editorTab:'Create',savedTab:'Sessions',player:'Player',selectPreset:'Select a preset',baseFrequency:'Base frequency',volume:'Volume',start:'▶  START',stop:'■  STOP',howToUse:'How to use',editorHelp:'Add sections with a beat frequency and duration. Together, the sections form the complete session.',clear:'Clear',save:'Save',play:'Play',totalDuration:'Total duration',savedInfo:'Your custom programs are stored locally on this device.',installAsApp:'Install as app',install:'Install',addSegment:'Add section',editSegment:'Edit section',segment:'Section',segments:'sections',segmentFrequency:'Beat frequency',segmentDuration:'Duration',seconds:'seconds',add:'Add',cancel:'Cancel',duplicate:'Duplicate',moveUp:'Move up',moveDown:'Move down',emptySegments:'No sections yet. Add the first one to create your session.',needSegment:'Add at least one section',invalidSegment:'Enter a valid frequency and duration',selectFirst:'Select a preset first',finished:'Program finished',programName:'Program name:',myProgram:'My program',saved:'✓ Program saved',empty:'No saved programs yet.',createSession:'Create a session',load:'Load',delete:'Delete',deleted:'Deleted',loaded:'Loaded in editor',playing:'▶ Playing',confirmDelete:'Delete this program?',points:'points',base:'Base',presets:{memoria:['Memory','Learning','Beta 14Hz - Focus and memory'],relax:['Relax','Calm','Alpha 10Hz - Deep relaxation'],dormir:['Sleep','Deep sleep','Delta 2Hz - Deep sleep'],meditar:['Meditation','Mindfulness','Theta 6Hz - Meditation'],deseo:['Intimacy','Sensual Relax','Theta 6Hz - Sensuality'],energia:['Energy','Motivation','Beta 20Hz - Energy']}}
 };
 Object.assign(TRANSLATIONS.es.presets,{
   creatividad:['Creatividad','Inspiración','Theta 8Hz - Flujo creativo'],
@@ -148,8 +149,10 @@ TRANSLATIONS.es.closePlayer='Volver';
 TRANSLATIONS.es.closePlayerAria='Volver a las presintonías';
 TRANSLATIONS.en.closePlayer='Back';
 TRANSLATIONS.en.closePlayerAria='Back to presets';
-Object.assign(TRANSLATIONS.es,{settingsTab:'Ajustes',settingsAria:'Abrir ajustes',closeSettings:'Volver a presintonías',languageTitle:'Idioma',languageInfo:'Elige el idioma de la aplicación.',themeTitle:'Tema de la aplicación',themeInfo:'Personaliza la apariencia de Binaural Beats Pro.',darkTheme:'Oscuro',darkThemeInfo:'Fondo oscuro para sesiones nocturnas.',lightTheme:'Claro',lightThemeInfo:'Interfaz luminosa para el día.',settingsSaved:'Tus preferencias se guardan automáticamente en este dispositivo.',eightDTitle:'Audio 8D',eightDInfo:'Rota el sonido entre los auriculares con un período proporcional a la frecuencia elegida.',eightDToggleLabel:'Activar audio 8D',eightDToggleInfo:'Opcional. Si está desactivado, el comportamiento es el habitual (sin rotación).',channelLeft:'Izquierdo',channelRight:'Derecho'});
-Object.assign(TRANSLATIONS.en,{settingsTab:'Settings',settingsAria:'Open settings',closeSettings:'Back to presets',languageTitle:'Language',languageInfo:'Choose the application language.',themeTitle:'Application theme',themeInfo:'Customize the appearance of Binaural Beats Pro.',darkTheme:'Dark',darkThemeInfo:'Dark background for night sessions.',lightTheme:'Light',lightThemeInfo:'Bright interface for daytime use.',settingsSaved:'Your preferences are saved automatically on this device.',eightDTitle:'8D audio',eightDInfo:'Rotates the sound between headphone channels with a period proportional to the chosen frequency.',eightDToggleLabel:'Enable 8D audio',eightDToggleInfo:'Optional. When disabled, playback behaves as usual (no rotation).',channelLeft:'Left',channelRight:'Right'});
+Object.assign(TRANSLATIONS.es,{settingsTab:'Ajustes',settingsAria:'Abrir ajustes',closeSettings:'Volver a presintonías',languageTitle:'Idioma',languageInfo:'Elige el idioma de la aplicación.',themeTitle:'Tema de la aplicación',themeInfo:'Personaliza la apariencia de Binaural Beats Lab.',darkTheme:'Oscuro',darkThemeInfo:'Fondo oscuro para sesiones nocturnas.',lightTheme:'Claro',lightThemeInfo:'Interfaz luminosa para el día.',settingsSaved:'Tus preferencias se guardan automáticamente en este dispositivo.',eightDTitle:'Audio 8D',eightDInfo:'Rota el sonido entre los auriculares con un período proporcional a la frecuencia elegida.',eightDToggleLabel:'Activar audio 8D',eightDToggleInfo:'Opcional. Si está desactivado, el comportamiento es el habitual (sin rotación).',channelLeft:'Izquierdo',channelRight:'Derecho'});
+Object.assign(TRANSLATIONS.en,{settingsTab:'Settings',settingsAria:'Open settings',closeSettings:'Back to presets',languageTitle:'Language',languageInfo:'Choose the application language.',themeTitle:'Application theme',themeInfo:'Customize the appearance of Binaural Beats Lab.',darkTheme:'Dark',darkThemeInfo:'Dark background for night sessions.',lightTheme:'Light',lightThemeInfo:'Bright interface for daytime use.',settingsSaved:'Your preferences are saved automatically on this device.',eightDTitle:'8D audio',eightDInfo:'Rotates the sound between headphone channels with a period proportional to the chosen frequency.',eightDToggleLabel:'Enable 8D audio',eightDToggleInfo:'Optional. When disabled, playback behaves as usual (no rotation).',channelLeft:'Left',channelRight:'Right'});
+Object.assign(TRANSLATIONS.es,{importClipboard:'Importar del portapapeles',share:'Compartir',shareClipboard:'Compartir por portapapeles',shareWhatsApp:'Compartir por WhatsApp',shareTelegram:'Compartir por Telegram',shareEmail:'Compartir por correo',appLinkLabel:'Reprodúcelo con Binaural Beats Lab:',productLinkLabel:'Conoce Binaural Beats Lab:',clipboardCopied:'Mensaje de sesión copiado al portapapeles',clipboardReadError:'No se pudo leer el portapapeles. Comprueba los permisos del navegador.',clipboardWriteError:'No se pudo copiar al portapapeles. Comprueba los permisos del navegador.',invalidSharedSession:'El contenido del portapapeles no contiene una sesión válida.',replaceSegments:'Esto reemplazará los tramos actuales del editor. ¿Continuar?',sessionBase:'Base',sessionDuration:'Duración',sessionSegments:'Tramos'});
+Object.assign(TRANSLATIONS.en,{importClipboard:'Import from clipboard',share:'Share',shareClipboard:'Share via clipboard',shareWhatsApp:'Share via WhatsApp',shareTelegram:'Share via Telegram',shareEmail:'Share via email',appLinkLabel:'Play it with Binaural Beats Lab:',productLinkLabel:'Discover Binaural Beats Lab:',clipboardCopied:'Session message copied to clipboard',clipboardReadError:'Could not read the clipboard. Check your browser permissions.',clipboardWriteError:'Could not copy to the clipboard. Check your browser permissions.',invalidSharedSession:'The clipboard content does not contain a valid session.',replaceSegments:'This will replace the current editor sections. Continue?',sessionBase:'Base',sessionDuration:'Duration',sessionSegments:'Sections'});
 let language=localStorage.getItem('bb_language')||((navigator.language||'es').toLowerCase().startsWith('en')?'en':'es');
 const t=key=>TRANSLATIONS[language][key]||key;
 const savedTheme=localStorage.getItem('bb_theme');
@@ -551,6 +554,7 @@ document.querySelectorAll('.tab').forEach(t=>{
 /* ============ EDITOR ============ */
 const MAX_BEAT=40;
 let segments=[];
+let draftSessionName='';
 const segmentList=document.getElementById('segmentList');
 
 function formatDuration(seconds){
@@ -623,6 +627,25 @@ document.getElementById('addSegmentBtn').onclick=()=>{
   renderSegments();
 };
 document.getElementById('clearBtn').onclick=()=>{segments=[];renderSegments();};
+document.getElementById('importClipboardBtn').onclick=async()=>{
+  let clipboardText;
+  try{
+    clipboardText=await navigator.clipboard.readText();
+  }catch(error){
+    toast(t('clipboardReadError'));
+    return;
+  }
+  const imported=parseSharedSession(clipboardText);
+  if(!imported){toast(t('invalidSharedSession'));return;}
+  if(segments.length&&!confirm(t('replaceSegments'))) return;
+  segments=imported.segments.map(segment=>({...segment}));
+  draftSessionName=imported.name;
+  const baseInput=document.getElementById('baseFreq2');
+  baseInput.value=imported.base;
+  document.getElementById('baseVal2').textContent=imported.base;
+  renderSegments();
+  toast(t('loaded'));
+};
 document.getElementById('baseFreq2').oninput=e=>{
   document.getElementById('baseVal2').textContent=e.target.value;
 };
@@ -691,7 +714,7 @@ document.getElementById('saveBtn').onclick=()=>{
   if(!segments.length){toast(t('needSegment'));return;}
   const duration=totalSegmentDuration();
   if(!Number.isFinite(duration)||duration<=0){toast(t('invalidSegment'));return;}
-  const name=prompt(t('programName'),t('myProgram'));
+  const name=prompt(t('programName'),draftSessionName||t('myProgram'));
   if(!name) return;
   const saved=JSON.parse(localStorage.getItem('bb_saved')||'[]');
   saved.push({
@@ -703,6 +726,7 @@ document.getElementById('saveBtn').onclick=()=>{
     created:Date.now()
   });
   localStorage.setItem('bb_saved',JSON.stringify(saved));
+  draftSessionName='';
   toast(t('saved'));
   renderSaved();
 };
@@ -711,23 +735,82 @@ function renderSaved(){
   const list=document.getElementById('savedList');
   const saved=JSON.parse(localStorage.getItem('bb_saved')||'[]');
   if(saved.length===0){
-    list.innerHTML=`<div class="empty">${t('empty')}</div>`;
+    const emptyState=document.createElement('div');
+    emptyState.className='empty';
+    const message=document.createElement('p');
+    message.textContent=t('empty');
+    const createButton=document.createElement('button');
+    createButton.type='button';
+    createButton.className='empty-create-btn';
+    createButton.textContent=t('createSession');
+    createButton.onclick=()=>document.querySelector('[data-view="editor"]').click();
+    emptyState.append(message,createButton);
+    list.replaceChildren(emptyState);
     return;
   }
   list.innerHTML='';
   saved.forEach(s=>{
     const el=document.createElement('div');
     el.className='saved-item';
-    el.innerHTML=`
-      <div>
-        <div class="name">🎵 ${s.name}</div>
-       <div class="meta">${normalizeSegments(s).length} ${t('segments')} · ${formatDuration(normalizeSegments(s).reduce((total,segment)=>total+segment.duration,0))} · ${t('base')} ${s.base}Hz</div>
-      </div>
-      <div>
-        <button data-act="load" data-id="${s.id}">${t('load')}</button>
-        <button data-act="play" data-id="${s.id}">▶</button>
-        <button class="del" data-act="del" data-id="${s.id}" aria-label="${t('delete')}">✕</button>
-      </div>`;
+    const details=document.createElement('div');
+    const name=document.createElement('div');
+    name.className='name';
+    name.textContent=`🎵 ${s.name}`;
+    const normalized=normalizeSegments(s);
+    const meta=document.createElement('div');
+    meta.className='meta';
+    meta.textContent=`${normalized.length} ${t('segments')} · ${formatDuration(normalized.reduce((total,segment)=>total+segment.duration,0))} · ${t('base')} ${s.base}Hz`;
+    details.append(name,meta);
+    const actions=document.createElement('div');
+    actions.className='saved-actions';
+    const makeAction=(label,action,extraClass='')=>{
+      const button=document.createElement('button');
+      button.type='button';
+      button.dataset.act=action;
+      button.dataset.id=s.id;
+      button.className=extraClass;
+      button.textContent=label;
+      actions.appendChild(button);
+      return button;
+    };
+    const playButton=makeAction('▶','play','action-play');
+    playButton.setAttribute('aria-label',t('play'));
+    playButton.title=t('play');
+    const loadButton=makeAction('','load','action-icon-button');
+    loadButton.innerHTML='<svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5h16M6 17V5a2 2 0 0 1 2-2h8l4 4v10M14 3v5h5M12 11v6m-3-3 3 3 3-3"/></svg>';
+    loadButton.setAttribute('aria-label',t('load'));
+    loadButton.title=t('load');
+    const shareControl=document.createElement('div');
+    shareControl.className='share-control';
+    const shareButton=makeAction('','share','action-icon-button');
+    shareButton.innerHTML='<svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.4m-6.6 7 6.6 4.2"/></svg>';
+    shareButton.setAttribute('aria-label',t('share'));
+    shareButton.title=t('share');
+    shareControl.appendChild(shareButton);
+    const shareOptions=document.createElement('div');
+    shareOptions.className='share-options';
+    shareOptions.hidden=true;
+    const shareIcons={
+      clipboard:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="4" width="12" height="16" rx="2"/><path d="M16 4V3a1 1 0 0 0-1-1H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h3M11 9h6M11 13h6"/></svg>',
+      whatsapp:'<svg viewBox="0 0 24 24" aria-hidden="true"><path class="brand-fill" d="M12 2a9.8 9.8 0 0 0-8.4 14.9L2 22l5.3-1.5A10 10 0 1 0 12 2Z"/><path class="brand-cutout" d="M9.1 7.5c-.3-.7-.6-.7-.9-.7h-.7c-.3 0-.7.1-1 .5s-1.3 1.3-1.3 3.1 1.3 3.5 1.5 3.7 2.5 4 6.1 5.4c3 .1 3.6 0 4.2-.6s1.2-1.2 1.3-1.7.1-1-.1-1.1-2.1-1-2.5-1.2-.6-.2-.8.2-.9 1.2-1.1 1.4-.4.3-.8.1a10.4 10.4 0 0 1-3-1.9 11.2 11.2 0 0 1-2.1-2.6c-.2-.4 0-.6.2-.8l.6-.7c.2-.2.2-.4.4-.7s.1-.5 0-.7L9.1 7.5Z"/></svg>',
+      telegram:'<svg viewBox="0 0 24 24" aria-hidden="true"><path class="brand-fill" d="M22 3 2.8 10.4c-1.3.5-1.3 1.2-.2 1.5l4.9 1.5 1.9 5.8c.2.7.1 1 .8 1 .5 0 .8-.2 1.1-.5l2.4-2.3 5 3.7c.9.5 1.5.2 1.7-.8L23.7 4c.3-1.2-.4-1.7-1.7-1Z"/><path class="brand-cutout" d="m8.2 13.1 10.4-6.6c.5-.3.9-.1.5.2l-8.6 7.8-.3 3.4-2-4.8Z"/></svg>',
+      email:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>'
+    };
+    [['shareClipboard','clipboard'],['shareWhatsApp','whatsapp'],['shareTelegram','telegram'],['shareEmail','email']].forEach(([label,destination])=>{
+      const button=document.createElement('button');
+      button.type='button';
+      button.dataset.share=destination;
+      button.dataset.id=s.id;
+      button.className=`share-option share-${destination}`;
+      button.setAttribute('aria-label',t(label));
+      button.title=t(label);
+      button.innerHTML=shareIcons[destination];
+      shareOptions.appendChild(button);
+    });
+    shareControl.appendChild(shareOptions);
+    makeAction('✕','del','del').setAttribute('aria-label',t('delete'));
+    el.append(details,actions);
+    actions.insertBefore(shareControl,actions.lastChild);
     list.appendChild(el);
   });
   list.querySelectorAll('button').forEach(b=>{
@@ -748,11 +831,131 @@ function renderSaved(){
         document.getElementById('baseVal2').textContent=s.base;
         document.querySelector('[data-view="editor"]').click();
         toast(t('loaded'));
-      } else if(b.dataset.act==='play'){
-        playSaved(s);
-      }
+       } else if(b.dataset.act==='play'){
+         playSaved(s);
+        } else if(b.dataset.act==='share'){
+          const options=b.closest('.share-control').querySelector('.share-options');
+          options.hidden=!options.hidden;
+          b.setAttribute('aria-expanded',String(!options.hidden));
+          b.closest('.saved-item').classList.toggle('share-open',!options.hidden);
+          if(!options.hidden){
+            list.querySelectorAll('.share-options').forEach(other=>{
+              if(other!==options){
+                other.hidden=true;
+                other.closest('.saved-item').classList.remove('share-open');
+                other.closest('.share-control').querySelector('[data-act="share"]').setAttribute('aria-expanded','false');
+              }
+            });
+          }
+       }
+     };
+   });
+  list.querySelectorAll('[data-share]').forEach(button=>{
+    button.onclick=()=>{
+      const s=saved.find(x=>String(x.id)===button.dataset.id);
+      if(s) shareSavedSession(s,button.dataset.share);
     };
   });
+}
+
+function makeSharedSession(program){
+  return {format:'binaural-beats-pro-session',version:1,name:String(program.name||t('myProgram')),base:+program.base,segments:normalizeSegments(program)};
+}
+
+function parseSharedSession(text){
+  if(typeof text!=='string'||text.length>1000000) return null;
+  const normalizedText=text.replace(/\r\n?/g,'\n').trim();
+  const marker='BINAURAL_BEATS_SESSION';
+  const markerIndex=normalizedText.lastIndexOf(marker);
+  if(markerIndex!==-1){
+    const jsonStart=normalizedText.indexOf('{',markerIndex+marker.length);
+    const parsed=jsonStart===-1?null:parseSessionJson(normalizedText.slice(jsonStart));
+    if(parsed) return parsed;
+  }
+  const direct=parseSessionJson(normalizedText);
+  if(direct) return direct;
+  const links=normalizedText.match(/https?:\/\/[^\s<>"']+/g)||[];
+  for(const rawLink of links){
+    try{
+      const link=new URL(rawLink.replace(/[),.!?]+$/,''));
+      const encoded=link.searchParams.get('session')||new URLSearchParams(link.hash.slice(1)).get('session');
+      if(encoded){
+        const parsed=parseSessionJson(encoded);
+        if(parsed) return parsed;
+      }
+    }catch(error){}
+  }
+  return null;
+}
+
+function parseSessionJson(text){
+  const start=text.indexOf('{');
+  if(start===-1) return null;
+  let depth=0;
+  let inString=false;
+  let escaped=false;
+  let end=-1;
+  for(let index=start;index<text.length;index++){
+    const character=text[index];
+    if(inString){
+      if(escaped) escaped=false;
+      else if(character==='\\') escaped=true;
+      else if(character==='"') inString=false;
+      continue;
+    }
+    if(character==='"'){inString=true;continue;}
+    if(character==='{') depth++;
+    if(character==='}'&&--depth===0){end=index+1;break;}
+  }
+  if(end===-1) return null;
+  try{
+    const data=JSON.parse(text.slice(start,end));
+    if(data?.format!=='binaural-beats-pro-session'||data.version!==1) return null;
+    if(typeof data.name!=='string'||!data.name.trim()||data.name.length>120) return null;
+    if(!Number.isFinite(data.base)||data.base<100||data.base>300) return null;
+    if(!Array.isArray(data.segments)||data.segments.length<1||data.segments.length>500) return null;
+    const validSegments=data.segments.every(segment=>segment&&Number.isFinite(segment.beat)&&segment.beat>=0&&segment.beat<=MAX_BEAT&&Number.isFinite(segment.duration)&&segment.duration>=1&&segment.duration<=86400);
+    if(!validSegments) return null;
+    return {name:data.name.trim(),base:data.base,segments:data.segments.map(segment=>({beat:segment.beat,duration:segment.duration}))};
+  }catch(error){
+    return null;
+  }
+}
+
+function sharedMessage(session){
+  return `${session.name}\n${t('appLinkLabel')}\n${sharedSessionLink(session)}\n\n${t('productLinkLabel')}\n${PRODUCT_URL}`;
+}
+
+function sharedSessionLink(session){
+  const appUrl=new URL('./',window.location.href);
+  appUrl.searchParams.set('session',JSON.stringify(session));
+  return appUrl.href;
+}
+
+function shareSavedSession(program,destination){
+  const session=makeSharedSession(program);
+  const message=sharedMessage(session);
+  if(destination==='clipboard'){
+    if(!navigator.clipboard?.writeText){toast(t('clipboardWriteError'));return;}
+    navigator.clipboard.writeText(message).then(()=>toast(t('clipboardCopied'))).catch(()=>toast(t('clipboardWriteError')));
+    return;
+  }
+  let url;
+  if(destination==='whatsapp') url=`https://wa.me/?text=${encodeURIComponent(message)}`;
+  if(destination==='telegram') url=`https://t.me/share/url?url=&text=${encodeURIComponent(message)}`;
+  if(destination==='email') url=`mailto:?subject=${encodeURIComponent(session.name)}&body=${encodeURIComponent(message)}`;
+  if(!url) return;
+  if(destination==='email') window.location.href=url;
+  else {
+    const link=document.createElement('a');
+    link.href=url;
+    link.target='_blank';
+    link.rel='noopener noreferrer';
+    link.style.display='none';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  }
 }
 
 function playSaved(s){
@@ -847,3 +1050,21 @@ document.querySelectorAll('.language-option').forEach(button=>{
 setTheme(theme);
 translateStatic();
 renderSegments();
+const sharedSessionParam=new URLSearchParams(window.location.search).get('session')||new URLSearchParams(window.location.hash.slice(1)).get('session');
+if(sharedSessionParam){
+  const incoming=parseSharedSession(sharedSessionParam);
+  if(incoming){
+    segments=incoming.segments.map(segment=>({...segment}));
+    draftSessionName=incoming.name;
+    document.getElementById('baseFreq2').value=incoming.base;
+    document.getElementById('baseVal2').textContent=incoming.base;
+    renderSegments();
+    document.querySelector('[data-view="editor"]').click();
+  }
+  const cleanUrl=new URL(window.location.href);
+  cleanUrl.searchParams.delete('session');
+  const hashParams=new URLSearchParams(cleanUrl.hash.slice(1));
+  hashParams.delete('session');
+  cleanUrl.hash=hashParams.size?hashParams.toString():'';
+  history.replaceState(null,'',`${cleanUrl.pathname}${cleanUrl.search}${cleanUrl.hash}`);
+}
