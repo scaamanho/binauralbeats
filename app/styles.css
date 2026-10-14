@@ -46,7 +46,8 @@
   .preset:active{transform:scale(0.97)}
   .preset.active::before{opacity:0.18}
   .preset.active{border-color:var(--c1);box-shadow:0 0 24px var(--glow)}
-  .preset .icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--c1);opacity:0.18;pointer-events:none;z-index:0}
+  .preset .icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--c1);opacity:0.3;filter:drop-shadow(0 0 8px var(--c1));pointer-events:none;z-index:0;transition:opacity .25s,filter .25s}
+  .preset.active .icon{opacity:0.42;filter:drop-shadow(0 0 12px var(--c1))}
   .preset-svg{display:block;width:clamp(72px,18vw,112px);height:clamp(72px,18vw,112px);overflow:visible}
   .preset-mode-icon{width:27px;height:27px;vertical-align:-6px;margin-right:5px;color:var(--theme-accent)}
   .preset .name{font-size:14px;font-weight:700;position:relative;z-index:1;text-shadow:0 1px 8px rgba(0,0,0,0.35)}
@@ -456,7 +457,8 @@ main{width:min(100%,960px);padding:12px 24px 34px}
   box-shadow:inset 0 1px 0 rgba(255,255,255,.13),0 8px 24px rgba(1,5,19,.27);
 }
 .preset::after{z-index:0;opacity:.25}
-.preset .icon{z-index:0;opacity:.23;filter:saturate(.9) drop-shadow(0 0 20px rgba(48,216,255,.42))}
+.preset .icon{z-index:0;opacity:.42;filter:drop-shadow(0 0 10px var(--c1))}
+.preset.active .icon{opacity:.58;filter:drop-shadow(0 0 16px var(--c1))}
 .preset .name,.preset .hz{z-index:1}
 .preset .name{font-size:clamp(16px,2vw,20px);text-shadow:0 2px 12px rgba(0,0,0,.55)}
 .preset .hz{font-size:14px;text-shadow:0 2px 9px rgba(0,0,0,.6)}
@@ -593,7 +595,8 @@ body.light .preset,body.light .brainwave-card,body.light .saved-item,body.light 
 }
 body.light .preset{backdrop-filter:none}
 body.light .preset::after{opacity:.12}
-body.light .preset .icon{opacity:.22;filter:saturate(.82)}
+body.light .preset .icon{opacity:.38;filter:drop-shadow(0 0 8px var(--c1))}
+body.light .preset.active .icon{opacity:.52;filter:drop-shadow(0 0 13px var(--c1))}
 body.light .preset .name{color:#182438;text-shadow:none}
 body.light .preset .hz{color:#53657d;opacity:1;text-shadow:none}
 body.light .slider-label,body.light .player-title,body.light .brainwave-card p{color:#42536b;opacity:1}
