@@ -1,24 +1,24 @@
 ---
 name: commit-messages
-description: Redacta mensajes de commit claros y específicos en castellano a partir de los cambios preparados o del diff indicado. Úsalo cuando se vaya a crear, revisar o mejorar un mensaje de commit.
+description: Write clear, specific commit messages in English based on staged changes or a provided diff. Use when creating, reviewing, or improving a commit message.
 ---
 
-# Mensajes de commit
+# Commit Messages
 
-Redacta el mensaje describiendo con precisión los cambios reales. Basa cada afirmación en los archivos modificados y en el contexto disponible; no supongas motivos ni resultados que el diff no demuestre.
+Write the message to describe the actual changes precisely. Base every claim on the modified files and available context; do not assume motives or outcomes that the diff does not demonstrate.
 
-## Formato
+## Format
 
-- La primera línea es el resumen: `tipo: descripción breve y concreta`.
-- Escribe en castellano, con el tipo en minúsculas y una descripción que nombre qué cambió. Usa un verbo preciso, por ejemplo: `docs: cambiar el idioma de los ejemplos de código de inglés a castellano`.
-- Elige un tipo acorde al cambio: `feat` para funcionalidad, `fix` para correcciones, `docs` para documentación, `style` para formato visual sin cambiar comportamiento, `refactor` para reestructuración, `perf` para rendimiento, `test` para pruebas y `chore` para mantenimiento. Si el cambio abarca tipos distintos, elige el que mejor represente su propósito principal.
-- No uses asuntos vagos como `actualizar instrucciones`, `cambios varios` o `arreglos`; especifica qué archivo, función, comportamiento o contenido se modificó.
-- El cuerpo es opcional. Añádelo cuando ayude a explicar detalles relevantes, el motivo conocido o el comportamiento afectado que no quepa en el resumen. Si el cambio es trivial y el resumen basta, entrega una sola línea.
-- Separa el cuerpo del resumen con una línea en blanco. Mantén cada frase del cuerpo informativa y evita repetir el asunto.
+- The first line is the summary: `type: short, specific description`.
+- Write in English, use a lowercase type, and describe what changed. Choose a precise verb, for example: `docs: change code examples from English to Spanish`.
+- Choose a type that fits the change: `feat` for functionality, `fix` for bug fixes, `docs` for documentation, `style` for visual formatting without behavior changes, `refactor` for restructuring, `perf` for performance, `test` for tests, and `chore` for maintenance. For changes spanning multiple types, choose the one that best represents the primary purpose.
+- Avoid vague subjects such as `update instructions`, `miscellaneous changes`, or `fix things`; specify which file, function, behavior, or content changed.
+- The body is optional. Add it when it helps explain relevant details, a known reason, or affected behavior that does not fit in the summary. If the change is trivial and the summary is enough, use a single line.
+- Separate the body from the summary with a blank line. Keep each sentence informative and avoid repeating the subject.
 
-## Procedimiento
+## Process
 
-1. Revisa los cambios que se incluirán en el commit. Si hay cambios preparados, usa esos cambios como fuente principal; distingue los cambios no preparados para no atribuirlos al commit. Si no hay cambios preparados, basa el borrador en el diff que el usuario indique.
-2. Agrupa los cambios relacionados y determina su efecto observable. Si el alcance o la intención no pueden deducirse de los cambios, pregunta antes de inventarlos.
-3. Entrega únicamente el mensaje de commit, en un bloque de texto plano, salvo que el usuario pida una explicación o alternativas.
-4. No ejecutes `git commit` ni alteres el índice. Este skill redacta el mensaje; el usuario decide y ejecuta el commit.
+1. Review the changes that will be included in the commit. If there are staged changes, use them as the primary source; distinguish unstaged changes so they are not attributed to the commit. If nothing is staged, base the draft on the diff provided by the user.
+2. Group related changes and determine their observable effect. If the scope or intent cannot be inferred from the changes, ask before making assumptions.
+3. Return only the commit message as plain text, unless the user asks for an explanation or alternatives.
+4. Do not run `git commit` or modify the index. This skill drafts the message; the user decides whether to commit and executes the commit.
