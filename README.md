@@ -2,6 +2,9 @@
 
 Aplicación web para crear y reproducir tonos binaurales estéreo. Ofrece presintonías, controles de frecuencia y volumen, un editor de sesiones temporizadas y almacenamiento local de los programas creados. La aplicación principal es una PWA instalable y puede seguir funcionando sin conexión después de cargar sus recursos.
 
+![Binaural Beats Lab en un teléfono móvil](assets/mobile_app.jpg)
+
+
 > Los ritmos binaurales no sustituyen atención médica ni garantizan resultados. Úsalos con auriculares estéreo, a un volumen cómodo, y nunca mientras conduces o realizas tareas que requieran atención externa continua.
 
 ## Características
