@@ -91,7 +91,7 @@ img{max-width:100%;display:block}
   box-shadow:0 8px 32px rgba(0,0,0,.3);
 }
 .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.01em;font-size:15px;color:var(--text)}
-.brand img{border-radius:9px;box-shadow:0 0 14px rgba(0,243,255,.35)}
+.brand-icon{display:block;width:34px;height:34px;flex:none;filter:drop-shadow(0 0 7px rgba(0,243,255,.35))}
 .brand em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .main-nav{display:flex;gap:28px;font:600 12px/1 'Inter',sans-serif;letter-spacing:.14em;text-transform:uppercase}
 .main-nav a{position:relative;padding:6px 0;color:var(--text-2);transition:color .2s var(--ease)}
@@ -501,7 +501,7 @@ h2{
   backdrop-filter:blur(10px);
 }
 .footer-brand{display:flex;align-items:center;gap:10px;font:600 13px/1 'Inter',sans-serif;color:var(--text-2);letter-spacing:.04em}
-.footer-brand img{border-radius:6px}
+.footer-brand-icon{display:block;width:22px;height:22px;flex:none}
 .footer-cta{
   font:700 12px/1 'Inter',sans-serif;letter-spacing:.1em;text-transform:uppercase;
   color:var(--cyan);

@@ -552,3 +552,100 @@ input[type=range]{height:8px;background:linear-gradient(90deg,rgba(24,220,239,.7
   .preset .name{font-size:13px}
   .wave-badge{font-size:9px;padding:3px 5px}
 }
+
+/* High-contrast light theme */
+body.light{
+  --theme-gradient:linear-gradient(135deg,#087da8,#315fce);
+  --theme-gradient-wide:linear-gradient(105deg,#0786a8 0%,#3569d4 58%,#7851c8 100%);
+  --theme-soft:linear-gradient(135deg,#fff,#edf4ff);
+  --theme-accent:#087da8;
+  --theme-glow:rgba(31,105,190,.2);
+  --viz-left:#087da8;
+  --viz-right:#7851c8;
+  color:#182438;
+  background-color:#f2f6fc;
+  background-image:url('./lab-ambient-light.svg');
+  background-size:100% auto;
+  background-position:center top;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+}
+body.light header{background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(255,255,255,.64));border-bottom:1px solid rgba(34,56,84,.09)}
+body.light header p{color:#52647b;opacity:1}
+body.light .title-word{background-image:linear-gradient(110deg,#087c9a 3%,#2854bd 45%,#7041a5 75%,#b02b8b 100%);filter:none}
+body.light .word-beats{background-image:linear-gradient(110deg,#087c9a,#7041a5 85%)}
+body.light .word-lab{background-image:linear-gradient(110deg,#7041a5,#b02b8b)}
+body.light .settings-trigger{background:#fff;color:#263852;border-color:#d0d9e7;box-shadow:0 5px 16px rgba(31,51,78,.12)}
+body.light .close-player{color:#26364c;background:#fff;border-color:#cbd7e5;box-shadow:0 3px 10px rgba(35,55,83,.1)}
+body.light .close-player:hover,body.light .close-player:focus-visible{color:#075d75;background:#eaf6fa;outline-color:#1684a7}
+body.light .tabs{background:rgba(255,255,255,.88);border-color:#d4deea;box-shadow:0 5px 18px rgba(31,51,78,.08)}
+body.light .tab{color:#42536b;opacity:1}
+body.light .tab.active{color:#fff}
+body.light .preset-group-title{color:#354b68;opacity:1;text-shadow:none}
+body.light .preset-group-title::after{background:linear-gradient(90deg,transparent,rgba(62,105,157,.34))}
+body.light .preset,body.light .brainwave-card,body.light .saved-item,body.light .segment-card{
+  color:#182438;
+  background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(247,250,255,.96));
+  border-color:#d5deea;
+  box-shadow:0 7px 20px rgba(35,55,83,.1),inset 0 1px rgba(255,255,255,.95);
+}
+body.light .preset{backdrop-filter:none}
+body.light .preset::after{opacity:.12}
+body.light .preset .icon{opacity:.22;filter:saturate(.82)}
+body.light .preset .name{color:#182438;text-shadow:none}
+body.light .preset .hz{color:#53657d;opacity:1;text-shadow:none}
+body.light .slider-label,body.light .player-title,body.light .brainwave-card p{color:#42536b;opacity:1}
+body.light .wave-badge{background:#dff4f8;color:#075d75;box-shadow:inset 0 0 0 1px #b8e4eb}
+body.light .player,body.light .global-playback{
+  color:#182438;
+  background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(239,245,253,.97));
+  border:1px solid #cbd7e6;
+  box-shadow:0 12px 32px rgba(35,55,83,.13),inset 0 1px #fff;
+  backdrop-filter:blur(12px);
+}
+body.light .player-title{color:#52647b}
+body.light .preset-details{background:#f8fbff;border:1px solid #d7e1ed;border-left:4px solid var(--theme-accent);color:#26364c}
+body.light .preset-details-description,body.light .preset-details-effects span{color:#34465e;opacity:1}
+body.light .preset-details-effects b{color:#075d75}
+body.light .preset-details-note{color:#596a80;opacity:1}
+body.light .slider-label{color:#42536b}
+body.light .slider-label b,body.light .segment-summary b{color:#075d75}
+body.light input[type=range]{background:#cbd6e4;box-shadow:inset 0 1px 2px rgba(31,51,78,.12)}
+body.light input[type=range]::-webkit-slider-thumb,body.light input[type=range]::-moz-range-thumb{border:2px solid #fff}
+body.light .info-box{background:#eaf6fa;border:1px solid #b9dfe9;border-left:4px solid #087da8;color:#263b53;box-shadow:0 4px 12px rgba(35,55,83,.05)}
+body.light .info-box b{color:#075d75}
+body.light .tool-btn,body.light .theme-option,body.light .language-option,body.light .settings-close,body.light .segment-actions button{
+  color:#26364c;background:#fff;border-color:#d0dbe8;box-shadow:0 2px 7px rgba(35,55,83,.05);
+}
+body.light .tool-btn:hover,body.light .theme-option:hover,body.light .language-option:hover,body.light .settings-close:hover,body.light .segment-actions button:hover{background:#f1f6fc}
+body.light .tool-btn.primary{color:#fff;background:var(--theme-gradient-wide);border:0}
+body.light .theme-option.active,body.light .language-option.active{border-color:#1684a7;background:#e5f5f8;box-shadow:0 0 0 2px rgba(8,125,168,.12);color:#17334a}
+body.light .theme-option span{color:#52647b;opacity:1}
+body.light .settings-section{border-color:#d8e0eb}
+body.light .settings-section h2{color:#1c2c42}
+body.light .settings-section p{color:#52647b;opacity:1}
+body.light .settings-note{background:#eaf6fa;border:1px solid #c5e2e9;color:#34465e}
+body.light .segment-summary{background:#e7eef7;border:1px solid #d3deeb;color:#34465e}
+body.light .segment-name-field,body.light .segment-values label,body.light .segment-card-heading{color:#42536b;opacity:1}
+body.light .segment-input{background:#fff;border-color:#cbd7e5;color:#182438;box-shadow:inset 0 1px 2px rgba(31,51,78,.05)}
+body.light .segment-actions .danger{color:#b42332}
+body.light .add-segment-btn{background:#e8f5f8;border:1px dashed #62aebe;color:#075d75}
+body.light .empty-segments{border-color:#bdcadd;color:#52647b;opacity:1}
+body.light .visualizer{background-color:#f9fbff;border-color:#cdd9e8}
+body.light .global-playback-heading strong{color:#075d75}
+body.light .empty{color:#34465e}
+body.light .empty p{opacity:1}
+body.light .saved-item .name{color:#182438}
+body.light .saved-item .meta{color:#596a80;opacity:1}
+body.light .saved-item .saved-actions button.action-icon-button{background:#e8eef6;color:#354b68}
+body.light .toast{background:#1e2e45;color:#fff}
+body.light .saved-item .saved-actions button.action-play{
+  background:linear-gradient(135deg,#087da8,#315fce 62%,#7851c8);
+  border:0;
+  color:#fff;
+  box-shadow:0 4px 12px rgba(49,95,206,.3);
+}
+body.light .saved-item .saved-actions button.action-play:hover,
+body.light .saved-item .saved-actions button.action-play:focus-visible{filter:brightness(1.08);outline:2px solid #315fce;outline-offset:2px}
+body.light .play-btn{background:linear-gradient(105deg,#087da8,#315fce 62%,#7851c8);color:#fff;box-shadow:0 8px 20px rgba(49,95,206,.28),inset 0 1px rgba(255,255,255,.28)}
+body.light .play-btn.playing{background:linear-gradient(105deg,#075d75,#284ba5 62%,#663da8)}
