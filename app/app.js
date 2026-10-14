@@ -1,4 +1,5 @@
 /* ============ PWA ============ */
+const PRODUCT_URL='https://scaamanho.github.io/binauralbeats/';
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('./sw.js').catch(()=>{});
 }
@@ -27,8 +28,8 @@ document.getElementById('installBtn').onclick=async()=>{
 
 /* ============ PRESETS ============ */
 const TRANSLATIONS={
-  es:{tagline:'Generador de ondas cerebrales',presetsTab:'Presintonías',editorTab:'Crear',savedTab:'Sesiones',player:'Reproductor',selectPreset:'Selecciona una presintonía',baseFrequency:'Frecuencia base',volume:'Volumen',start:'▶  INICIAR',stop:'■  DETENER',howToUse:'¿Cómo usar?',editorHelp:'Toca el gráfico para añadir puntos. Arrástralos para definir la frecuencia del batido binaural a lo largo del tiempo. La línea muestra la diferencia entre oídos (Hz).',time:'Tiempo →',clear:'Limpiar',save:'Guardar',play:'Reproducir',totalDuration:'Duración total',savedInfo:'Tus programas personalizados se guardan localmente en este dispositivo.',installAsApp:'Instalar como app',install:'Instalar',addPoints:'Toca para añadir puntos',selectFirst:'Selecciona una presintonía primero',needTwo:'Añade al menos 2 puntos al gráfico',needTwoShort:'Añade al menos 2 puntos',finished:'Programa finalizado',programName:'Nombre del programa:',myProgram:'Mi programa',saved:'✓ Programa guardado',empty:'No hay programas guardados aún.<br>Crea uno en el Editor.',load:'Cargar',delete:'Eliminar',deleted:'Eliminado',loaded:'Cargado en el editor',playing:'▶ Reproduciendo',confirmDelete:'¿Eliminar este programa?',points:'puntos',base:'Base',presets:{memoria:['Memoria','Aprendizaje','Beta 14Hz - Concentración y memoria'],relax:['Relajarse','Calma','Alpha 10Hz - Relajación profunda'],dormir:['Dormir','Sueño profundo','Delta 2Hz - Sueño profundo'],meditar:['Meditación','Atención plena','Theta 6Hz - Meditación'],deseo:['Intimidad','Relajación Sensua','Theta 6Hz - Sensualidad'],energia:['Energía','Motivación','Beta 20Hz - Energía']}},
-  en:{tagline:'Brainwave generator',presetsTab:'Presets',editorTab:'Create',savedTab:'Sessions',player:'Player',selectPreset:'Select a preset',baseFrequency:'Base frequency',volume:'Volume',start:'▶  START',stop:'■  STOP',howToUse:'How to use',editorHelp:'Tap the graph to add points. Drag them to define the binaural beat frequency over time. The line shows the difference between ears (Hz).',time:'Time →',clear:'Clear',save:'Save',play:'Play',totalDuration:'Total duration',savedInfo:'Your custom programs are stored locally on this device.',installAsApp:'Install as app',install:'Install',addPoints:'Tap to add points',selectFirst:'Select a preset first',needTwo:'Add at least 2 points to the graph',needTwoShort:'Add at least 2 points',finished:'Program finished',programName:'Program name:',myProgram:'My program',saved:'✓ Program saved',empty:'No saved programs yet.<br>Create one in the Editor.',load:'Load',delete:'Delete',deleted:'Deleted',loaded:'Loaded in editor',playing:'▶ Playing',confirmDelete:'Delete this program?',points:'points',base:'Base',presets:{memoria:['Memory','Learning','Beta 14Hz - Focus and memory'],relax:['Relax','Calm','Alpha 10Hz - Deep relaxation'],dormir:['Sleep','Deep sleep','Delta 2Hz - Deep sleep'],meditar:['Meditation','Mindfulness','Theta 6Hz - Meditation'],deseo:['Intimacy','Sensual Relax','Theta 6Hz - Sensuality'],energia:['Energy','Motivation','Beta 20Hz - Energy']}}
+  es:{tagline:'Generador de ondas cerebrales',presetsTab:'Presintonías',editorTab:'Crear',savedTab:'Sesiones',player:'Reproductor',selectPreset:'Selecciona una presintonía',baseFrequency:'Frecuencia base',volume:'Volumen',start:'▶  INICIAR',stop:'■  DETENER',howToUse:'¿Cómo usar?',editorHelp:'Añade tramos con una frecuencia y duración. La suma de los tramos forma la sintonía completa.',clear:'Limpiar',save:'Guardar',play:'Reproducir',totalDuration:'Duración total',savedInfo:'Tus programas personalizados se guardan localmente en este dispositivo.',installAsApp:'Instalar como app',install:'Instalar',addSegment:'Añadir tramo',editSegment:'Editar tramo',segment:'Tramo',segments:'tramos',segmentFrequency:'Frecuencia del batido',segmentDuration:'Duración',seconds:'segundos',add:'Añadir',cancel:'Cancelar',duplicate:'Duplicar',moveUp:'Subir',moveDown:'Bajar',emptySegments:'Aún no hay tramos. Añade el primero para crear tu sintonía.',needSegment:'Añade al menos un tramo',invalidSegment:'Indica una frecuencia y duración válidas',selectFirst:'Selecciona una presintonía primero',finished:'Programa finalizado',programName:'Nombre del programa:',myProgram:'Mi programa',saved:'✓ Programa guardado',empty:'No hay programas guardados aún.',createSession:'Crear una sesión',load:'Cargar',delete:'Eliminar',deleted:'Eliminado',loaded:'Cargado en el editor',playing:'▶ Reproduciendo',confirmDelete:'¿Eliminar este programa?',points:'puntos',base:'Base',presets:{memoria:['Memoria','Aprendizaje','Beta 14Hz - Concentración y memoria'],relax:['Relajarse','Calma','Alpha 10Hz - Relajación profunda'],dormir:['Dormir','Sueño profundo','Delta 2Hz - Sueño profundo'],meditar:['Meditación','Atención plena','Theta 6Hz - Meditación'],deseo:['Intimidad','Relajación Sensua','Theta 6Hz - Sensualidad'],energia:['Energía','Motivación','Beta 20Hz - Energía']}},
+  en:{tagline:'Brainwave generator',presetsTab:'Presets',editorTab:'Create',savedTab:'Sessions',player:'Player',selectPreset:'Select a preset',baseFrequency:'Base frequency',volume:'Volume',start:'▶  START',stop:'■  STOP',howToUse:'How to use',editorHelp:'Add sections with a beat frequency and duration. Together, the sections form the complete session.',clear:'Clear',save:'Save',play:'Play',totalDuration:'Total duration',savedInfo:'Your custom programs are stored locally on this device.',installAsApp:'Install as app',install:'Install',addSegment:'Add section',editSegment:'Edit section',segment:'Section',segments:'sections',segmentFrequency:'Beat frequency',segmentDuration:'Duration',seconds:'seconds',add:'Add',cancel:'Cancel',duplicate:'Duplicate',moveUp:'Move up',moveDown:'Move down',emptySegments:'No sections yet. Add the first one to create your session.',needSegment:'Add at least one section',invalidSegment:'Enter a valid frequency and duration',selectFirst:'Select a preset first',finished:'Program finished',programName:'Program name:',myProgram:'My program',saved:'✓ Program saved',empty:'No saved programs yet.',createSession:'Create a session',load:'Load',delete:'Delete',deleted:'Deleted',loaded:'Loaded in editor',playing:'▶ Playing',confirmDelete:'Delete this program?',points:'points',base:'Base',presets:{memoria:['Memory','Learning','Beta 14Hz - Focus and memory'],relax:['Relax','Calm','Alpha 10Hz - Deep relaxation'],dormir:['Sleep','Deep sleep','Delta 2Hz - Deep sleep'],meditar:['Meditation','Mindfulness','Theta 6Hz - Meditation'],deseo:['Intimacy','Sensual Relax','Theta 6Hz - Sensuality'],energia:['Energy','Motivation','Beta 20Hz - Energy']}}
 };
 Object.assign(TRANSLATIONS.es.presets,{
   creatividad:['Creatividad','Inspiración','Theta 8Hz - Flujo creativo'],
@@ -148,14 +149,20 @@ TRANSLATIONS.es.closePlayer='Volver';
 TRANSLATIONS.es.closePlayerAria='Volver a las presintonías';
 TRANSLATIONS.en.closePlayer='Back';
 TRANSLATIONS.en.closePlayerAria='Back to presets';
-Object.assign(TRANSLATIONS.es,{settingsTab:'Ajustes',settingsAria:'Abrir ajustes',closeSettings:'Volver a presintonías',languageTitle:'Idioma',languageInfo:'Elige el idioma de la aplicación.',themeTitle:'Tema de la aplicación',themeInfo:'Personaliza la apariencia de Binaural Beats Pro.',darkTheme:'Oscuro',darkThemeInfo:'Fondo oscuro para sesiones nocturnas.',lightTheme:'Claro',lightThemeInfo:'Interfaz luminosa para el día.',settingsSaved:'Tus preferencias se guardan automáticamente en este dispositivo.',eightDTitle:'Audio 8D',eightDInfo:'Rota el sonido entre los auriculares con un período proporcional a la frecuencia elegida.',eightDToggleLabel:'Activar audio 8D',eightDToggleInfo:'Opcional. Si está desactivado, el comportamiento es el habitual (sin rotación).',channelLeft:'Izquierdo',channelRight:'Derecho'});
-Object.assign(TRANSLATIONS.en,{settingsTab:'Settings',settingsAria:'Open settings',closeSettings:'Back to presets',languageTitle:'Language',languageInfo:'Choose the application language.',themeTitle:'Application theme',themeInfo:'Customize the appearance of Binaural Beats Pro.',darkTheme:'Dark',darkThemeInfo:'Dark background for night sessions.',lightTheme:'Light',lightThemeInfo:'Bright interface for daytime use.',settingsSaved:'Your preferences are saved automatically on this device.',eightDTitle:'8D audio',eightDInfo:'Rotates the sound between headphone channels with a period proportional to the chosen frequency.',eightDToggleLabel:'Enable 8D audio',eightDToggleInfo:'Optional. When disabled, playback behaves as usual (no rotation).',channelLeft:'Left',channelRight:'Right'});
+TRANSLATIONS.es.savedSession='Sesión guardada';
+TRANSLATIONS.en.savedSession='Saved session';
+Object.assign(TRANSLATIONS.es,{settingsTab:'Ajustes',settingsAria:'Abrir ajustes',closeSettings:'Volver a presintonías',languageTitle:'Idioma',languageInfo:'Elige el idioma de la aplicación.',themeTitle:'Tema de la aplicación',themeInfo:'Personaliza la apariencia de Binaural Beats Lab.',darkTheme:'Oscuro',darkThemeInfo:'Fondo oscuro para sesiones nocturnas.',lightTheme:'Claro',lightThemeInfo:'Interfaz luminosa para el día.',settingsSaved:'Tus preferencias se guardan automáticamente en este dispositivo.',eightDTitle:'Audio 8D',eightDInfo:'Rota el sonido entre los auriculares con un período proporcional a la frecuencia elegida.',eightDToggleLabel:'Activar audio 8D',eightDToggleInfo:'Opcional. Si está desactivado, el comportamiento es el habitual (sin rotación).',channelLeft:'Izquierdo',channelRight:'Derecho'});
+Object.assign(TRANSLATIONS.en,{settingsTab:'Settings',settingsAria:'Open settings',closeSettings:'Back to presets',languageTitle:'Language',languageInfo:'Choose the application language.',themeTitle:'Application theme',themeInfo:'Customize the appearance of Binaural Beats Lab.',darkTheme:'Dark',darkThemeInfo:'Dark background for night sessions.',lightTheme:'Light',lightThemeInfo:'Bright interface for daytime use.',settingsSaved:'Your preferences are saved automatically on this device.',eightDTitle:'8D audio',eightDInfo:'Rotates the sound between headphone channels with a period proportional to the chosen frequency.',eightDToggleLabel:'Enable 8D audio',eightDToggleInfo:'Optional. When disabled, playback behaves as usual (no rotation).',channelLeft:'Left',channelRight:'Right'});
+Object.assign(TRANSLATIONS.es,{importClipboard:'Importar del portapapeles',share:'Compartir',shareClipboard:'Compartir por portapapeles',shareWhatsApp:'Compartir por WhatsApp',shareTelegram:'Compartir por Telegram',shareEmail:'Compartir por correo',appLinkLabel:'Reprodúcelo con Binaural Beats Lab:',productLinkLabel:'Conoce Binaural Beats Lab:',clipboardCopied:'Mensaje de sesión copiado al portapapeles',clipboardReadError:'No se pudo leer el portapapeles. Comprueba los permisos del navegador.',clipboardWriteError:'No se pudo copiar al portapapeles. Comprueba los permisos del navegador.',invalidSharedSession:'El contenido del portapapeles no contiene una sesión válida.',replaceSegments:'Esto reemplazará los tramos actuales del editor. ¿Continuar?',sessionBase:'Base',sessionDuration:'Duración',sessionSegments:'Tramos'});
+Object.assign(TRANSLATIONS.en,{importClipboard:'Import from clipboard',share:'Share',shareClipboard:'Share via clipboard',shareWhatsApp:'Share via WhatsApp',shareTelegram:'Share via Telegram',shareEmail:'Share via email',appLinkLabel:'Play it with Binaural Beats Lab:',productLinkLabel:'Discover Binaural Beats Lab:',clipboardCopied:'Session message copied to clipboard',clipboardReadError:'Could not read the clipboard. Check your browser permissions.',clipboardWriteError:'Could not copy to the clipboard. Check your browser permissions.',invalidSharedSession:'The clipboard content does not contain a valid session.',replaceSegments:'This will replace the current editor sections. Continue?',sessionBase:'Base',sessionDuration:'Duration',sessionSegments:'Sections'});
+Object.assign(TRANSLATIONS.es,{segmentName:'Nombre del tramo',segmentNamePlaceholder:'Ej. Relajación inicial',segmentCopy:'copia'});
+Object.assign(TRANSLATIONS.en,{segmentName:'Section name',segmentNamePlaceholder:'e.g. Initial relaxation',segmentCopy:'copy'});
 let language=localStorage.getItem('bb_language')||((navigator.language||'es').toLowerCase().startsWith('en')?'en':'es');
 const t=key=>TRANSLATIONS[language][key]||key;
 const savedTheme=localStorage.getItem('bb_theme');
 let theme=savedTheme||((window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark');
 function setTheme(value){
-  const themes=['dark','light','monokai','desert','ocean','solarized'];
+  const themes=['dark','light'];
   theme=themes.includes(value)?value:'dark';
   document.body.classList.remove('light','theme-monokai','theme-desert','theme-ocean','theme-solarized');
   document.body.classList.toggle('light',theme==='light');
@@ -170,6 +177,7 @@ function translateStatic(){
   document.querySelector('.theme-options').setAttribute('aria-label',language==='es'?'Tema':'Theme');
   document.getElementById('closePlayerBtn').setAttribute('aria-label',t('closePlayerAria'));
   document.getElementById('settingsTrigger').setAttribute('aria-label',t('settingsAria'));
+  if(currentSavedSession) document.getElementById('playerTitle').textContent=t('savedSession');
 }
 const PRESETS = [
   // Agrupadas por onda (Delta→Theta→Alpha→Beta→Gamma) y ascendente por Hz dentro de cada grupo
@@ -200,8 +208,9 @@ Object.assign(TRANSLATIONS.en.presetDetails,{
   memoria:['A 14 Hz beta session for gentle concentration and focused attention.','Use it for reading, learning or tasks that require sustained attention.'],relax:['A 10 Hz alpha session for alert relaxation and stress reduction.','It can accompany a conscious break without aiming for sleep.'],dormir:['A 2 Hz delta session for a restorative sleep routine.','Use it before sleep or during a deep rest break.'],meditar:['A 6 Hz theta session for light meditation and visualization.','It can accompany calm breathing and mindfulness.'],intuicion:['A 5 Hz theta session for deep relaxation and inner connection.','It can accompany introspection, imagination and a personal pause.'],energia:['A 20 Hz beta session for intense concentration and mental energy.','Use it in short work, study or activation blocks.'],creatividad:['A 7 Hz theta session for creative ideas and a hypnagogic transition.','It can accompany brainstorming, writing or creative exploration.'],enfoque:['An 18 Hz beta session for intense concentration and problem-solving.','Use it for productive tasks that need continuity.'],claridad:['A 12 Hz alpha session for positive thinking and clear visualization.','It can accompany planning, reflection or a pause before deciding.'],siesta:['A 3 Hz delta session for deep rest and physical recovery.','Use it only when you can disconnect and do not need to stay alert.'],respiracion:['A 4 Hz theta session for deep meditation and inner connection.','It can accompany slow breathing exercises and attention to the body.'],alerta:['A 30 Hz gamma session for cognitive processing and memory.','Use it at a comfortable volume during short periods of intense attention.']
 });
 let audioCtx=null, leftOsc=null, rightOsc=null, merger=null, gainNode=null, analyserL=null, analyserR=null, panNode=null, panLfo=null, panLfoGain=null, eightDFilter=null, eightDDepthGain=null, eightDShaper=null, eightDFilterMod=null, eightDDepthMod=null;
-let isPlaying=false, currentPreset=null, animId=null;
-let customPlayData=null, customStartTime=0;
+let isPlaying=false, currentPreset=null, currentSavedSession=null, animId=null;
+let customPlayData=null, customStartTime=0, playbackTimer=null;
+let savedPlaybackStartTime=0;
 // Ajuste opcional: audio 8D (rotación de panorama). Persistido en localStorage.
 let eightD=localStorage.getItem('bb_8d')==='1';
 // Curva 1-|x| reutilizada para simular acercamiento/alejamiento sincronizado con el pan
@@ -289,12 +298,39 @@ function startTone(baseFreq, beatFreq, volume){
 }
 
 function stopTone(){
+  if(playbackTimer){clearTimeout(playbackTimer);playbackTimer=null;}
   if(leftOsc){try{leftOsc.stop();}catch(e){}leftOsc.disconnect();leftOsc=null;}
   if(rightOsc){try{rightOsc.stop();}catch(e){}rightOsc.disconnect();rightOsc=null;}
   isPlaying=false;
   if(animId){cancelAnimationFrame(animId);animId=null;}
   customPlayData=null;
+  savedPlaybackStartTime=0;
   stopPanRotation();
+  document.getElementById('globalPlayback').hidden=true;
+  if(currentSavedSession){
+    playBtn.textContent=t('start');
+    playBtn.classList.remove('playing');
+  }
+  playBtn.textContent=t('start');
+  playBtn.classList.remove('playing');
+  playCustomBtn.innerHTML=`▶ <span>${t('play')}</span>`;
+  playCustomBtn.classList.remove('playing');
+  playCustomBtn.classList.add('primary');
+}
+
+function schedulePlaybackEnd(duration,onFinish){
+  if(playbackTimer) clearTimeout(playbackTimer);
+  let remaining=duration;
+  let previous=performance.now();
+  const maxTimeoutMs=2147483000;
+  const tick=()=>{
+    const now=performance.now();
+    remaining-=(now-previous)/1000;
+    previous=now;
+    if(remaining<=0){playbackTimer=null;onFinish();return;}
+    playbackTimer=setTimeout(tick,Math.min(remaining*1000,maxTimeoutMs));
+  };
+  playbackTimer=setTimeout(tick,Math.min(remaining*1000,maxTimeoutMs));
 }
 
 // Arranca un LFO que mueve panNode.pan; el período (s) es proporcional a beatFreq. Sólo si el ajuste 8D está activo.
@@ -340,7 +376,12 @@ function updateBeat(beatFreq){
 /* ============ VISUALIZER ============ */
 const vizCanvas=document.getElementById('visualizer');
 const vizCtx=vizCanvas.getContext('2d');
-function resizeViz(){vizCanvas.width=vizCanvas.offsetWidth*2;vizCanvas.height=vizCanvas.offsetHeight*2;}
+function resizeViz(){
+  const width=vizCanvas.clientWidth;
+  if(!width) return;
+  vizCanvas.width=width*2;
+  vizCanvas.height=vizCanvas.clientHeight*2;
+}
 resizeViz();
 window.addEventListener('resize',resizeViz);
 
@@ -356,6 +397,8 @@ function shadeHex(hex,percent){
 
 function startVisualizer(){
   if(!analyserL||!analyserR) return;
+  document.getElementById('globalPlayback').hidden=false;
+  requestAnimationFrame(resizeViz);
   // Buffers de frecuencia para el canal izquierdo y derecho
   const dataL=new Uint8Array(analyserL.frequencyBinCount);
   const dataR=new Uint8Array(analyserR.frequencyBinCount);
@@ -378,6 +421,7 @@ function startVisualizer(){
   }
   function draw(){
     if(!isPlaying){vizCtx.clearRect(0,0,vizCanvas.width,vizCanvas.height);return;}
+    if(!vizCanvas.clientWidth){animId=requestAnimationFrame(draw);return;}
     analyserL.getByteFrequencyData(dataL);
     analyserR.getByteFrequencyData(dataR);
     // Estela con el color de fondo real del canvas (varía por tema) en vez de negro fijo
@@ -449,6 +493,10 @@ function selectPreset(p){
   const text=TRANSLATIONS[language].presets[p.id];
   const details=TRANSLATIONS[language].presetDetails[p.id];
   currentPreset=p;
+  currentSavedSession=null;
+  playBtn.hidden=false;
+  document.getElementById('playerTitle').textContent=t('player');
+  document.getElementById('presetDetails').hidden=false;
   document.getElementById('presetGrid').style.display='none';
   document.getElementById('playerPanel').classList.remove('hidden');
   requestAnimationFrame(resizeViz);
@@ -468,11 +516,15 @@ function selectPreset(p){
 
 /* ============ CONTROLES ============ */
 const playBtn=document.getElementById('playBtn');
+document.getElementById('globalStopBtn').onclick=()=>stopTone();
 document.getElementById('closePlayerBtn').onclick=()=>{
   if(isPlaying) stopTone();
   playBtn.textContent=t('start');
   playBtn.classList.remove('playing');
   currentPreset=null;
+  currentSavedSession=null;
+  document.getElementById('playerTitle').textContent=t('player');
+  document.getElementById('presetDetails').hidden=false;
   document.getElementById('playerPanel').classList.add('hidden');
   document.getElementById('presetGrid').style.display='grid';
 };
@@ -482,6 +534,7 @@ playBtn.onclick=()=>{
     playBtn.textContent=t('start');
     playBtn.classList.remove('playing');
   } else {
+    if(currentSavedSession){playSaved(currentSavedSession.program);return;}
     if(!currentPreset){toast(t('selectFirst'));return;}
     const base=+document.getElementById('baseFreq').value;
     const vol=+document.getElementById('volume').value/100;
@@ -495,6 +548,10 @@ playBtn.onclick=()=>{
 
 document.getElementById('baseFreq').oninput=e=>{
   document.getElementById('baseVal').textContent=e.target.value;
+  if(isPlaying&&currentSavedSession){
+    updateSavedSessionBase(+e.target.value);
+    return;
+  }
   if(isPlaying && currentPreset){
     leftOsc.frequency.setValueAtTime(+e.target.value, audioCtx.currentTime);
     rightOsc.frequency.setValueAtTime(+e.target.value+currentPreset.beat, audioCtx.currentTime);
@@ -507,146 +564,170 @@ document.getElementById('volume').oninput=e=>{
 
 /* ============ TABS ============ */
 document.querySelectorAll('.tab').forEach(t=>{
-  t.onclick=()=>{
+  t.onclick=event=>{
+    if(suppressTabClick&&event.detail!==0){suppressTabClick=false;return;}
+    const previousIndex=carouselTabs.findIndex(tab=>tab.classList.contains('active'));
+    const nextIndex=carouselTabs.indexOf(t);
     document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
     document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
     t.classList.add('active');
-    document.getElementById('view-'+t.dataset.view).classList.add('active');
-    if(t.dataset.view==='editor') resizeEditor();
+    const nextView=document.getElementById('view-'+t.dataset.view);
+    nextView.classList.remove('slide-from-left','slide-from-right');
+    nextView.classList.add(nextIndex>=previousIndex?'slide-from-right':'slide-from-left','active');
+    nextView.addEventListener('animationend',()=>nextView.classList.remove('slide-from-left','slide-from-right'),{once:true});
+    if(t.dataset.view==='editor') renderSegments();
     if(t.dataset.view==='saved') renderSaved();
   };
 });
 
+/* Horizontal swipe / mouse drag between the three main views */
+const carouselTabs=[...document.querySelectorAll('.tab[data-view]')];
+let dragStart=null,suppressTabClick=false,suppressDragClick=false;
+const swipeIgnore='button,input,textarea,select,a,[contenteditable="true"],.saved-actions,.segment-actions,.tabs';
+document.querySelector('main').addEventListener('pointerdown',event=>{
+  if(event.pointerType==='mouse'&&event.button!==0) return;
+  if(event.target.closest(swipeIgnore)) return;
+  const activeIndex=carouselTabs.findIndex(tab=>tab.classList.contains('active'));
+  if(activeIndex<0) return;
+  dragStart={x:event.clientX,y:event.clientY,pointerId:event.pointerId,index:activeIndex,moved:false};
+});
+document.querySelector('main').addEventListener('pointermove',event=>{
+  if(!dragStart||dragStart.pointerId!==event.pointerId) return;
+  const dx=event.clientX-dragStart.x,dy=event.clientY-dragStart.y;
+  if(Math.abs(dx)>12&&Math.abs(dx)>Math.abs(dy)*1.25){
+    dragStart.moved=true;
+    if(event.cancelable) event.preventDefault();
+  }
+});
+function finishCarouselDrag(event){
+  if(!dragStart||dragStart.pointerId!==event.pointerId) return;
+  const {x,y,index,moved}=dragStart;
+  const dx=event.clientX-x,dy=event.clientY-y;
+  dragStart=null;
+  if(!moved||Math.abs(dx)<56||Math.abs(dx)<Math.abs(dy)*1.25) return;
+  const nextIndex=Math.max(0,Math.min(carouselTabs.length-1,index+(dx<0?1:-1)));
+  if(nextIndex===index) return;
+  suppressTabClick=true;
+  suppressDragClick=true;
+  carouselTabs[nextIndex].click();
+  setTimeout(()=>{suppressTabClick=false;suppressDragClick=false;},250);
+}
+document.addEventListener('click',event=>{
+  if(!suppressDragClick||event.detail===0) return;
+  event.preventDefault();
+  event.stopImmediatePropagation();
+},true);
+window.addEventListener('pointerup',finishCarouselDrag);
+window.addEventListener('pointercancel',()=>{dragStart=null;});
+
 /* ============ EDITOR ============ */
-const editorCanvas=document.getElementById('editor');
-const ectx=editorCanvas.getContext('2d');
-let points=[]; // {x:0..1, y:0..1} y=0 es 0Hz, y=1 es 40Hz
-let dragging=null;
 const MAX_BEAT=40;
+let segments=[];
+let draftSessionName='';
+const segmentList=document.getElementById('segmentList');
 
-function resizeEditor(){
-  editorCanvas.width=editorCanvas.offsetWidth*2;
-  editorCanvas.height=editorCanvas.offsetHeight*2;
-  drawEditor();
+function formatDuration(seconds){
+  const minutes=Math.floor(seconds/60);
+  const remaining=seconds%60;
+  return `${minutes}:${String(remaining).padStart(2,'0')}`;
 }
-window.addEventListener('resize',resizeEditor);
-
-function pointBeat(point){
-  return Math.round(point.y*MAX_BEAT*10)/10;
+function totalSegmentDuration(){
+  return segments.reduce((total,segment)=>total+segment.duration,0);
 }
-
-function drawEditor(){
-  const W=editorCanvas.width, H=editorCanvas.height;
-  ectx.clearRect(0,0,W,H);
-  // grid
-  ectx.strokeStyle='rgba(255,255,255,0.06)';
-  ectx.lineWidth=1;
-  for(let i=1;i<8;i++){
-    const y=H*i/8;
-    ectx.beginPath();ectx.moveTo(0,y);ectx.lineTo(W,y);ectx.stroke();
+function escapeHTML(value){
+  return String(value).replace(/[&<>"']/g,character=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+}
+function normalizeSegments(program){
+  if(Array.isArray(program.segments)){
+    return program.segments.map((segment,index)=>({
+      name:typeof segment.name==='string'&&segment.name.trim()?segment.name.trim().slice(0,60):`${t('segment')} ${index+1}`,
+      beat:Math.max(0,Math.min(MAX_BEAT,+segment.beat||0)),
+      duration:Math.max(1,+segment.duration||1)
+    }));
   }
-  for(let i=1;i<10;i++){
-    const x=W*i/10;
-    ectx.beginPath();ectx.moveTo(x,0);ectx.lineTo(x,H);ectx.stroke();
+  const points=Array.isArray(program.points)?[...program.points].sort((a,b)=>a.x-b.x):[];
+  const duration=Math.max(1,+program.duration||60);
+  return points.slice(0,-1).map((point,index)=>({
+    name:`${t('segment')} ${index+1}`,
+    beat:Math.round(Math.max(0,Math.min(MAX_BEAT,(+point.y||0)*MAX_BEAT))*10)/10,
+    duration:Math.max(1,Math.round((points[index+1].x-point.x)*duration))
+  }));
+}
+function renderSegments(){
+  document.getElementById('segmentCount').textContent=segments.length;
+  document.getElementById('durVal').textContent=formatDuration(totalSegmentDuration());
+  if(!segments.length){
+    segmentList.innerHTML=`<div class="empty-segments">${t('emptySegments')}</div>`;
+    return;
   }
-  // curva
-  if(points.length>0){
-    const sorted=[...points].sort((a,b)=>a.x-b.x);
-    const grad=ectx.createLinearGradient(0,0,W,0);
-    grad.addColorStop(0,'#00d4ff');
-    grad.addColorStop(0.5,'#a855f7');
-    grad.addColorStop(1,'#ec4899');
-    ectx.strokeStyle=grad;
-    ectx.lineWidth=4;
-    ectx.beginPath();
-    sorted.forEach((p,i)=>{
-      const x=p.x*W, y=H-p.y*H;
-      if(i===0) ectx.moveTo(x,y); else ectx.lineTo(x,y);
-    });
-    ectx.stroke();
-    // relleno
-    ectx.lineTo(sorted[sorted.length-1].x*W, H);
-    ectx.lineTo(sorted[0].x*W, H);
-    ectx.closePath();
-    const fillGrad=ectx.createLinearGradient(0,0,0,H);
-    fillGrad.addColorStop(0,'rgba(168,85,247,0.3)');
-    fillGrad.addColorStop(1,'rgba(0,212,255,0)');
-    ectx.fillStyle=fillGrad;
-    ectx.fill();
-    // puntos
-    sorted.forEach(p=>{
-      const x=p.x*W, y=H-p.y*H;
-      ectx.fillStyle='#fff';
-      ectx.beginPath();ectx.arc(x,y,10,0,Math.PI*2);ectx.fill();
-      ectx.fillStyle='#00d4ff';
-      ectx.beginPath();ectx.arc(x,y,6,0,Math.PI*2);ectx.fill();
+  segmentList.innerHTML=segments.map((segment,index)=>`
+    <article class="segment-card" data-index="${index}">
+      <label class="segment-name-field">${t('segmentName')}<input class="segment-input" data-field="name" type="text" maxlength="60" value="${escapeHTML(segment.name)}" placeholder="${escapeHTML(t('segmentNamePlaceholder'))}"></label>
+      <div class="segment-values">
+        <label>${t('segmentFrequency')}<input class="segment-input" data-field="beat" type="number" min="0" max="${MAX_BEAT}" step="0.1" value="${segment.beat}" inputmode="decimal"></label>
+        <label>${t('segmentDuration')}<input class="segment-input" data-field="duration" type="number" min="1" step="1" value="${segment.duration}" inputmode="numeric"></label>
+      </div>
+      <div class="segment-actions">
+        <button type="button" data-action="up" aria-label="${t('moveUp')}" ${index===0?'disabled':''}>↑</button>
+        <button type="button" data-action="down" aria-label="${t('moveDown')}" ${index===segments.length-1?'disabled':''}>↓</button>
+        <button type="button" data-action="duplicate">${t('duplicate')}</button>
+        <button type="button" data-action="delete" class="danger">${t('delete')}</button>
+      </div>
+    </article>`).join('');
+  segmentList.querySelectorAll('.segment-input[data-field="name"]').forEach(input=>input.addEventListener('input',()=>{
+    const index=+input.closest('.segment-card').dataset.index;
+    segments[index].name=input.value.slice(0,60);
+  }));
+  segmentList.querySelectorAll('.segment-input').forEach(input=>input.addEventListener('change',()=>{
+    const card=input.closest('.segment-card');
+    const index=+card.dataset.index;
+    const field=input.dataset.field;
+    if(field==='name'){
+      segments[index].name=input.value.trim()||`${t('segment')} ${index+1}`;
+      renderSegments();
+      return;
+    }
+    const value=+input.value;
+    const min=field==='beat'?0:1;
+    const max=field==='beat'?MAX_BEAT:Number.MAX_VALUE;
+    segments[index][field]=Number.isFinite(value)?Math.max(min,Math.min(max,value||0)):min;
+    renderSegments();
+  }));
+  segmentList.querySelectorAll('[data-action]').forEach(button=>button.addEventListener('click',()=>{
+    const card=button.closest('.segment-card');
+    const index=+card.dataset.index;
+    const action=button.dataset.action;
+    if(action==='delete') segments.splice(index,1);
+    if(action==='duplicate') segments.splice(index+1,0,{...segments[index],name:`${segments[index].name} (${t('segmentCopy')})`});
+    if(action==='up'&&index>0) [segments[index-1],segments[index]]=[segments[index],segments[index-1]];
+    if(action==='down'&&index<segments.length-1) [segments[index],segments[index+1]]=[segments[index+1],segments[index]];
+    renderSegments();
+  }));
+}
 
-      const beat=pointBeat(p);
-      const label=`${beat.toFixed(1)} Hz`;
-      ectx.font='600 18px sans-serif';
-      const labelWidth=ectx.measureText(label).width+16;
-      const labelX=Math.max(4,Math.min(W-labelWidth-4,x-labelWidth/2));
-      const labelY=y<42?y+16:y-38;
-      ectx.fillStyle='rgba(10,10,31,0.88)';
-      ectx.fillRect(labelX,labelY,labelWidth,26);
-      ectx.fillStyle='#fff';
-      ectx.textAlign='center';
-      ectx.textBaseline='middle';
-      ectx.fillText(label,labelX+labelWidth/2,labelY+13);
-    });
-  } else {
-    ectx.fillStyle='rgba(255,255,255,0.3)';
-    ectx.font='24px sans-serif';
-    ectx.textAlign='center';
-    ectx.fillText(t('addPoints'),W/2,H/2);
+document.getElementById('addSegmentBtn').onclick=()=>{
+  segments.push({name:`${t('segment')} ${segments.length+1}`,beat:10,duration:60});
+  renderSegments();
+};
+document.getElementById('clearBtn').onclick=()=>{segments=[];renderSegments();};
+document.getElementById('importClipboardBtn').onclick=async()=>{
+  let clipboardText;
+  try{
+    clipboardText=await navigator.clipboard.readText();
+  }catch(error){
+    toast(t('clipboardReadError'));
+    return;
   }
-}
-
-function getPos(e){
-  const r=editorCanvas.getBoundingClientRect();
-  const t=e.touches?e.touches[0]:e;
-  const rawY=Math.max(0,Math.min(1,1-(t.clientY-r.top)/r.height));
-  return {
-    x:Math.max(0,Math.min(1,(t.clientX-r.left)/r.width)),
-    y:Math.round(rawY*MAX_BEAT*10)/(MAX_BEAT*10)
-  };
-}
-
-editorCanvas.addEventListener('touchstart',e=>{e.preventDefault();handleDown(e);},{passive:false});
-editorCanvas.addEventListener('touchmove',e=>{e.preventDefault();handleMove(e);},{passive:false});
-editorCanvas.addEventListener('touchend',e=>{e.preventDefault();dragging=null;},{passive:false});
-editorCanvas.addEventListener('mousedown',handleDown);
-editorCanvas.addEventListener('mousemove',handleMove);
-editorCanvas.addEventListener('mouseup',()=>dragging=null);
-editorCanvas.addEventListener('mouseleave',()=>dragging=null);
-
-function handleDown(e){
-  const p=getPos(e);
-  // buscar punto cercano
-  let closest=-1, minD=0.05;
-  points.forEach((pt,i)=>{
-    const d=Math.hypot(pt.x-p.x,pt.y-p.y);
-    if(d<minD){minD=d;closest=i;}
-  });
-  if(closest>=0){
-    dragging=closest;
-  } else {
-    points.push(p);
-    dragging=points.length-1;
-    drawEditor();
-  }
-}
-function handleMove(e){
-  if(dragging===null) return;
-  const p=getPos(e);
-  points[dragging]=p;
-  drawEditor();
-}
-
-document.getElementById('clearBtn').onclick=()=>{points=[];drawEditor();};
-
-document.getElementById('duration').oninput=e=>{
-  document.getElementById('durVal').textContent=e.target.value;
+  const imported=parseSharedSession(clipboardText);
+  if(!imported){toast(t('invalidSharedSession'));return;}
+  if(segments.length&&!confirm(t('replaceSegments'))) return;
+  segments=imported.segments.map(segment=>({...segment}));
+  draftSessionName=imported.name;
+  const baseInput=document.getElementById('baseFreq2');
+  baseInput.value=imported.base;
+  document.getElementById('baseVal2').textContent=imported.base;
+  renderSegments();
+  toast(t('loaded'));
 };
 document.getElementById('baseFreq2').oninput=e=>{
   document.getElementById('baseVal2').textContent=e.target.value;
@@ -662,11 +743,12 @@ playCustomBtn.onclick=()=>{
     playCustomBtn.classList.add('primary');
     return;
   }
-  if(points.length<2){toast(t('needTwo'));return;}
+  if(!segments.length){toast(t('needSegment'));return;}
   initAudio();
   const base=+document.getElementById('baseFreq2').value;
   const vol=+document.getElementById('volume').value/100;
-  const duration=+document.getElementById('duration').value;
+  const duration=totalSegmentDuration();
+  if(!Number.isFinite(duration)||duration<=0){toast(t('invalidSegment'));return;}
   gainNode.gain.value=vol;
 
   leftOsc=audioCtx.createOscillator();
@@ -680,16 +762,15 @@ playCustomBtn.onclick=()=>{
   rightOsc.connect(gR).connect(merger,0,1);
   merger.connect(gainNode);
 
-  // Programar curva
+  // Programar cada frecuencia al comienzo de su tramo.
   const now=audioCtx.currentTime;
-  const sorted=[...points].sort((a,b)=>a.x-b.x);
-  sorted.forEach(p=>{
-    const t=now+p.x*duration;
-    const freq=base+p.y*MAX_BEAT;
-    rightOsc.frequency.setValueAtTime(freq,t);
+  let offset=0;
+  segments.forEach(segment=>{
+    rightOsc.frequency.setValueAtTime(base+segment.beat,now+offset);
+    offset+=segment.duration;
   });
-  // Auto-stop
-  setTimeout(()=>{
+  // Auto-stop after the total duration, even beyond the browser timer limit.
+  schedulePlaybackEnd(duration,()=>{
     if(isPlaying && customPlayData){
       stopTone();
       playCustomBtn.innerHTML=`▶ <span>${t('play')}</span>`;
@@ -697,35 +778,38 @@ playCustomBtn.onclick=()=>{
       playCustomBtn.classList.add('primary');
       toast(t('finished'));
     }
-  },duration*1000);
+  });
 
   leftOsc.start();rightOsc.start();
   isPlaying=true;
-  customPlayData={base,duration,sorted};
+  customPlayData={base,duration,segments:[...segments]};
   customStartTime=now;
   playCustomBtn.textContent=t('stop');
   playCustomBtn.classList.add('playing');
   playCustomBtn.classList.remove('primary');
   startVisualizer();
-  const avgBeat=sorted.reduce((s,p)=>s+p.y*MAX_BEAT,0)/sorted.length;
+  const avgBeat=segments.reduce((sum,segment)=>sum+segment.beat,0)/segments.length;
   startPanRotation(avgBeat);
 };
 
 /* ============ GUARDAR / CARGAR ============ */
 document.getElementById('saveBtn').onclick=()=>{
-  if(points.length<2){toast(t('needTwoShort'));return;}
-  const name=prompt(t('programName'),t('myProgram'));
+  if(!segments.length){toast(t('needSegment'));return;}
+  const duration=totalSegmentDuration();
+  if(!Number.isFinite(duration)||duration<=0){toast(t('invalidSegment'));return;}
+  const name=prompt(t('programName'),draftSessionName||t('myProgram'));
   if(!name) return;
   const saved=JSON.parse(localStorage.getItem('bb_saved')||'[]');
   saved.push({
     id:Date.now(),
     name,
-    points:[...points],
-    duration:+document.getElementById('duration').value,
+    segments:segments.map(segment=>({...segment})),
+    duration,
     base:+document.getElementById('baseFreq2').value,
     created:Date.now()
   });
   localStorage.setItem('bb_saved',JSON.stringify(saved));
+  draftSessionName='';
   toast(t('saved'));
   renderSaved();
 };
@@ -734,23 +818,82 @@ function renderSaved(){
   const list=document.getElementById('savedList');
   const saved=JSON.parse(localStorage.getItem('bb_saved')||'[]');
   if(saved.length===0){
-    list.innerHTML=`<div class="empty">${t('empty')}</div>`;
+    const emptyState=document.createElement('div');
+    emptyState.className='empty';
+    const message=document.createElement('p');
+    message.textContent=t('empty');
+    const createButton=document.createElement('button');
+    createButton.type='button';
+    createButton.className='empty-create-btn';
+    createButton.textContent=t('createSession');
+    createButton.onclick=()=>document.querySelector('[data-view="editor"]').click();
+    emptyState.append(message,createButton);
+    list.replaceChildren(emptyState);
     return;
   }
   list.innerHTML='';
   saved.forEach(s=>{
     const el=document.createElement('div');
     el.className='saved-item';
-    el.innerHTML=`
-      <div>
-        <div class="name">🎵 ${s.name}</div>
-        <div class="meta">${s.points.length} ${t('points')} · ${s.duration}s · ${t('base')} ${s.base}Hz</div>
-      </div>
-      <div>
-        <button data-act="load" data-id="${s.id}">${t('load')}</button>
-        <button data-act="play" data-id="${s.id}">▶</button>
-        <button class="del" data-act="del" data-id="${s.id}" aria-label="${t('delete')}">✕</button>
-      </div>`;
+    const details=document.createElement('div');
+    const name=document.createElement('div');
+    name.className='name';
+    name.textContent=`🎵 ${s.name}`;
+    const normalized=normalizeSegments(s);
+    const meta=document.createElement('div');
+    meta.className='meta';
+    meta.textContent=`${normalized.length} ${t('segments')} · ${formatDuration(normalized.reduce((total,segment)=>total+segment.duration,0))} · ${t('base')} ${s.base}Hz`;
+    details.append(name,meta);
+    const actions=document.createElement('div');
+    actions.className='saved-actions';
+    const makeAction=(label,action,extraClass='')=>{
+      const button=document.createElement('button');
+      button.type='button';
+      button.dataset.act=action;
+      button.dataset.id=s.id;
+      button.className=extraClass;
+      button.textContent=label;
+      actions.appendChild(button);
+      return button;
+    };
+    const playButton=makeAction('▶','play','action-play');
+    playButton.setAttribute('aria-label',t('play'));
+    playButton.title=t('play');
+    const loadButton=makeAction('','load','action-icon-button');
+    loadButton.innerHTML='<svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5h16M6 17V5a2 2 0 0 1 2-2h8l4 4v10M14 3v5h5M12 11v6m-3-3 3 3 3-3"/></svg>';
+    loadButton.setAttribute('aria-label',t('load'));
+    loadButton.title=t('load');
+    const shareControl=document.createElement('div');
+    shareControl.className='share-control';
+    const shareButton=makeAction('','share','action-icon-button');
+    shareButton.innerHTML='<svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.4m-6.6 7 6.6 4.2"/></svg>';
+    shareButton.setAttribute('aria-label',t('share'));
+    shareButton.title=t('share');
+    shareControl.appendChild(shareButton);
+    const shareOptions=document.createElement('div');
+    shareOptions.className='share-options';
+    shareOptions.hidden=true;
+    const shareIcons={
+      clipboard:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="4" width="12" height="16" rx="2"/><path d="M16 4V3a1 1 0 0 0-1-1H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h3M11 9h6M11 13h6"/></svg>',
+      whatsapp:'<svg viewBox="0 0 24 24" aria-hidden="true"><path class="brand-fill" d="M12 2a9.8 9.8 0 0 0-8.4 14.9L2 22l5.3-1.5A10 10 0 1 0 12 2Z"/><path class="brand-cutout" d="M9.1 7.5c-.3-.7-.6-.7-.9-.7h-.7c-.3 0-.7.1-1 .5s-1.3 1.3-1.3 3.1 1.3 3.5 1.5 3.7 2.5 4 6.1 5.4c3 .1 3.6 0 4.2-.6s1.2-1.2 1.3-1.7.1-1-.1-1.1-2.1-1-2.5-1.2-.6-.2-.8.2-.9 1.2-1.1 1.4-.4.3-.8.1a10.4 10.4 0 0 1-3-1.9 11.2 11.2 0 0 1-2.1-2.6c-.2-.4 0-.6.2-.8l.6-.7c.2-.2.2-.4.4-.7s.1-.5 0-.7L9.1 7.5Z"/></svg>',
+      telegram:'<svg viewBox="0 0 24 24" aria-hidden="true"><path class="brand-fill" d="M22 3 2.8 10.4c-1.3.5-1.3 1.2-.2 1.5l4.9 1.5 1.9 5.8c.2.7.1 1 .8 1 .5 0 .8-.2 1.1-.5l2.4-2.3 5 3.7c.9.5 1.5.2 1.7-.8L23.7 4c.3-1.2-.4-1.7-1.7-1Z"/><path class="brand-cutout" d="m8.2 13.1 10.4-6.6c.5-.3.9-.1.5.2l-8.6 7.8-.3 3.4-2-4.8Z"/></svg>',
+      email:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>'
+    };
+    [['shareClipboard','clipboard'],['shareWhatsApp','whatsapp'],['shareTelegram','telegram'],['shareEmail','email']].forEach(([label,destination])=>{
+      const button=document.createElement('button');
+      button.type='button';
+      button.dataset.share=destination;
+      button.dataset.id=s.id;
+      button.className=`share-option share-${destination}`;
+      button.setAttribute('aria-label',t(label));
+      button.title=t(label);
+      button.innerHTML=shareIcons[destination];
+      shareOptions.appendChild(button);
+    });
+    shareControl.appendChild(shareOptions);
+    makeAction('✕','del','del').setAttribute('aria-label',t('delete'));
+    el.append(details,actions);
+    actions.insertBefore(shareControl,actions.lastChild);
     list.appendChild(el);
   });
   list.querySelectorAll('button').forEach(b=>{
@@ -766,29 +909,166 @@ function renderSaved(){
           toast(t('deleted'));
         }
       } else if(b.dataset.act==='load'){
-        points=[...s.points];
-        document.getElementById('duration').value=s.duration;
-        document.getElementById('durVal').textContent=s.duration;
+        segments=normalizeSegments(s);
         document.getElementById('baseFreq2').value=s.base;
         document.getElementById('baseVal2').textContent=s.base;
         document.querySelector('[data-view="editor"]').click();
         toast(t('loaded'));
-      } else if(b.dataset.act==='play'){
-        playSaved(s);
-      }
+       } else if(b.dataset.act==='play'){
+         playSaved(s);
+        } else if(b.dataset.act==='share'){
+          const options=b.closest('.share-control').querySelector('.share-options');
+          options.hidden=!options.hidden;
+          b.setAttribute('aria-expanded',String(!options.hidden));
+          b.closest('.saved-item').classList.toggle('share-open',!options.hidden);
+          if(!options.hidden){
+            list.querySelectorAll('.share-options').forEach(other=>{
+              if(other!==options){
+                other.hidden=true;
+                other.closest('.saved-item').classList.remove('share-open');
+                other.closest('.share-control').querySelector('[data-act="share"]').setAttribute('aria-expanded','false');
+              }
+            });
+          }
+       }
+     };
+   });
+  list.querySelectorAll('[data-share]').forEach(button=>{
+    button.onclick=()=>{
+      const s=saved.find(x=>String(x.id)===button.dataset.id);
+      if(s) shareSavedSession(s,button.dataset.share);
     };
   });
 }
 
+function makeSharedSession(program){
+  return {format:'binaural-beats-pro-session',version:1,name:String(program.name||t('myProgram')),base:+program.base,segments:normalizeSegments(program)};
+}
+
+function parseSharedSession(text){
+  if(typeof text!=='string'||text.length>1000000) return null;
+  const normalizedText=text.replace(/\r\n?/g,'\n').trim();
+  const marker='BINAURAL_BEATS_SESSION';
+  const markerIndex=normalizedText.lastIndexOf(marker);
+  if(markerIndex!==-1){
+    const jsonStart=normalizedText.indexOf('{',markerIndex+marker.length);
+    const parsed=jsonStart===-1?null:parseSessionJson(normalizedText.slice(jsonStart));
+    if(parsed) return parsed;
+  }
+  const direct=parseSessionJson(normalizedText);
+  if(direct) return direct;
+  const links=normalizedText.match(/https?:\/\/[^\s<>"']+/g)||[];
+  for(const rawLink of links){
+    try{
+      const link=new URL(rawLink.replace(/[),.!?]+$/,''));
+      const encoded=link.searchParams.get('session')||new URLSearchParams(link.hash.slice(1)).get('session');
+      if(encoded){
+        const parsed=parseSessionJson(encoded);
+        if(parsed) return parsed;
+      }
+    }catch(error){}
+  }
+  return null;
+}
+
+function parseSessionJson(text){
+  const start=text.indexOf('{');
+  if(start===-1) return null;
+  let depth=0;
+  let inString=false;
+  let escaped=false;
+  let end=-1;
+  for(let index=start;index<text.length;index++){
+    const character=text[index];
+    if(inString){
+      if(escaped) escaped=false;
+      else if(character==='\\') escaped=true;
+      else if(character==='"') inString=false;
+      continue;
+    }
+    if(character==='"'){inString=true;continue;}
+    if(character==='{') depth++;
+    if(character==='}'&&--depth===0){end=index+1;break;}
+  }
+  if(end===-1) return null;
+  try{
+    const data=JSON.parse(text.slice(start,end));
+    if(data?.format!=='binaural-beats-pro-session'||data.version!==1) return null;
+    if(typeof data.name!=='string'||!data.name.trim()||data.name.length>120) return null;
+    if(!Number.isFinite(data.base)||data.base<100||data.base>300) return null;
+    if(!Array.isArray(data.segments)||data.segments.length<1||data.segments.length>500) return null;
+    const validSegments=data.segments.every(segment=>segment&&Number.isFinite(segment.beat)&&segment.beat>=0&&segment.beat<=MAX_BEAT&&Number.isFinite(segment.duration)&&segment.duration>=1&&segment.duration<=86400&&(segment.name===undefined||(typeof segment.name==='string'&&segment.name.length<=60)));
+    if(!validSegments) return null;
+    return {name:data.name.trim(),base:data.base,segments:data.segments.map((segment,index)=>({name:typeof segment.name==='string'&&segment.name.trim()?segment.name.trim():`${t('segment')} ${index+1}`,beat:segment.beat,duration:segment.duration}))};
+  }catch(error){
+    return null;
+  }
+}
+
+function sharedMessage(session){
+  return `${session.name}\n${t('appLinkLabel')}\n${sharedSessionLink(session)}\n\n${t('productLinkLabel')}\n${PRODUCT_URL}`;
+}
+
+function sharedSessionLink(session){
+  const appUrl=new URL('./',window.location.href);
+  appUrl.searchParams.set('session',JSON.stringify(session));
+  return appUrl.href;
+}
+
+function shareSavedSession(program,destination){
+  const session=makeSharedSession(program);
+  const message=sharedMessage(session);
+  if(destination==='clipboard'){
+    if(!navigator.clipboard?.writeText){toast(t('clipboardWriteError'));return;}
+    navigator.clipboard.writeText(message).then(()=>toast(t('clipboardCopied'))).catch(()=>toast(t('clipboardWriteError')));
+    return;
+  }
+  let url;
+  if(destination==='whatsapp') url=`https://wa.me/?text=${encodeURIComponent(message)}`;
+  if(destination==='telegram') url=`https://t.me/share/url?url=&text=${encodeURIComponent(message)}`;
+  if(destination==='email') url=`mailto:?subject=${encodeURIComponent(session.name)}&body=${encodeURIComponent(message)}`;
+  if(!url) return;
+  if(destination==='email') window.location.href=url;
+  else {
+    const link=document.createElement('a');
+    link.href=url;
+    link.target='_blank';
+    link.rel='noopener noreferrer';
+    link.style.display='none';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  }
+}
+
 function playSaved(s){
   if(isPlaying) stopTone();
+  const savedSegments=normalizeSegments(s);
+  if(!savedSegments.length){toast(t('needSegment'));return;}
+  document.querySelector('[data-view="presets"]').click();
+  currentPreset=null;
+  currentSavedSession={program:s,segments:savedSegments};
+  document.getElementById('presetGrid').style.display='none';
+  document.getElementById('playerPanel').classList.remove('hidden');
+  document.getElementById('playerTitle').textContent=t('savedSession');
+  document.getElementById('currentMode').textContent=`🎵 ${s.name}`;
+  document.getElementById('presetDetailsDescription').textContent='';
+  document.getElementById('presetDetailsEffects').textContent='';
+  document.getElementById('presetDetails').hidden=true;
+  document.getElementById('baseFreq').value=s.base;
+  document.getElementById('baseVal').textContent=s.base;
+  playBtn.hidden=false;
+  playBtn.textContent=t('stop');
+  playBtn.classList.add('playing');
   initAudio();
   gainNode.gain.value=+document.getElementById('volume').value/100;
   leftOsc=audioCtx.createOscillator();
   rightOsc=audioCtx.createOscillator();
   leftOsc.type='sine';rightOsc.type='sine';
-  leftOsc.frequency.value=s.base;
-  rightOsc.frequency.value=s.base;
+  const duration=savedSegments.reduce((total,segment)=>total+segment.duration,0);
+  const base=+document.getElementById('baseFreq').value;
+  leftOsc.frequency.value=base;
+  rightOsc.frequency.value=base;
   const gL=audioCtx.createGain();const gR=audioCtx.createGain();
   const v=+document.getElementById('volume').value/100;
   gL.gain.value=v;gR.gain.value=v;
@@ -796,22 +1076,45 @@ function playSaved(s){
   rightOsc.connect(gR).connect(merger,0,1);
   merger.connect(gainNode);
   const now=audioCtx.currentTime;
-  [...s.points].sort((a,b)=>a.x-b.x).forEach(p=>{
-    rightOsc.frequency.setValueAtTime(s.base+p.y*MAX_BEAT, now+p.x*s.duration);
+  let offset=0;
+  savedSegments.forEach(segment=>{
+    rightOsc.frequency.setValueAtTime(base+segment.beat,now+offset);
+    offset+=segment.duration;
   });
-  setTimeout(()=>{
+  schedulePlaybackEnd(duration,()=>{
     if(isPlaying){
       stopTone();
       toast(t('finished'));
     }
-  },s.duration*1000);
+  });
   leftOsc.start();rightOsc.start();
   isPlaying=true;
+  savedPlaybackStartTime=performance.now();
+  requestAnimationFrame(resizeViz);
   startVisualizer();
   toast(`${t('playing')} ${s.name}`);
-  const sortedPoints=[...s.points].sort((a,b)=>a.x-b.x);
-  const avgBeat=sortedPoints.reduce((sum,p)=>sum+p.y*MAX_BEAT,0)/sortedPoints.length;
+  const avgBeat=savedSegments.reduce((sum,segment)=>sum+segment.beat,0)/savedSegments.length;
   startPanRotation(avgBeat);
+}
+
+function updateSavedSessionBase(base){
+  if(!audioCtx||!leftOsc||!rightOsc||!currentSavedSession) return;
+  const now=audioCtx.currentTime;
+  const elapsed=Math.max(0,(performance.now()-savedPlaybackStartTime)/1000);
+  let segmentOffset=0,currentBeat=currentSavedSession.segments[0].beat;
+  for(const segment of currentSavedSession.segments){
+    const end=segmentOffset+segment.duration;
+    if(elapsed<end){currentBeat=segment.beat;break;}
+    segmentOffset=end;
+  }
+  leftOsc.frequency.setValueAtTime(base,now);
+  rightOsc.frequency.cancelScheduledValues(now);
+  rightOsc.frequency.setValueAtTime(base+currentBeat,now);
+  segmentOffset=0;
+  for(const segment of currentSavedSession.segments){
+    segmentOffset+=segment.duration;
+    if(segmentOffset>elapsed) rightOsc.frequency.setValueAtTime(base+segment.beat,now+(segmentOffset-elapsed));
+  }
 }
 
 /* ============ TOAST ============ */
@@ -838,7 +1141,7 @@ eightDToggle.onclick=()=>{
   localStorage.setItem('bb_8d',eightD?'1':'0');
   updateEightDUI();
   if(isPlaying){
-    if(eightD) startPanRotation(currentPreset?currentPreset.beat:(customPlayData?customPlayData.sorted.reduce((s,p)=>s+p.y*MAX_BEAT,0)/customPlayData.sorted.length:0));
+    if(eightD) startPanRotation(currentPreset?currentPreset.beat:(customPlayData?customPlayData.segments.reduce((sum,segment)=>sum+segment.beat,0)/customPlayData.segments.length:0));
     else stopPanRotation();
   }
 };
@@ -862,9 +1165,27 @@ document.querySelectorAll('.language-option').forEach(button=>{
   PRESETS.forEach(renderPresetCard);
   if(currentPreset) selectPreset(currentPreset);
   renderSaved();
-  drawEditor();
+   renderSegments();
   };
 });
 setTheme(theme);
 translateStatic();
-resizeEditor();
+renderSegments();
+const sharedSessionParam=new URLSearchParams(window.location.search).get('session')||new URLSearchParams(window.location.hash.slice(1)).get('session');
+if(sharedSessionParam){
+  const incoming=parseSharedSession(sharedSessionParam);
+  if(incoming){
+    segments=incoming.segments.map(segment=>({...segment}));
+    draftSessionName=incoming.name;
+    document.getElementById('baseFreq2').value=incoming.base;
+    document.getElementById('baseVal2').textContent=incoming.base;
+    renderSegments();
+    document.querySelector('[data-view="editor"]').click();
+  }
+  const cleanUrl=new URL(window.location.href);
+  cleanUrl.searchParams.delete('session');
+  const hashParams=new URLSearchParams(cleanUrl.hash.slice(1));
+  hashParams.delete('session');
+  cleanUrl.hash=hashParams.size?hashParams.toString():'';
+  history.replaceState(null,'',`${cleanUrl.pathname}${cleanUrl.search}${cleanUrl.hash}`);
+}

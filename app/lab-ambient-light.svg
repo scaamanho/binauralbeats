@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1600" fill="none">
+  <defs>
+    <linearGradient id="paper" x1="450" y1="0" x2="450" y2="1600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f8fbff"/><stop offset="1" stop-color="#eaf1fa"/>
+    </linearGradient>
+    <radialGradient id="aqua" cx="0" cy="0" r="1" gradientTransform="matrix(0 440 -420 0 95 585)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#44bfd0" stop-opacity=".14"/><stop offset="1" stop-color="#44bfd0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lilac" cx="0" cy="0" r="1" gradientTransform="matrix(0 500 -430 0 840 1030)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9a83d2" stop-opacity=".13"/><stop offset="1" stop-color="#9a83d2" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="wave" x1="0" y1="0" x2="900" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#39aebc" stop-opacity="0"/><stop offset=".25" stop-color="#39aebc" stop-opacity=".32"/><stop offset=".72" stop-color="#8c76c4" stop-opacity=".28"/><stop offset="1" stop-color="#8c76c4" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#7395b5" fill-opacity=".12"/>
+    </pattern>
+    <pattern id="grid" width="45" height="45" patternUnits="userSpaceOnUse">
+      <path d="M45 0H0v45" stroke="#6590b5" stroke-opacity=".075" stroke-width=".8"/>
+    </pattern>
+  </defs>
+  <path fill="url(#paper)" d="M0 0h900v1600H0z"/>
+  <path fill="url(#aqua)" d="M0 0h900v1600H0z"/>
+  <path fill="url(#lilac)" d="M0 0h900v1600H0z"/>
+  <path fill="url(#grid)" d="M0 0h900v1600H0z"/>
+  <path fill="url(#dots)" d="M0 0h900v1600H0z"/>
+
+  <!-- Cerebro de laboratorio y señal binaural, en la misma disposición que el tema oscuro -->
+  <g stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <g stroke="#348fa7" stroke-opacity=".28">
+      <path d="M450 400c-58-76-162-43-160 36-49 3-75 52-47 93-36 42-15 97 28 107-9 51 29 84 75 80 17 45 65 58 104 30"/>
+      <path d="M450 400c58-76 162-43 160 36 49 3 75 52 47 93 36 42 15 97-28 107 9 51-29 84-75 80-17 45-65 58-104 30" stroke="#9279bd"/>
+      <path d="M450 408v326M409 429c20 14 22 33 10 48m-80-5c31-7 53 9 56 36m-101 21c34-14 67-1 75 30m-57 82c32-23 63-18 79 8m-30 48c19-3 37 5 48 24"/>
+      <path d="M491 429c-20 14-22 33-10 48m80-5c-31-7-53 9-56 36m101 21c-34-14-67-1-75 30m57 82c-32-23-63-18-79 8m30 48c-19-3-37 5-48 24" stroke="#9279bd"/>
+    </g>
+    <ellipse cx="450" cy="560" rx="260" ry="230" stroke="url(#wave)" stroke-opacity=".85" stroke-dasharray="4 12"/>
+    <ellipse cx="450" cy="560" rx="220" ry="190" stroke="#549bad" stroke-opacity=".2" stroke-width="1.5"/>
+    <path d="M20 590c64 0 72-81 133-81s62 126 125 126 70-172 133-172 64 178 127 178 67-114 129-114 65 63 213 63" stroke="url(#wave)" stroke-width="3.5"/>
+  </g>
+
+  <g stroke="#6daebd" stroke-opacity=".16">
+    <circle cx="106" cy="400" r="76" stroke-dasharray="3 9"/><circle cx="106" cy="400" r="56"/><circle cx="106" cy="400" r="35"/>
+    <circle cx="790" cy="690" r="100" stroke-dasharray="3 11"/><circle cx="790" cy="690" r="74"/><circle cx="790" cy="690" r="47"/>
+    <circle cx="174" cy="1210" r="112" stroke-dasharray="3 12"/><circle cx="174" cy="1210" r="83"/><circle cx="174" cy="1210" r="53"/>
+    <circle cx="730" cy="1430" r="68" stroke-dasharray="3 9"/><circle cx="730" cy="1430" r="43"/>
+  </g>
+  <g stroke="url(#wave)" stroke-width="2">
+    <path d="M0 250h190l22-13 21 25 19-12h118M900 480H724l-20-13-21 25-20-12H560"/>
+    <path d="M0 860h172l25-16 22 31 20-15h138M900 1080H735l-22-14-20 28-19-14H540"/>
+    <path d="M-20 1390c100-12 118-70 210-63 90 8 111 79 196 72 88-8 99-65 183-66 92-1 117 68 208 60 65-6 92-44 149-45"/>
+  </g>
+  <g stroke="#6c9fba" stroke-opacity=".12" stroke-width="1">
+    <path d="M0 1465h900M0 1495h900M0 1525h900"/>
+    <path d="M60 1415v185m48-145v145m48-120v120m48-160v160m48-135v135m48-105v105m48-148v148m48-115v115m48-138v138m48-98v98m48-160v160m48-123v123m48-142v142m48-105v105m48-152v152m48-120v120m48-96v96"/>
+  </g>
+  <g fill="#648da9" fill-opacity=".27">
+    <circle cx="250" cy="338" r="2"/><circle cx="670" cy="390" r="2"/><circle cx="340" cy="690" r="1.7"/>
+    <circle cx="540" cy="920" r="2"/><circle cx="760" cy="1160" r="1.7"/><circle cx="410" cy="1285" r="2"/>
+  </g>
+</svg>
