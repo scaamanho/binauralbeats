@@ -155,6 +155,8 @@ Object.assign(TRANSLATIONS.es,{settingsTab:'Ajustes',settingsAria:'Abrir ajustes
 Object.assign(TRANSLATIONS.en,{settingsTab:'Settings',settingsAria:'Open settings',closeSettings:'Back to presets',languageTitle:'Language',languageInfo:'Choose the application language.',themeTitle:'Application theme',themeInfo:'Customize the appearance of Binaural Beats Lab.',darkTheme:'Dark',darkThemeInfo:'Dark background for night sessions.',lightTheme:'Light',lightThemeInfo:'Bright interface for daytime use.',settingsSaved:'Your preferences are saved automatically on this device.',eightDTitle:'8D audio',eightDInfo:'Rotates the sound between headphone channels with a period proportional to the chosen frequency.',eightDToggleLabel:'Enable 8D audio',eightDToggleInfo:'Optional. When disabled, playback behaves as usual (no rotation).',channelLeft:'Left',channelRight:'Right'});
 Object.assign(TRANSLATIONS.es,{importClipboard:'Importar del portapapeles',share:'Compartir',shareClipboard:'Compartir por portapapeles',shareWhatsApp:'Compartir por WhatsApp',shareTelegram:'Compartir por Telegram',shareEmail:'Compartir por correo',appLinkLabel:'Reprodúcelo con Binaural Beats Lab:',productLinkLabel:'Conoce Binaural Beats Lab:',clipboardCopied:'Mensaje de sesión copiado al portapapeles',clipboardReadError:'No se pudo leer el portapapeles. Comprueba los permisos del navegador.',clipboardWriteError:'No se pudo copiar al portapapeles. Comprueba los permisos del navegador.',invalidSharedSession:'El contenido del portapapeles no contiene una sesión válida.',replaceSegments:'Esto reemplazará los tramos actuales del editor. ¿Continuar?',sessionBase:'Base',sessionDuration:'Duración',sessionSegments:'Tramos'});
 Object.assign(TRANSLATIONS.en,{importClipboard:'Import from clipboard',share:'Share',shareClipboard:'Share via clipboard',shareWhatsApp:'Share via WhatsApp',shareTelegram:'Share via Telegram',shareEmail:'Share via email',appLinkLabel:'Play it with Binaural Beats Lab:',productLinkLabel:'Discover Binaural Beats Lab:',clipboardCopied:'Session message copied to clipboard',clipboardReadError:'Could not read the clipboard. Check your browser permissions.',clipboardWriteError:'Could not copy to the clipboard. Check your browser permissions.',invalidSharedSession:'The clipboard content does not contain a valid session.',replaceSegments:'This will replace the current editor sections. Continue?',sessionBase:'Base',sessionDuration:'Duration',sessionSegments:'Sections'});
+TRANSLATIONS.es.clipboardPastePrompt='Pega aquí el enlace o texto de la sesión compartida.';
+TRANSLATIONS.en.clipboardPastePrompt='Paste the shared session link or text here.';
 Object.assign(TRANSLATIONS.es,{segmentName:'Nombre del tramo',segmentNamePlaceholder:'Ej. Relajación inicial',segmentCopy:'copia'});
 Object.assign(TRANSLATIONS.en,{segmentName:'Section name',segmentNamePlaceholder:'e.g. Initial relaxation',segmentCopy:'copy'});
 let language=localStorage.getItem('bb_language')||((navigator.language||'es').toLowerCase().startsWith('en')?'en':'es');
@@ -173,6 +175,7 @@ function setTheme(value){
 function translateStatic(){
   document.documentElement.lang=language;
   document.querySelectorAll('[data-i18n]').forEach(el=>{el.innerHTML=t(el.dataset.i18n);});
+  document.querySelector('.tabs').setAttribute('aria-label',language==='es'?'Secciones':'Sections');
   document.querySelectorAll('.language-option').forEach(button=>button.classList.toggle('active',button.dataset.language===language));
   document.querySelector('.theme-options').setAttribute('aria-label',language==='es'?'Tema':'Theme');
   document.getElementById('closePlayerBtn').setAttribute('aria-label',t('closePlayerAria'));
@@ -181,27 +184,53 @@ function translateStatic(){
 }
 const PRESETS = [
   // Agrupadas por onda (Delta→Theta→Alpha→Beta→Gamma) y ascendente por Hz dentro de cada grupo
-  {id:'sanacion',name:'Sanación',sub:'Restauración',icon:'💧',beat:1.5,base:200,wave:'Delta',grad:'linear-gradient(135deg,#0ea5e9,#0369a1)',c1:'#0ea5e9',glow:'rgba(14,165,233,0.4)',desc:'Delta 1.5Hz - Sueño muy profundo y restauración física'},
-  {id:'dormir',name:'Dormir',sub:'Sueño profundo',icon:'🌙',beat:2,base:200,wave:'Delta',grad:'linear-gradient(135deg,#6366f1,#312e81)',c1:'#6366f1',glow:'rgba(99,102,241,0.4)',desc:'Delta 2Hz - Sueño reparador y sanación profunda'},
-  {id:'siesta',name:'Siesta',sub:'Descanso breve',icon:'🛌',beat:3,base:200,wave:'Delta',grad:'linear-gradient(135deg,#818cf8,#4f46e5)',c1:'#818cf8',glow:'rgba(129,140,248,0.4)',desc:'Delta 3Hz - Descanso profundo y recuperación física'},
-  {id:'calma',name:'Calma profunda',sub:'Descompresión',icon:'🕯️',beat:3.5,base:200,wave:'Delta',grad:'linear-gradient(135deg,#4338ca,#1e1b4b)',c1:'#4338ca',glow:'rgba(67,56,202,0.4)',desc:'Delta 3.5Hz - Descompresión física y mental profunda'},
-  {id:'respiracion',name:'Respiración',sub:'Serenidad',icon:'🌬️',beat:4,base:200,wave:'Theta',grad:'linear-gradient(135deg,#2dd4bf,#0d9488)',c1:'#2dd4bf',glow:'rgba(45,212,191,0.4)',desc:'Theta 4Hz - Meditación profunda y conexión subconsciente'},
-  {id:'intuicion',name:'Intuición',sub:'Conexión interna',icon:'🔮',beat:5,base:200,wave:'Theta',grad:'linear-gradient(135deg,#ec4899,#be185d)',c1:'#ec4899',glow:'rgba(236,72,153,0.4)',desc:'Theta 5Hz - Relajación profunda e intuición'},
-  {id:'meditar',name:'Meditación',sub:'Atención plena',icon:'🧘',beat:6,base:200,wave:'Theta',grad:'linear-gradient(135deg,#a855f7,#7e22ce)',c1:'#a855f7',glow:'rgba(168,85,247,0.4)',desc:'Theta 6Hz - Meditación ligera y visualización'},
-  {id:'creatividad',name:'Creatividad',sub:'Inspiración',icon:'💡',beat:7,base:200,wave:'Theta',grad:'linear-gradient(135deg,#f97316,#ea580c)',c1:'#f97316',glow:'rgba(249,115,22,0.4)',desc:'Theta 7Hz - Ideas creativas y estado hipnagógico'},
-  {id:'alegria',name:'Alegría',sub:'Bienestar',icon:'😊',beat:9,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#fb7185,#e11d48)',c1:'#fb7185',glow:'rgba(251,113,133,0.4)',desc:'Alpha 9Hz - Estado de ánimo positivo y bienestar'},
-  {id:'relax',name:'Relajarse',sub:'Calma',icon:'🌿',beat:10,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#10b981,#059669)',c1:'#10b981',glow:'rgba(16,185,129,0.4)',desc:'Alpha 10Hz - Relajación alerta y reducción de estrés'},
-  {id:'claridad',name:'Claridad',sub:'Equilibrio',icon:'🔎',beat:12,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#38bdf8,#0284c7)',c1:'#38bdf8',glow:'rgba(56,189,248,0.4)',desc:'Alpha 12Hz - Pensamiento positivo y visualización clara'},
-  {id:'equilibrio',name:'Equilibrio',sub:'Estabilidad emocional',icon:'⚖️',beat:13,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#34d399,#059669)',c1:'#34d399',glow:'rgba(52,211,153,0.4)',desc:'Alpha 13Hz - Estabilidad emocional y equilibrio interior'},
-  {id:'memoria',name:'Memoria',sub:'Aprendizaje',icon:'🧠',beat:14,base:200,wave:'Beta',grad:'linear-gradient(135deg,#00d4ff,#0066ff)',c1:'#00d4ff',glow:'rgba(0,212,255,0.4)',desc:'Beta 14Hz - Concentración suave y atención focalizada'},
-  {id:'estudio',name:'Estudio',sub:'Aprendizaje intensivo',icon:'📚',beat:16,base:200,wave:'Beta',grad:'linear-gradient(135deg,#22d3ee,#0891b2)',c1:'#22d3ee',glow:'rgba(34,211,238,0.4)',desc:'Beta 16Hz - Atención sostenida para sesiones de estudio largas'},
-  {id:'enfoque',name:'Enfoque profundo',sub:'Productividad',icon:'🎯',beat:18,base:200,wave:'Beta',grad:'linear-gradient(135deg,#14b8a6,#0f766e)',c1:'#14b8a6',glow:'rgba(20,184,166,0.4)',desc:'Beta 18Hz - Concentración intensa y resolución de problemas'},
-  {id:'energia',name:'Energía',sub:'Motivación',icon:'⚡',beat:20,base:200,wave:'Beta',grad:'linear-gradient(135deg,#f59e0b,#dc2626)',c1:'#f59e0b',glow:'rgba(245,158,11,0.4)',desc:'Beta 20Hz - Concentración intensa y energía mental'},
-  {id:'alerta',name:'Alerta',sub:'Activación',icon:'🚀',beat:30,base:200,wave:'Gamma',grad:'linear-gradient(135deg,#facc15,#eab308)',c1:'#facc15',glow:'rgba(250,204,21,0.4)',desc:'Gamma 30Hz - Procesamiento cognitivo y memoria'},
-  {id:'lucidez',name:'Lucidez',sub:'Atención plena intensa',icon:'👁️',beat:35,base:200,wave:'Gamma',grad:'linear-gradient(135deg,#fde047,#ca8a04)',c1:'#fde047',glow:'rgba(253,224,71,0.4)',desc:'Gamma 35Hz - Lucidez mental y atención plena intensa'},
-  {id:'percepcion',name:'Percepción',sub:'Agudeza sensorial',icon:'✨',beat:40,base:200,wave:'Gamma',grad:'linear-gradient(135deg,#e879f9,#a21caf)',c1:'#e879f9',glow:'rgba(232,121,249,0.4)',desc:'Gamma 40Hz - Procesamiento sensorial y percepción aguda'},
-  {id:'expansion',name:'Expansión mental',sub:'Integración cognitiva',icon:'🌟',beat:45,base:200,wave:'Gamma',grad:'linear-gradient(135deg,#c084fc,#7e22ce)',c1:'#c084fc',glow:'rgba(192,132,252,0.4)',desc:'Gamma 45Hz - Expansión de la conciencia e integración cognitiva'}
+  {id:'sanacion',name:'Sanación',sub:'Restauración',beat:1.5,base:200,wave:'Delta',grad:'linear-gradient(135deg,#0ea5e9,#0369a1)',c1:'#0ea5e9',glow:'rgba(14,165,233,0.4)',desc:'Delta 1.5Hz - Sueño muy profundo y restauración física'},
+  {id:'dormir',name:'Dormir',sub:'Sueño profundo',beat:2,base:200,wave:'Delta',grad:'linear-gradient(135deg,#6366f1,#312e81)',c1:'#6366f1',glow:'rgba(99,102,241,0.4)',desc:'Delta 2Hz - Sueño reparador y sanación profunda'},
+  {id:'siesta',name:'Siesta',sub:'Descanso breve',beat:3,base:200,wave:'Delta',grad:'linear-gradient(135deg,#818cf8,#4f46e5)',c1:'#818cf8',glow:'rgba(129,140,248,0.4)',desc:'Delta 3Hz - Descanso profundo y recuperación física'},
+  {id:'calma',name:'Calma profunda',sub:'Descompresión',beat:3.5,base:200,wave:'Delta',grad:'linear-gradient(135deg,#4338ca,#1e1b4b)',c1:'#4338ca',glow:'rgba(67,56,202,0.4)',desc:'Delta 3.5Hz - Descompresión física y mental profunda'},
+  {id:'respiracion',name:'Respiración',sub:'Serenidad',beat:4,base:200,wave:'Theta',grad:'linear-gradient(135deg,#2dd4bf,#0d9488)',c1:'#2dd4bf',glow:'rgba(45,212,191,0.4)',desc:'Theta 4Hz - Meditación profunda y conexión subconsciente'},
+  {id:'intuicion',name:'Intuición',sub:'Conexión interna',beat:5,base:200,wave:'Theta',grad:'linear-gradient(135deg,#ec4899,#be185d)',c1:'#ec4899',glow:'rgba(236,72,153,0.4)',desc:'Theta 5Hz - Relajación profunda e intuición'},
+  {id:'meditar',name:'Meditación',sub:'Atención plena',beat:6,base:200,wave:'Theta',grad:'linear-gradient(135deg,#a855f7,#7e22ce)',c1:'#a855f7',glow:'rgba(168,85,247,0.4)',desc:'Theta 6Hz - Meditación ligera y visualización'},
+  {id:'creatividad',name:'Creatividad',sub:'Inspiración',beat:7,base:200,wave:'Theta',grad:'linear-gradient(135deg,#f97316,#ea580c)',c1:'#f97316',glow:'rgba(249,115,22,0.4)',desc:'Theta 7Hz - Ideas creativas y estado hipnagógico'},
+  {id:'alegria',name:'Alegría',sub:'Bienestar',beat:9,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#fb7185,#e11d48)',c1:'#fb7185',glow:'rgba(251,113,133,0.4)',desc:'Alpha 9Hz - Estado de ánimo positivo y bienestar'},
+  {id:'relax',name:'Relajarse',sub:'Calma',beat:10,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#10b981,#059669)',c1:'#10b981',glow:'rgba(16,185,129,0.4)',desc:'Alpha 10Hz - Relajación alerta y reducción de estrés'},
+  {id:'claridad',name:'Claridad',sub:'Equilibrio',beat:12,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#38bdf8,#0284c7)',c1:'#38bdf8',glow:'rgba(56,189,248,0.4)',desc:'Alpha 12Hz - Pensamiento positivo y visualización clara'},
+  {id:'equilibrio',name:'Equilibrio',sub:'Estabilidad emocional',beat:13,base:200,wave:'Alpha',grad:'linear-gradient(135deg,#34d399,#059669)',c1:'#34d399',glow:'rgba(52,211,153,0.4)',desc:'Alpha 13Hz - Estabilidad emocional y equilibrio interior'},
+  {id:'memoria',name:'Memoria',sub:'Aprendizaje',beat:14,base:200,wave:'Beta',grad:'linear-gradient(135deg,#00d4ff,#0066ff)',c1:'#00d4ff',glow:'rgba(0,212,255,0.4)',desc:'Beta 14Hz - Concentración suave y atención focalizada'},
+  {id:'estudio',name:'Estudio',sub:'Aprendizaje intensivo',beat:16,base:200,wave:'Beta',grad:'linear-gradient(135deg,#22d3ee,#0891b2)',c1:'#22d3ee',glow:'rgba(34,211,238,0.4)',desc:'Beta 16Hz - Atención sostenida para sesiones de estudio largas'},
+  {id:'enfoque',name:'Enfoque profundo',sub:'Productividad',beat:18,base:200,wave:'Beta',grad:'linear-gradient(135deg,#14b8a6,#0f766e)',c1:'#14b8a6',glow:'rgba(20,184,166,0.4)',desc:'Beta 18Hz - Concentración intensa y resolución de problemas'},
+  {id:'energia',name:'Energía',sub:'Motivación',beat:20,base:200,wave:'Beta',grad:'linear-gradient(135deg,#f59e0b,#dc2626)',c1:'#f59e0b',glow:'rgba(245,158,11,0.4)',desc:'Beta 20Hz - Concentración intensa y energía mental'},
+  {id:'alerta',name:'Alerta',sub:'Activación',beat:30,base:200,wave:'Gamma',grad:'linear-gradient(135deg,#facc15,#eab308)',c1:'#facc15',glow:'rgba(250,204,21,0.4)',desc:'Gamma 30Hz - Procesamiento cognitivo y memoria'},
+  {id:'lucidez',name:'Lucidez',sub:'Atención plena intensa',beat:35,base:200,wave:'Gamma',grad:'linear-gradient(135deg,#fde047,#ca8a04)',c1:'#fde047',glow:'rgba(253,224,71,0.4)',desc:'Gamma 35Hz - Lucidez mental y atención plena intensa'},
+  {id:'percepcion',name:'Percepción',sub:'Agudeza sensorial',beat:40,base:200,wave:'Gamma',grad:'linear-gradient(135deg,#e879f9,#a21caf)',c1:'#e879f9',glow:'rgba(232,121,249,0.4)',desc:'Gamma 40Hz - Procesamiento sensorial y percepción aguda'},
+  {id:'expansion',name:'Expansión mental',sub:'Integración cognitiva',beat:45,base:200,wave:'Gamma',grad:'linear-gradient(135deg,#c084fc,#7e22ce)',c1:'#c084fc',glow:'rgba(192,132,252,0.4)',desc:'Gamma 45Hz - Expansión de la conciencia e integración cognitiva'}
 ];
+
+const PRESET_ICON_MARKS={
+  sanacion:'<path d="M50 82S22 62 22 40a16 16 0 0 1 28-10 16 16 0 0 1 28 10c0 22-28 42-28 42Z"/><path d="M50 40v20m-10-10h20"/>',
+  dormir:'<path d="M66 20a32 32 0 1 0 14 53A34 34 0 0 1 66 20Z"/><path d="m31 35 1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3Zm42 20 1.5 4.5L79 61l-4.5 1.5L73 67l-1.5-4.5L67 61l4.5-1.5L73 55Z"/>',
+  siesta:'<path d="M18 66h64v12H18zM25 66V48a8 8 0 0 1 8-8h34a15 15 0 0 1 15 15v11"/><path d="M25 55h18a8 8 0 0 0-8-8h-2a8 8 0 0 0-8 8Z"/>',
+  calma:'<path d="M50 19v10m-8 0h16l-2 8H44l-2-8Zm0 8c-2 8-9 13-9 24a17 17 0 0 0 34 0c0-11-7-16-9-24"/><path d="M50 45c-5 6 3 8 0 14-2 4-1 9 3 11 5-4 7-9 4-14-1-3-5-5-7-11Z"/>',
+  respiracion:'<path d="M18 39h20c10 0 10-14 20-14 9 0 9 14 0 14h-4m28 0H66c-10 0-10 14-20 14-9 0-9-14 0-14h4M18 67h18c8 0 8-10 16-10s8 10 16 10h14"/>',
+  intuicion:'<path d="M50 18 76 50 50 82 24 50 50 18Z"/><path d="M24 50h52M50 18v64M34 38l32 24m0-24L34 62"/>',
+  meditar:'<path d="M50 69c-8 0-15-6-15-14 0-7 5-12 12-13-1-9 5-16 14-16 8 0 14 6 14 14 8 2 13 8 13 16 0 9-7 15-16 15H50Z"/><path d="M50 69c0 7-5 12-12 12m12-12c0 7 5 12 12 12M33 49c-7 0-12 5-12 11m57-14c7 0 11 5 11 11"/>',
+  creatividad:'<path d="M50 18a25 25 0 0 0-15 45c4 3 5 7 5 11h20c0-4 1-8 5-11a25 25 0 0 0-15-45Z"/><path d="M41 79h18m-15 7h12M50 8v5m30 7-4 4M18 20l4 4m55 28h6M17 52h6"/>',
+  alegria:'<circle cx="50" cy="50" r="31"/><path d="M38 43h.1M62 43h.1M36 57c4 8 10 12 14 12s10-4 14-12"/>',
+  relax:'<path d="M50 80S23 65 23 42c0-12 8-20 18-20 5 0 8 3 9 8 2-5 5-8 10-8 10 0 18 8 18 20 0 23-28 38-28 38Z"/><path d="M50 69V37m0 18c-7-8-13-9-19-9m19 2c6-8 12-11 19-11"/>',
+  claridad:'<circle cx="45" cy="45" r="22"/><path d="m61 61 19 19M35 45h20m-10-10v20"/>',
+  equilibrio:'<path d="M50 20v57m-25 0h50M30 34h40M50 20l-5 7h10l-5-7Z"/><path d="m30 34-13 23h26L30 34Zm40 0L57 57h26L70 34Z"/><path d="M17 57a13 7 0 0 0 26 0m14 0a13 7 0 0 0 26 0"/>',
+  memoria:'<path d="M49 29a13 13 0 0 0-23 8 13 13 0 0 0-5 22 13 13 0 0 0 13 20h15V29Zm2 0a13 13 0 0 1 23 8 13 13 0 0 1 5 22 13 13 0 0 1-13 20H51V29Z"/><path d="M35 40c8 0 12 4 14 10m-20 7c7-2 12 0 17 5m19-22c-7 0-12 4-14 10m20 7c-7-2-12 0-17 5"/>',
+  estudio:'<path d="M50 31c-11-8-23-9-34-5v48c12-4 24-3 34 5 10-8 22-9 34-5V26c-11-4-23-3-34 5Z"/><path d="M50 31v48m-25-38c7-1 13 0 18 3m-18 9c7-1 13 0 18 3m32-15c-7-1-13 0-18 3m18 9c-7-1-13 0-18 3"/>',
+  enfoque:'<circle cx="50" cy="50" r="31"/><circle cx="50" cy="50" r="19"/><circle cx="50" cy="50" r="7"/><path d="M50 12v9m0 58v9M12 50h9m58 0h9"/>',
+  energia:'<path d="m56 14-31 40h22l-3 32 31-44H53l3-28Z"/>',
+  alerta:'<path d="M50 15 76 70H24l26-55Z"/><path d="m50 35-3 19m3 8h.1"/><path d="M18 82h64"/>',
+  lucidez:'<path d="M14 50s13-23 36-23 36 23 36 23-13 23-36 23-36-23-36-23Z"/><circle cx="50" cy="50" r="12"/><circle cx="50" cy="50" r="4"/>',
+  percepcion:'<path d="m50 16 7 23 23-7-14 20 20 14-25-1-4 24-10-22-22 12 12-22-20-14 24 2 9-29Z"/>',
+  expansion:'<path d="m50 14 9 25 27 1-21 16 7 26-22-15-22 15 7-26-21-16 27-1 9-25Z"/><path d="M50 3v7m39 15-6 4M11 25l6 4m72 33-7-1M11 62l7-1"/>'
+};
+function presetIcon(p,className=''){
+  return `<svg class="preset-svg ${className}" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${PRESET_ICON_MARKS[p.id]||''}</svg>`;
+}
 
 /* ============ AUDIO ENGINE ============ */
 Object.assign(TRANSLATIONS.en.presetDetails,{
@@ -476,14 +505,16 @@ PRESETS.forEach(p=>{
     header.textContent=p.wave;
     presetGrid.appendChild(header);
   }
-  const el=document.createElement('div');
+  const el=document.createElement('button');
+  el.type='button';
   el.className='preset';
   el.dataset.id=p.id;
+  el.setAttribute('aria-pressed','false');
   el.style.setProperty('--grad',p.grad);
   el.style.setProperty('--c1',p.c1);
   el.style.setProperty('--glow',p.glow);
-  el.innerHTML=`<div class="icon">${p.icon}</div>
-    <div class="name"></div><div class="hz"></div>`;
+  el.innerHTML=`<span class="icon">${presetIcon(p)}</span>
+    <span class="name"></span><span class="hz"></span>`;
   el.onclick=()=>selectPreset(p);
   presetGrid.appendChild(el);
   renderPresetCard(p);
@@ -500,10 +531,13 @@ function selectPreset(p){
   document.getElementById('presetGrid').style.display='none';
   document.getElementById('playerPanel').classList.remove('hidden');
   requestAnimationFrame(resizeViz);
-  document.querySelectorAll('.preset').forEach(e=>e.classList.remove('active'));
-  document.querySelector(`.preset[data-id="${p.id}"]`)?.classList.add('active');
+  document.querySelectorAll('.preset').forEach(card=>{
+    const selected=card.dataset.id===p.id;
+    card.classList.toggle('active',selected);
+    card.setAttribute('aria-pressed',String(selected));
+  });
   renderPresetCard(p);
-  document.getElementById('currentMode').innerHTML=`${p.icon} ${text[0]} <span class="wave-badge">${text[2]}</span>`;
+  document.getElementById('currentMode').innerHTML=`${presetIcon(p,'preset-mode-icon')} ${text[0]} <span class="wave-badge">${text[2]}</span>`;
   document.getElementById('presetDetailsDescription').textContent=details[0];
   document.getElementById('presetDetailsEffects').textContent=details[1];
   document.getElementById('baseFreq').value=p.base;
@@ -563,25 +597,47 @@ document.getElementById('volume').oninput=e=>{
 };
 
 /* ============ TABS ============ */
-document.querySelectorAll('.tab').forEach(t=>{
+const tabList=document.querySelector('.tabs');
+const carouselTabs=[...tabList.querySelectorAll('.tab[data-view]')];
+function activateTab(tab){
+  const previousIndex=carouselTabs.findIndex(candidate=>candidate.classList.contains('active'));
+  const nextIndex=carouselTabs.indexOf(tab);
+  tabList.hidden=false;
+  carouselTabs.forEach(candidate=>{
+    const selected=candidate===tab;
+    candidate.classList.toggle('active',selected);
+    candidate.setAttribute('aria-selected',String(selected));
+    candidate.tabIndex=selected?0:-1;
+  });
+  document.querySelectorAll('.view').forEach(view=>view.classList.remove('active'));
+  const nextView=document.getElementById('view-'+tab.dataset.view);
+  nextView.classList.remove('slide-from-left','slide-from-right');
+  nextView.classList.add(nextIndex>=previousIndex?'slide-from-right':'slide-from-left','active');
+  nextView.addEventListener('animationend',()=>nextView.classList.remove('slide-from-left','slide-from-right'),{once:true});
+  if(tab.dataset.view==='editor') renderSegments();
+  if(tab.dataset.view==='saved') renderSaved();
+}
+carouselTabs.forEach(t=>{
   t.onclick=event=>{
     if(suppressTabClick&&event.detail!==0){suppressTabClick=false;return;}
-    const previousIndex=carouselTabs.findIndex(tab=>tab.classList.contains('active'));
-    const nextIndex=carouselTabs.indexOf(t);
-    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
-    document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
-    t.classList.add('active');
-    const nextView=document.getElementById('view-'+t.dataset.view);
-    nextView.classList.remove('slide-from-left','slide-from-right');
-    nextView.classList.add(nextIndex>=previousIndex?'slide-from-right':'slide-from-left','active');
-    nextView.addEventListener('animationend',()=>nextView.classList.remove('slide-from-left','slide-from-right'),{once:true});
-    if(t.dataset.view==='editor') renderSegments();
-    if(t.dataset.view==='saved') renderSaved();
+    activateTab(t);
   };
+});
+tabList.addEventListener('keydown',event=>{
+  const currentIndex=carouselTabs.indexOf(event.target);
+  if(currentIndex<0) return;
+  let nextIndex=currentIndex;
+  if(event.key==='ArrowRight') nextIndex=(currentIndex+1)%carouselTabs.length;
+  else if(event.key==='ArrowLeft') nextIndex=(currentIndex-1+carouselTabs.length)%carouselTabs.length;
+  else if(event.key==='Home') nextIndex=0;
+  else if(event.key==='End') nextIndex=carouselTabs.length-1;
+  else return;
+  event.preventDefault();
+  carouselTabs[nextIndex].focus();
+  carouselTabs[nextIndex].click();
 });
 
 /* Horizontal swipe / mouse drag between the three main views */
-const carouselTabs=[...document.querySelectorAll('.tab[data-view]')];
 let dragStart=null,suppressTabClick=false,suppressDragClick=false;
 const swipeIgnore='button,input,textarea,select,a,[contenteditable="true"],.saved-actions,.segment-actions,.tabs';
 document.querySelector('main').addEventListener('pointerdown',event=>{
@@ -715,8 +771,11 @@ document.getElementById('importClipboardBtn').onclick=async()=>{
   try{
     clipboardText=await navigator.clipboard.readText();
   }catch(error){
-    toast(t('clipboardReadError'));
-    return;
+    clipboardText=null;
+  }
+  if(typeof clipboardText!=='string'){
+    clipboardText=prompt(t('clipboardPastePrompt'));
+    if(clipboardText===null) return;
   }
   const imported=parseSharedSession(clipboardText);
   if(!imported){toast(t('invalidSharedSession'));return;}
@@ -1152,7 +1211,12 @@ document.getElementById('settingsTrigger').onclick=()=>{
     document.querySelector('[data-view="presets"]').click();
     return;
   }
-  document.querySelectorAll('.tab').forEach(tab=>tab.classList.remove('active'));
+  tabList.hidden=true;
+  carouselTabs.forEach(tab=>{
+    tab.classList.remove('active');
+    tab.setAttribute('aria-selected','false');
+    tab.tabIndex=-1;
+  });
   document.querySelectorAll('.view').forEach(view=>view.classList.remove('active'));
   settingsView.classList.add('active');
 };
