@@ -1,10 +1,10 @@
-const CACHE_NAME = 'binaural-beats-pro-v46';
+const CACHE_NAME = 'binaural-beats-pro-v58';
 const APP_SHELL = ['./', './index.html', './styles.css', './app.js', './lab-ambient.svg', './lab-ambient-light.svg', './icon.svg', './icon-192.png?v=43', './icon-512.png?v=38'];
 
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(APP_SHELL))
+      .then(cache => cache.addAll(APP_SHELL.map(path => new Request(path, {cache:'reload'}))))
       .then(() => self.skipWaiting())
   );
 });

@@ -155,6 +155,8 @@ Object.assign(TRANSLATIONS.es,{settingsTab:'Ajustes',settingsAria:'Abrir ajustes
 Object.assign(TRANSLATIONS.en,{settingsTab:'Settings',settingsAria:'Open settings',closeSettings:'Back to presets',languageTitle:'Language',languageInfo:'Choose the application language.',themeTitle:'Application theme',themeInfo:'Customize the appearance of Binaural Beats Lab.',darkTheme:'Dark',darkThemeInfo:'Dark background for night sessions.',lightTheme:'Light',lightThemeInfo:'Bright interface for daytime use.',settingsSaved:'Your preferences are saved automatically on this device.',eightDTitle:'8D audio',eightDInfo:'Rotates the sound between headphone channels with a period proportional to the chosen frequency.',eightDToggleLabel:'Enable 8D audio',eightDToggleInfo:'Optional. When disabled, playback behaves as usual (no rotation).',channelLeft:'Left',channelRight:'Right'});
 Object.assign(TRANSLATIONS.es,{importClipboard:'Importar del portapapeles',share:'Compartir',shareClipboard:'Compartir por portapapeles',shareWhatsApp:'Compartir por WhatsApp',shareTelegram:'Compartir por Telegram',shareEmail:'Compartir por correo',appLinkLabel:'Reprodúcelo con Binaural Beats Lab:',productLinkLabel:'Conoce Binaural Beats Lab:',clipboardCopied:'Mensaje de sesión copiado al portapapeles',clipboardReadError:'No se pudo leer el portapapeles. Comprueba los permisos del navegador.',clipboardWriteError:'No se pudo copiar al portapapeles. Comprueba los permisos del navegador.',invalidSharedSession:'El contenido del portapapeles no contiene una sesión válida.',replaceSegments:'Esto reemplazará los tramos actuales del editor. ¿Continuar?',sessionBase:'Base',sessionDuration:'Duración',sessionSegments:'Tramos'});
 Object.assign(TRANSLATIONS.en,{importClipboard:'Import from clipboard',share:'Share',shareClipboard:'Share via clipboard',shareWhatsApp:'Share via WhatsApp',shareTelegram:'Share via Telegram',shareEmail:'Share via email',appLinkLabel:'Play it with Binaural Beats Lab:',productLinkLabel:'Discover Binaural Beats Lab:',clipboardCopied:'Session message copied to clipboard',clipboardReadError:'Could not read the clipboard. Check your browser permissions.',clipboardWriteError:'Could not copy to the clipboard. Check your browser permissions.',invalidSharedSession:'The clipboard content does not contain a valid session.',replaceSegments:'This will replace the current editor sections. Continue?',sessionBase:'Base',sessionDuration:'Duration',sessionSegments:'Sections'});
+TRANSLATIONS.es.clipboardPastePrompt='Pega aquí el enlace o texto de la sesión compartida.';
+TRANSLATIONS.en.clipboardPastePrompt='Paste the shared session link or text here.';
 Object.assign(TRANSLATIONS.es,{segmentName:'Nombre del tramo',segmentNamePlaceholder:'Ej. Relajación inicial',segmentCopy:'copia'});
 Object.assign(TRANSLATIONS.en,{segmentName:'Section name',segmentNamePlaceholder:'e.g. Initial relaxation',segmentCopy:'copy'});
 let language=localStorage.getItem('bb_language')||((navigator.language||'es').toLowerCase().startsWith('en')?'en':'es');
@@ -173,6 +175,7 @@ function setTheme(value){
 function translateStatic(){
   document.documentElement.lang=language;
   document.querySelectorAll('[data-i18n]').forEach(el=>{el.innerHTML=t(el.dataset.i18n);});
+  document.querySelector('.tabs').setAttribute('aria-label',language==='es'?'Secciones':'Sections');
   document.querySelectorAll('.language-option').forEach(button=>button.classList.toggle('active',button.dataset.language===language));
   document.querySelector('.theme-options').setAttribute('aria-label',language==='es'?'Tema':'Theme');
   document.getElementById('closePlayerBtn').setAttribute('aria-label',t('closePlayerAria'));
@@ -502,14 +505,16 @@ PRESETS.forEach(p=>{
     header.textContent=p.wave;
     presetGrid.appendChild(header);
   }
-  const el=document.createElement('div');
+  const el=document.createElement('button');
+  el.type='button';
   el.className='preset';
   el.dataset.id=p.id;
+  el.setAttribute('aria-pressed','false');
   el.style.setProperty('--grad',p.grad);
   el.style.setProperty('--c1',p.c1);
   el.style.setProperty('--glow',p.glow);
-  el.innerHTML=`<div class="icon">${presetIcon(p)}</div>
-    <div class="name"></div><div class="hz"></div>`;
+  el.innerHTML=`<span class="icon">${presetIcon(p)}</span>
+    <span class="name"></span><span class="hz"></span>`;
   el.onclick=()=>selectPreset(p);
   presetGrid.appendChild(el);
   renderPresetCard(p);
@@ -526,8 +531,11 @@ function selectPreset(p){
   document.getElementById('presetGrid').style.display='none';
   document.getElementById('playerPanel').classList.remove('hidden');
   requestAnimationFrame(resizeViz);
-  document.querySelectorAll('.preset').forEach(e=>e.classList.remove('active'));
-  document.querySelector(`.preset[data-id="${p.id}"]`)?.classList.add('active');
+  document.querySelectorAll('.preset').forEach(card=>{
+    const selected=card.dataset.id===p.id;
+    card.classList.toggle('active',selected);
+    card.setAttribute('aria-pressed',String(selected));
+  });
   renderPresetCard(p);
   document.getElementById('currentMode').innerHTML=`${presetIcon(p,'preset-mode-icon')} ${text[0]} <span class="wave-badge">${text[2]}</span>`;
   document.getElementById('presetDetailsDescription').textContent=details[0];
@@ -589,25 +597,47 @@ document.getElementById('volume').oninput=e=>{
 };
 
 /* ============ TABS ============ */
-document.querySelectorAll('.tab').forEach(t=>{
+const tabList=document.querySelector('.tabs');
+const carouselTabs=[...tabList.querySelectorAll('.tab[data-view]')];
+function activateTab(tab){
+  const previousIndex=carouselTabs.findIndex(candidate=>candidate.classList.contains('active'));
+  const nextIndex=carouselTabs.indexOf(tab);
+  tabList.hidden=false;
+  carouselTabs.forEach(candidate=>{
+    const selected=candidate===tab;
+    candidate.classList.toggle('active',selected);
+    candidate.setAttribute('aria-selected',String(selected));
+    candidate.tabIndex=selected?0:-1;
+  });
+  document.querySelectorAll('.view').forEach(view=>view.classList.remove('active'));
+  const nextView=document.getElementById('view-'+tab.dataset.view);
+  nextView.classList.remove('slide-from-left','slide-from-right');
+  nextView.classList.add(nextIndex>=previousIndex?'slide-from-right':'slide-from-left','active');
+  nextView.addEventListener('animationend',()=>nextView.classList.remove('slide-from-left','slide-from-right'),{once:true});
+  if(tab.dataset.view==='editor') renderSegments();
+  if(tab.dataset.view==='saved') renderSaved();
+}
+carouselTabs.forEach(t=>{
   t.onclick=event=>{
     if(suppressTabClick&&event.detail!==0){suppressTabClick=false;return;}
-    const previousIndex=carouselTabs.findIndex(tab=>tab.classList.contains('active'));
-    const nextIndex=carouselTabs.indexOf(t);
-    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
-    document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
-    t.classList.add('active');
-    const nextView=document.getElementById('view-'+t.dataset.view);
-    nextView.classList.remove('slide-from-left','slide-from-right');
-    nextView.classList.add(nextIndex>=previousIndex?'slide-from-right':'slide-from-left','active');
-    nextView.addEventListener('animationend',()=>nextView.classList.remove('slide-from-left','slide-from-right'),{once:true});
-    if(t.dataset.view==='editor') renderSegments();
-    if(t.dataset.view==='saved') renderSaved();
+    activateTab(t);
   };
+});
+tabList.addEventListener('keydown',event=>{
+  const currentIndex=carouselTabs.indexOf(event.target);
+  if(currentIndex<0) return;
+  let nextIndex=currentIndex;
+  if(event.key==='ArrowRight') nextIndex=(currentIndex+1)%carouselTabs.length;
+  else if(event.key==='ArrowLeft') nextIndex=(currentIndex-1+carouselTabs.length)%carouselTabs.length;
+  else if(event.key==='Home') nextIndex=0;
+  else if(event.key==='End') nextIndex=carouselTabs.length-1;
+  else return;
+  event.preventDefault();
+  carouselTabs[nextIndex].focus();
+  carouselTabs[nextIndex].click();
 });
 
 /* Horizontal swipe / mouse drag between the three main views */
-const carouselTabs=[...document.querySelectorAll('.tab[data-view]')];
 let dragStart=null,suppressTabClick=false,suppressDragClick=false;
 const swipeIgnore='button,input,textarea,select,a,[contenteditable="true"],.saved-actions,.segment-actions,.tabs';
 document.querySelector('main').addEventListener('pointerdown',event=>{
@@ -741,8 +771,11 @@ document.getElementById('importClipboardBtn').onclick=async()=>{
   try{
     clipboardText=await navigator.clipboard.readText();
   }catch(error){
-    toast(t('clipboardReadError'));
-    return;
+    clipboardText=null;
+  }
+  if(typeof clipboardText!=='string'){
+    clipboardText=prompt(t('clipboardPastePrompt'));
+    if(clipboardText===null) return;
   }
   const imported=parseSharedSession(clipboardText);
   if(!imported){toast(t('invalidSharedSession'));return;}
@@ -1178,7 +1211,12 @@ document.getElementById('settingsTrigger').onclick=()=>{
     document.querySelector('[data-view="presets"]').click();
     return;
   }
-  document.querySelectorAll('.tab').forEach(tab=>tab.classList.remove('active'));
+  tabList.hidden=true;
+  carouselTabs.forEach(tab=>{
+    tab.classList.remove('active');
+    tab.setAttribute('aria-selected','false');
+    tab.tabIndex=-1;
+  });
   document.querySelectorAll('.view').forEach(view=>view.classList.remove('active'));
   settingsView.classList.add('active');
 };

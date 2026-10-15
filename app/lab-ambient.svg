@@ -16,7 +16,7 @@
       <stop stop-color="#39cffa" stop-opacity=".12"/><stop offset=".55" stop-color="#39cffa" stop-opacity=".05"/><stop offset="1" stop-color="#ab6cff" stop-opacity=".12"/>
     </linearGradient>
     <pattern id="grid" width="45" height="45" patternUnits="userSpaceOnUse">
-      <path d="M45 0H0v45" stroke="#4ddfff" stroke-opacity=".2" stroke-width=".8"/>
+      <path d="M0 22.5H45M22.5 0V45" stroke="#4ddfff" stroke-opacity=".2" stroke-width=".8"/>
     </pattern>
     <pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse">
       <circle cx="2" cy="2" r="1" fill="#72dffa" fill-opacity=".36"/>
